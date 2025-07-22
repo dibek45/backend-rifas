@@ -8,27 +8,44 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model Comprador {
   id        Int      @id @default(autoincrement())
+  nombre    String
   email     String   @unique
-  password  String
-  createdAt DateTime @default(now())
   boletos   Boleto[]
+  createdAt DateTime @default(now())
+}
+
+model Vendedor {
+  id        Int      @id @default(autoincrement())
+  nombre    String
+  email     String   @unique
+  rol       String   @default("vendedor") // "admin" o "vendedor"
+  boletos   Boleto[]
+  createdAt DateTime @default(now())
 }
 
 model Boleto {
-  id        Int      @id @default(autoincrement())
-  numero    Int
-  vendido   Boolean  @default(false)
-  user      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
-  sorteo    Sorteo?  @relation(fields: [sorteoId], references: [id])
-  sorteoId  Int?
+  id           Int        @id @default(autoincrement())
+  numero       Int
+  precio       Float
+  estado       String     @default("disponible") // vendido, cancelado, disponible
+  metodoPago   String?
+  fechaCompra  DateTime?
+  comprador    Comprador? @relation(fields: [compradorId], references: [id])
+  compradorId  Int?
+  vendedor     Vendedor?  @relation(fields: [vendedorId], references: [id])
+  vendedorId   Int?
+  sorteo       Sorteo     @relation(fields: [sorteoId], references: [id])
+  sorteoId     Int
 }
 
 model Sorteo {
-  id      Int      @id @default(autoincrement())
-  nombre  String
-  fecha   DateTime
-  boletos Boleto[]
+  id           Int       @id @default(autoincrement())
+  nombre       String
+  descripcion  String?
+  imagen       String?
+  fecha        DateTime
+  cierreVentas DateTime?
+  boletos      Boleto[]
 }
