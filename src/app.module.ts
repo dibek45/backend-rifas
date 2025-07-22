@@ -1,9 +1,13 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
+import { UserModule } from './user/user.module';
+import { BoletoModule } from './boleto/boleto.module';
+import { SorteoModule } from './sorteo/sorteo.module';
+import { PrismaModule } from './prisma/prisma.module';
 
 @Module({
-  imports: [],
+  imports: [UserModule, BoletoModule, SorteoModule, PrismaModule],
   controllers: [AppController],
   providers: [AppService],
 })
