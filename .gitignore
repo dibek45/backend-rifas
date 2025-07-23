@@ -7,3 +7,4 @@ test
 *.spec.ts
 src/update-version
 src/interceptors
+.env
