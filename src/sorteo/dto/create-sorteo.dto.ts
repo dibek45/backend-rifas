@@ -4,18 +4,18 @@ export class CreateSorteoDto {
   @IsString()
   nombre: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   descripcion?: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   imagen?: string;
 
   @IsDateString()
   fecha: string;
 
-  @IsDateString()
   @IsOptional()
-  fechaCierreVenta?: string;
+  @IsDateString()
+  cierreVentas?: string; // 👈 Este nombre debe coincidir con el modelo de Prisma
 }
