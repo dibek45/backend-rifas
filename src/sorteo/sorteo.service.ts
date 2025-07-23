@@ -20,11 +20,23 @@ export class SorteoService {
     });
   }
 
-  create(data: Prisma.SorteoCreateInput) {
-    console.log(data); // Asegúrate de ver los campos
-
-    return this.prisma.sorteo.create({ data });
-  }
+create(data: {
+  nombre: string;
+  descripcion?: string;
+  imagen?: string;
+  fecha: Date | string;
+  cierreVentas?: Date | string;
+}) {
+  return this.prisma.sorteo.create({
+    data: {
+      nombre: data.nombre,
+      descripcion: data.descripcion,
+      imagen: data.imagen,
+      fecha: new Date(data.fecha),
+      cierreVentas: data.cierreVentas ? new Date(data.cierreVentas) : undefined,
+    },
+  });
+}
 
 
 
