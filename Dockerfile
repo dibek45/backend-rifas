@@ -5,12 +5,11 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 
-# 🧠 Solo copia lo que necesites
 COPY prisma ./prisma
+COPY generated ./generated
 COPY src ./src
 COPY nest-cli.json tsconfig.build.json tsconfig.json ./
 
-# ⚠️ CAMBIA el orden: genera Prisma primero, luego compilas Nest
 RUN npx prisma generate && npm run build
 
 # 🚀 Final image
@@ -20,6 +19,7 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/generated ./generated
 COPY --from=builder /app/package*.json ./
 
 ENV NODE_ENV=production
