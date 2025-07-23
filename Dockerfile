@@ -1,14 +1,21 @@
+# 👷 Build
 FROM node:18 AS builder
-
 WORKDIR /app
+
 COPY package*.json ./
 RUN npm install
-COPY . .
+
+# 🧠 Solo copia lo que necesites
+COPY prisma ./prisma
+COPY src ./src
+COPY nest-cli.json tsconfig.build.json tsconfig.json ./
+
 RUN npm run build && npx prisma generate
 
-# Etapa final
+# 🚀 Final image
 FROM node:18-slim
 WORKDIR /app
+
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY --from=builder /app/prisma ./prisma
