@@ -26,7 +26,7 @@ COPY --from=builder /app/generated ./generated
 COPY --from=builder /app/package*.json ./
 
 # 👇 Copiar el script de arranque
-COPY --from=builder /app/start.sh ./start.sh
+COPY start.sh ./start.sh
 
 # ⛳ Necesario para leer variables de entorno del docker-compose
 ENV NODE_ENV=production
