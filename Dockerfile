@@ -10,7 +10,8 @@ COPY prisma ./prisma
 COPY src ./src
 COPY nest-cli.json tsconfig.build.json tsconfig.json ./
 
-RUN npm run build && npx prisma generate
+# ⚠️ CAMBIA el orden: genera Prisma primero, luego compilas Nest
+RUN npx prisma generate && npm run build
 
 # 🚀 Final image
 FROM node:18-slim
