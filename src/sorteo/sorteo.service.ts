@@ -21,6 +21,8 @@ export class SorteoService {
   }
 
   create(data: Prisma.SorteoCreateInput) {
+    console.log(data); // Asegúrate de ver los campos
+
     return this.prisma.sorteo.create({ data });
   }
 
