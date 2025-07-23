@@ -5,7 +5,8 @@ import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
     imports: [PrismaModule], // 👈 agrégalo aquí
-  
+    exports: [BoletoService], // 👈 esto es CLAVE
+
   controllers: [BoletoController],
   providers: [BoletoService],
 })
