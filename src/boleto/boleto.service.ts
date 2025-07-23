@@ -58,4 +58,19 @@ export class BoletoService {
       where: { id },
     });
   }
+
+
+
+   async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
+    const boletos = Array.from({ length: cantidad }, (_, i) => ({
+      numero: i + 1,
+      precio,
+      estado: 'disponible',
+      sorteoId,
+    }));
+
+    return this.prisma.boleto.createMany({
+      data: boletos,
+    });
+  }
 }

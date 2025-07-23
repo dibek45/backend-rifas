@@ -1,4 +1,4 @@
-import { IsString, IsDateString, IsOptional } from 'class-validator';
+import { IsDateString, IsOptional, IsString, IsInt, Min } from 'class-validator';
 
 export class CreateSorteoDto {
   @IsString()
@@ -17,5 +17,14 @@ export class CreateSorteoDto {
 
   @IsOptional()
   @IsDateString()
-  cierreVentas?: string; // 👈 Este nombre debe coincidir con el modelo de Prisma
+  cierreVentas?: string;
+
+  @IsInt()
+  @Min(1)
+  cantidadBoletos: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  precioBoletos?: number;
 }

@@ -2,10 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Prisma } from '../../generated/prisma';
 import { UpdateSorteoDto } from './dto/update-sorteo.dto';
+import { BoletoService } from 'src/boleto/boleto.service';
+import { CreateSorteoDto } from './dto/create-sorteo.dto';
 
 @Injectable()
 export class SorteoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService,     private boletoService: BoletoService, // <-- inyectado
+) {}
 
   findAll() {
     return this.prisma.sorteo.findMany({
@@ -20,23 +23,26 @@ export class SorteoService {
     });
   }
 
-create(data: {
-  nombre: string;
-  descripcion?: string;
-  imagen?: string;
-  fecha: Date | string;
-  cierreVentas?: Date | string;
-}) {
-  return this.prisma.sorteo.create({
+async create(dto: CreateSorteoDto) {
+  const sorteo = await this.prisma.sorteo.create({
     data: {
-      nombre: data.nombre,
-      descripcion: data.descripcion,
-      imagen: data.imagen,
-      fecha: new Date(data.fecha),
-      cierreVentas: data.cierreVentas ? new Date(data.cierreVentas) : undefined,
+      nombre: dto.nombre,
+      descripcion: dto.descripcion,
+      imagen: dto.imagen,
+      fecha: new Date(dto.fecha),
+      cierreVentas: dto.cierreVentas ? new Date(dto.cierreVentas) : undefined,
     },
   });
+
+  await this.boletoService.generarBoletosParaSorteo(
+    sorteo.id,
+    dto.cantidadBoletos,
+    dto.precioBoletos ?? 100,
+  );
+
+  return sorteo;
 }
+
 
 
 
