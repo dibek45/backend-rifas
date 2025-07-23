@@ -1,26 +1,61 @@
 import { Injectable } from '@nestjs/common';
+import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
 
 @Injectable()
 export class BoletoService {
-  create(createBoletoDto: CreateBoletoDto) {
-    return 'This action adds a new boleto';
-  }
+  constructor(private prisma: PrismaService) {}
 
   findAll() {
-    return `This action returns all boleto`;
+    return this.prisma.boleto.findMany({
+      include: {
+        comprador: true,
+        vendedor: true,
+        sorteo: true,
+      },
+    });
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} boleto`;
+    return this.prisma.boleto.findUnique({
+      where: { id },
+      include: {
+        comprador: true,
+        vendedor: true,
+        sorteo: true,
+      },
+    });
   }
 
-  update(id: number, updateBoletoDto: UpdateBoletoDto) {
-    return `This action updates a #${id} boleto`;
+  create(data: CreateBoletoDto) {
+    return this.prisma.boleto.create({
+      data: {
+        numero: data.numero,
+        precio: data.precio,
+        estado: data.estado ?? 'disponible',
+        metodoPago: data.metodoPago ?? null,
+        fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
+        sorteoId: data.sorteoId,
+        compradorId: data.compradorId ?? null,
+        vendedorId: data.vendedorId ?? null,
+      },
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} boleto`;
+  update(id: number, data: UpdateBoletoDto) {
+    return this.prisma.boleto.update({
+      where: { id },
+      data: {
+        ...data,
+        fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
+      },
+    });
+  }
+
+  delete(id: number) {
+    return this.prisma.boleto.delete({
+      where: { id },
+    });
   }
 }

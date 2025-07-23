@@ -29,6 +29,6 @@ export class BoletoController {
 
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.boletoService.remove(+id);
+    return this.boletoService.delete(+id);
   }
 }
