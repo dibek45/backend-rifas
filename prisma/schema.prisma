@@ -13,10 +13,11 @@ model Comprador {
   id        Int      @id @default(autoincrement())
   nombre    String
   email     String   @unique
-  telefono String?
+  telefono  String?
   boletos   Boleto[]
   createdAt DateTime @default(now())
 }
+
 
 model Vendedor {
   id        Int      @id @default(autoincrement())
