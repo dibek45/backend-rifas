@@ -13,6 +13,7 @@ model Comprador {
   id        Int      @id @default(autoincrement())
   nombre    String
   email     String   @unique
+  telefono  String?
   boletos   Boleto[]
   createdAt DateTime @default(now())
 }

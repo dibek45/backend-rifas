@@ -7,6 +7,17 @@ import { UpdateBoletoDto } from './dto/update-boleto.dto';
 export class BoletoController {
   constructor(private readonly boletoService: BoletoService) {}
 
+
+
+@Post('apartar-lote')
+async apartarLote(
+  @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
+) {
+  const { nombre, telefono, boletos } = body;
+  return this.boletoService.apartarLoteConComprador(nombre, telefono, boletos);
+}
+
+
   @Post()
   create(@Body() createBoletoDto: CreateBoletoDto) {
     return this.boletoService.create(createBoletoDto);

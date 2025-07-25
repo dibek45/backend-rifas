@@ -110,4 +110,22 @@ export class BoletoService {
       boletosOcupados: boletosFallidos, // Devuelve los que fallaron
     };
   }
+
+
+  async apartarLoteConComprador(
+  nombre: string,
+  telefono: string,
+  boletos: { id: number }[]
+) {
+  const comprador = await this.prisma.comprador.create({
+    data: {
+      nombre,
+      telefono,
+      email: `${Date.now()}@fake.com`, // puedes generar un email real si tienes login
+    },
+  });
+
+  return this.apartarBoletosEnLote(comprador.id, boletos);
+}
+
 }

@@ -124,6 +124,7 @@ exports.Prisma.CompradorScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
   email: 'email',
+  telefono: 'telefono',
   createdAt: 'createdAt'
 };
 
