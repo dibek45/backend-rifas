@@ -134,9 +134,12 @@ async findBoletosPorNombreTelefonoYSorteo(
   telefono: string,
   sorteoId?: number
 ) {
-  const whereBoletos = sorteoId
-    ? { sorteoId }  // si hay sorteoId
-    : {};           // si no, trae todos los sorteos
+  const whereBoletos = sorteoId ? { sorteoId } : {};
+
+  console.log('🟡 Buscar comprador con:');
+  console.log('Nombre:', nombre);
+  console.log('Teléfono:', telefono);
+  console.log('Filtro de boletos:', whereBoletos);
 
   const comprador = await this.prisma.comprador.findFirst({
     where: {
@@ -157,7 +160,10 @@ async findBoletosPorNombreTelefonoYSorteo(
     },
   });
 
+  console.log('🟢 Resultado comprador:', comprador);
+
   if (!comprador) {
+    console.warn('❌ Comprador no encontrado');
     return {
       message: 'Comprador no encontrado',
       boletos: [],
