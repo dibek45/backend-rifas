@@ -48,4 +48,14 @@ async buscarPorNombreTelefonoYSorteo(
   remove(@Param('id') id: string) {
     return this.boletoService.delete(+id);
   }
+
+
+  @Post('/apartar-lote')
+async apartarLote(
+  @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
+) {
+  const { nombre, telefono, boletos } = body;
+  return this.boletoService.apartarLoteConComprador(nombre, telefono, boletos);
+}
+
 }
