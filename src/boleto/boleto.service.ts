@@ -59,9 +59,7 @@ export class BoletoService {
     });
   }
 
-
-
-   async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
+  async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
     const boletos = Array.from({ length: cantidad }, (_, i) => ({
       numero: i + 1,
       precio,
@@ -72,5 +70,44 @@ export class BoletoService {
     return this.prisma.boleto.createMany({
       data: boletos,
     });
+  }
+
+  async apartarBoletosEnLote(
+    compradorId: number,
+    boletos: { id: number }[]
+  ) {
+    const boletosFallidos: number[] = [];
+
+    // Traer todos los boletos por ID
+    const ids = boletos.map(b => b.id);
+    const encontrados = await this.prisma.boleto.findMany({
+      where: { id: { in: ids } },
+    });
+
+    // Filtrar los que ya están ocupados
+    const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
+    boletosFallidos.push(...yaOcupados.map(b => b.numero));
+
+    // Filtrar los que sí se pueden apartar
+    const disponibles = encontrados.filter(b => b.estado === 'disponible');
+
+    if (disponibles.length > 0) {
+      await this.prisma.$transaction(
+        disponibles.map(b =>
+          this.prisma.boleto.update({
+            where: { id: b.id },
+            data: {
+              estado: 'ocupado',
+              compradorId: compradorId,
+            },
+          })
+        )
+      );
+    }
+
+    return {
+      success: true,
+      boletosOcupados: boletosFallidos, // Devuelve los que fallaron
+    };
   }
 }
