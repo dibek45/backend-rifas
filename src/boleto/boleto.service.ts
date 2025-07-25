@@ -128,4 +128,49 @@ export class BoletoService {
   return this.apartarBoletosEnLote(comprador.id, boletos);
 }
 
+
+
+async findBoletosPorNombreTelefonoYSorteo(
+  nombre: string,
+  telefono: string,
+  sorteoId: number
+) {
+  const comprador = await this.prisma.comprador.findFirst({
+    where: {
+      nombre,
+      telefono,
+      boletos: {
+        some: {
+          sorteoId
+        }
+      }
+    },
+    include: {
+      boletos: {
+        where: { sorteoId },
+        include: {
+          sorteo: true,
+          vendedor: true
+        }
+      }
+    }
+  });
+
+  if (!comprador) {
+    return {
+      message: 'Comprador no encontrado para ese sorteo',
+      boletos: []
+    };
+  }
+
+  return {
+    comprador: {
+      id: comprador.id,
+      nombre: comprador.nombre,
+      telefono: comprador.telefono
+    },
+    boletos: comprador.boletos
+  };
+}
+
 }

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { BoletoService } from './boleto.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
@@ -9,13 +9,20 @@ export class BoletoController {
 
 
 
-@Post('/apartar-lote')
-async apartarLote(
-  @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
+@Get('por-cliente')
+async buscarPorNombreTelefonoYSorteo(
+  @Query('nombre') nombre: string,
+  @Query('telefono') telefono: string,
+  @Query('sorteoId') sorteoIdStr: string
 ) {
-  const { nombre, telefono, boletos } = body;
-  return this.boletoService.apartarLoteConComprador(nombre, telefono, boletos);
+  const sorteoId = parseInt(sorteoIdStr, 10);
+  return this.boletoService.findBoletosPorNombreTelefonoYSorteo(
+    nombre,
+    telefono,
+    sorteoId
+  );
 }
+
 
 
   @Post()
