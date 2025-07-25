@@ -141,8 +141,8 @@ async findBoletosPorNombreTelefonoYSorteo(
   console.log('Teléfono:', telefono);
   console.log('Filtro de boletos:', whereBoletos);
 
-const comprador = await this.prisma.comprador.findFirst({
-  where: {
+  // 👇 Esta es la parte clave: solo agregamos "boletos: some" si hay sorteoId
+  const whereComprador: any = {
     nombre: {
       mode: 'insensitive',
       equals: nombre,
@@ -150,20 +150,26 @@ const comprador = await this.prisma.comprador.findFirst({
     telefono: {
       equals: telefono,
     },
-    boletos: {
-      some: whereBoletos,
-    },
-  },
-  include: {
-    boletos: {
-      where: whereBoletos,
-      include: {
-        sorteo: true,
-        vendedor: true,
+  };
+
+  if (sorteoId) {
+    whereComprador.boletos = {
+      some: { sorteoId },
+    };
+  }
+
+  const comprador = await this.prisma.comprador.findFirst({
+    where: whereComprador,
+    include: {
+      boletos: {
+        where: whereBoletos,
+        include: {
+          sorteo: true,
+          vendedor: true,
+        },
       },
     },
-  },
-});
+  });
 
   console.log('🟢 Resultado comprador:', comprador);
 
@@ -184,6 +190,7 @@ const comprador = await this.prisma.comprador.findFirst({
     boletos: comprador.boletos,
   };
 }
+
 
 
 }
