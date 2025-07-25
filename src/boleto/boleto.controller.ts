@@ -9,7 +9,7 @@ export class BoletoController {
 
 
 
-@Post('apartar-lote')
+@Post('/apartar-lote')
 async apartarLote(
   @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
 ) {
