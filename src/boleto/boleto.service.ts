@@ -192,5 +192,47 @@ async findBoletosPorNombreTelefonoYSorteo(
 }
 
 
+async getBoletosPorClienteSinSorteo(nombre: string, telefono: string) {
+  console.log('🟡 Buscar TODOS los boletos (sin sorteoId) para:');
+  console.log('Nombre:', nombre);
+  console.log('Teléfono:', telefono);
+
+  const comprador = await this.prisma.comprador.findFirst({
+    where: {
+      nombre: {
+        equals: nombre,
+        mode: 'insensitive',
+      },
+      telefono,
+    },
+    include: {
+      boletos: {
+        include: {
+          sorteo: true,
+          vendedor: true,
+        },
+      },
+    },
+  });
+
+  console.log('🟢 Resultado comprador:', comprador);
+
+  if (!comprador) {
+    console.warn('❌ Comprador no encontrado');
+    return {
+      message: 'Comprador no encontrado',
+      boletos: [],
+    };
+  }
+
+  return {
+    comprador: {
+      id: comprador.id,
+      nombre: comprador.nombre,
+      telefono: comprador.telefono,
+    },
+    boletos: comprador.boletos,
+  };
+}
 
 }

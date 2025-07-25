@@ -21,7 +21,13 @@ async buscarPorNombreTelefonoYSorteo(
     sorteoId
   );
 }
-
+@Get('por-cliente-sin-sorteo')
+async getBoletosPorClienteSinSorteo(
+  @Query('nombre') nombre: string,
+  @Query('telefono') telefono: string
+) {
+  return this.boletoService.getBoletosPorClienteSinSorteo(nombre, telefono);
+}
 
 
   @Post()
