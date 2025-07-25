@@ -8,14 +8,13 @@ export class BoletoController {
   constructor(private readonly boletoService: BoletoService) {}
 
 
-
 @Get('por-cliente')
 async buscarPorNombreTelefonoYSorteo(
   @Query('nombre') nombre: string,
   @Query('telefono') telefono: string,
-  @Query('sorteoId') sorteoIdStr: string
+  @Query('sorteoId') sorteoIdStr?: string // <- opcional
 ) {
-  const sorteoId = parseInt(sorteoIdStr, 10);
+  const sorteoId = sorteoIdStr ? parseInt(sorteoIdStr, 10) : undefined;
   return this.boletoService.findBoletosPorNombreTelefonoYSorteo(
     nombre,
     telefono,

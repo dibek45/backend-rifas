@@ -129,37 +129,38 @@ export class BoletoService {
 }
 
 
-
 async findBoletosPorNombreTelefonoYSorteo(
   nombre: string,
   telefono: string,
-  sorteoId: number
+  sorteoId?: number
 ) {
+  const whereBoletos = sorteoId
+    ? { sorteoId }  // si hay sorteoId
+    : {};           // si no, trae todos los sorteos
+
   const comprador = await this.prisma.comprador.findFirst({
     where: {
       nombre,
       telefono,
       boletos: {
-        some: {
-          sorteoId
-        }
-      }
+        some: whereBoletos,
+      },
     },
     include: {
       boletos: {
-        where: { sorteoId },
+        where: whereBoletos,
         include: {
           sorteo: true,
-          vendedor: true
-        }
-      }
-    }
+          vendedor: true,
+        },
+      },
+    },
   });
 
   if (!comprador) {
     return {
-      message: 'Comprador no encontrado para ese sorteo',
-      boletos: []
+      message: 'Comprador no encontrado',
+      boletos: [],
     };
   }
 
@@ -167,10 +168,11 @@ async findBoletosPorNombreTelefonoYSorteo(
     comprador: {
       id: comprador.id,
       nombre: comprador.nombre,
-      telefono: comprador.telefono
+      telefono: comprador.telefono,
     },
-    boletos: comprador.boletos
+    boletos: comprador.boletos,
   };
 }
+
 
 }
