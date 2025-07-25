@@ -141,24 +141,29 @@ async findBoletosPorNombreTelefonoYSorteo(
   console.log('Teléfono:', telefono);
   console.log('Filtro de boletos:', whereBoletos);
 
-  const comprador = await this.prisma.comprador.findFirst({
-    where: {
-      nombre,
-      telefono,
-      boletos: {
-        some: whereBoletos,
+const comprador = await this.prisma.comprador.findFirst({
+  where: {
+    nombre: {
+      mode: 'insensitive',
+      equals: nombre,
+    },
+    telefono: {
+      equals: telefono,
+    },
+    boletos: {
+      some: whereBoletos,
+    },
+  },
+  include: {
+    boletos: {
+      where: whereBoletos,
+      include: {
+        sorteo: true,
+        vendedor: true,
       },
     },
-    include: {
-      boletos: {
-        where: whereBoletos,
-        include: {
-          sorteo: true,
-          vendedor: true,
-        },
-      },
-    },
-  });
+  },
+});
 
   console.log('🟢 Resultado comprador:', comprador);
 
