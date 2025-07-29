@@ -13,9 +13,13 @@ export class SorteoGateway implements OnGatewayConnection {
   @WebSocketServer()
   server: Server;
 
-  handleConnection(client: Socket) {
-    console.log('📡 Cliente conectado:', client.id);
-  }
+ handleConnection(client: Socket) {
+  console.log('📡 Cliente conectado:', client.id);
+
+  client.once('disconnect', () => {
+    console.log('🔌 Cliente desconectado:', client.id);
+  });
+}
 
   @SubscribeMessage('joinSorteo')
   handleJoinSorteo(
