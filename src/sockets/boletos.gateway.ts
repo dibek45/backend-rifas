@@ -8,7 +8,18 @@ import {
 } from '@nestjs/websockets';
 import { Server, Socket } from 'socket.io';
 
-@WebSocketGateway({ cors: true })
+@WebSocketGateway({
+  cors: {
+    origin: [
+       'http://localhost:4200',
+      'https://sorteos.sa.dibeksolutions.com',
+      'https://sorteos.sa.admin.dibeksolutions.com', // 👈 AGREGA ESTE
+    ],
+    methods: ['GET', 'POST'],
+    credentials: true,
+  },
+  transports: ['websocket'], // 👈 importante para compatibilidad con frontend
+})
 export class SorteoGateway implements OnGatewayConnection {
   @WebSocketServer()
   server: Server;
