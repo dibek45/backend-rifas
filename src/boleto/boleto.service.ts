@@ -44,28 +44,49 @@ export class BoletoService {
       },
     });
   }
+async update(id: number, data: UpdateBoletoDto) {
+  const actual = await this.prisma.boleto.findUnique({
+    where: { id },
+    include: {
+      comprador: true,
+      vendedor: true,
+      sorteo: true,
+    },
+  });
 
-  async update(id: number, data: UpdateBoletoDto) { //aqui recibo id
+  if (!actual) throw new Error('❌ Boleto no encontrado');
 
+  // 🧠 Verifica si los datos son iguales (solo campos que cambian normalmente)
+  const noCambio =
+    actual.estado === data.estado &&
+    actual.metodoPago === data.metodoPago &&
+    actual.precio === data.precio &&
+    actual.compradorId === data.compradorId &&
+    actual.vendedorId === data.vendedorId;
 
-            const updatedBoleto = await this.prisma.boleto.update({
-              where: { id },
-              data: {
-                ...data,
-                fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
-              },
-              include: {
-                comprador: true,
-                vendedor: true,
-                sorteo: true,
-              },
-            });
+  if (noCambio) {
+    console.log('🔁 Boleto sin cambios reales, no se actualiza ni emite socket');
+    return actual;
+  }
 
-      // Emitir por socket
-      this.sorteoGateway.emitBoletoActualizado(updatedBoleto);
+  // ✅ Si sí cambió, actualiza y emite
+  const updatedBoleto = await this.prisma.boleto.update({
+    where: { id },
+    data: {
+      ...data,
+      fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
+    },
+    include: {
+      comprador: true,
+      vendedor: true,
+      sorteo: true,
+    },
+  });
 
+  this.sorteoGateway.emitBoletoActualizado(updatedBoleto);
   return updatedBoleto;
 }
+
 
 
   delete(id: number) {
