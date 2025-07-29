@@ -5,8 +5,9 @@ import { UpdateBoletoDto } from './dto/update-boleto.dto';
 
 @Controller('boleto')
 export class BoletoController {
-  constructor(private readonly boletoService: BoletoService) {}
-
+  constructor(
+    private readonly boletoService: BoletoService,
+  ) {}
 
 @Get('por-cliente')
 async buscarPorNombreTelefonoYSorteo(

@@ -2,10 +2,12 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
+import { SorteoGateway } from 'src/sockets/boletos.gateway'; // asegúrate que esté bien importado
 
 @Injectable()
 export class BoletoService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService,    private readonly sorteoGateway: SorteoGateway, // inyecta el gateway
+) {}
 
   findAll() {
     return this.prisma.boleto.findMany({
@@ -43,15 +45,28 @@ export class BoletoService {
     });
   }
 
-  update(id: number, data: UpdateBoletoDto) {
-    return this.prisma.boleto.update({
-      where: { id },
-      data: {
-        ...data,
-        fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
-      },
-    });
-  }
+  async update(id: number, data: UpdateBoletoDto) { //aqui recibo id
+
+
+            const updatedBoleto = await this.prisma.boleto.update({
+              where: { id },
+              data: {
+                ...data,
+                fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
+              },
+              include: {
+                comprador: true,
+                vendedor: true,
+                sorteo: true,
+              },
+            });
+
+      // Emitir por socket
+      this.sorteoGateway.emitBoletoActualizado(updatedBoleto);
+
+  return updatedBoleto;
+}
+
 
   delete(id: number) {
     return this.prisma.boleto.delete({
@@ -72,47 +87,57 @@ export class BoletoService {
     });
   }
 
-  async apartarBoletosEnLote(
-    compradorId: number,
-    boletos: { id: number }[]
-  ) {
-    const boletosFallidos: number[] = [];
+ async apartarBoletosEnLote(
+  compradorId: number,
+  boletos: { id: number }[]
+) {
+  const boletosFallidos: number[] = [];
 
-    // Traer todos los boletos por ID
-    const ids = boletos.map(b => b.id);
-    const encontrados = await this.prisma.boleto.findMany({
-      where: { id: { in: ids } },
-    });
+  const ids = boletos.map(b => b.id);
+  const encontrados = await this.prisma.boleto.findMany({
+    where: { id: { in: ids } },
+  });
 
-    // Filtrar los que ya están ocupados
-    const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
-    boletosFallidos.push(...yaOcupados.map(b => b.numero));
+  const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
+  boletosFallidos.push(...yaOcupados.map(b => b.numero));
 
-    // Filtrar los que sí se pueden apartar
-    const disponibles = encontrados.filter(b => b.estado === 'disponible');
+  const disponibles = encontrados.filter(b => b.estado === 'disponible');
 
-    if (disponibles.length > 0) {
-      await this.prisma.$transaction(
-        disponibles.map(b =>
-          this.prisma.boleto.update({
-            where: { id: b.id },
-            data: {
-              estado: 'ocupado',
-              compradorId: compradorId,
-            },
-          })
-        )
-      );
+  let actualizados: any[] = [];
+
+  if (disponibles.length > 0) {
+    actualizados = await this.prisma.$transaction(
+      disponibles.map(b =>
+        this.prisma.boleto.update({
+          where: { id: b.id },
+          data: {
+            estado: 'ocupado',
+            compradorId: compradorId,
+          },
+          include: {
+            sorteo: true,
+            comprador: true,
+            vendedor: true,
+          },
+        })
+      )
+    );
+
+    // Emitir cada boleto actualizado por socket
+    for (const boleto of actualizados) {
+      this.sorteoGateway.emitBoletoActualizado(boleto);
     }
-
-    return {
-      success: true,
-      boletosOcupados: boletosFallidos, // Devuelve los que fallaron
-    };
   }
 
+  return {
+    success: true,
+    boletosOcupados: boletosFallidos,
+  };
+}
 
-  async apartarLoteConComprador(
+
+
+async apartarLoteConComprador(
   nombre: string,
   telefono: string,
   boletos: { id: number }[]
@@ -121,11 +146,46 @@ export class BoletoService {
     data: {
       nombre,
       telefono,
-      email: `${Date.now()}@fake.com`, // puedes generar un email real si tienes login
+      email: `${Date.now()}@fake.com`,
     },
   });
 
-  return this.apartarBoletosEnLote(comprador.id, boletos);
+  const boletosFallidos: number[] = [];
+
+  const ids = boletos.map(b => b.id);
+  const encontrados = await this.prisma.boleto.findMany({
+    where: { id: { in: ids } },
+  });
+
+  const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
+  boletosFallidos.push(...yaOcupados.map(b => b.numero));
+
+  const disponibles = encontrados.filter(b => b.estado === 'disponible');
+
+  if (disponibles.length > 0) {
+    const actualizados = await this.prisma.$transaction(
+      disponibles.map(b =>
+        this.prisma.boleto.update({
+          where: { id: b.id },
+          data: {
+            estado: 'ocupado',
+            compradorId: comprador.id,
+          },
+          include: { sorteo: true, comprador: true, vendedor: true },
+        })
+      )
+    );
+
+    // 🔥 Emitimos cada boleto actualizado
+    actualizados.forEach(boleto => {
+      this.sorteoGateway.emitBoletoActualizado(boleto);
+    });
+  }
+
+  return {
+    success: true,
+    boletosOcupados: boletosFallidos,
+  };
 }
 
 
