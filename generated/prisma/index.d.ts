@@ -4697,6 +4697,7 @@ export namespace Prisma {
     totalBoletos: number | null
     boletosVendidos: number | null
     estado: string | null
+    numeroWhatsApp: string | null
   }
 
   export type SorteoMaxAggregateOutputType = {
@@ -4710,6 +4711,7 @@ export namespace Prisma {
     totalBoletos: number | null
     boletosVendidos: number | null
     estado: string | null
+    numeroWhatsApp: string | null
   }
 
   export type SorteoCountAggregateOutputType = {
@@ -4723,6 +4725,7 @@ export namespace Prisma {
     totalBoletos: number
     boletosVendidos: number
     estado: number
+    numeroWhatsApp: number
     _all: number
   }
 
@@ -4752,6 +4755,7 @@ export namespace Prisma {
     totalBoletos?: true
     boletosVendidos?: true
     estado?: true
+    numeroWhatsApp?: true
   }
 
   export type SorteoMaxAggregateInputType = {
@@ -4765,6 +4769,7 @@ export namespace Prisma {
     totalBoletos?: true
     boletosVendidos?: true
     estado?: true
+    numeroWhatsApp?: true
   }
 
   export type SorteoCountAggregateInputType = {
@@ -4778,6 +4783,7 @@ export namespace Prisma {
     totalBoletos?: true
     boletosVendidos?: true
     estado?: true
+    numeroWhatsApp?: true
     _all?: true
   }
 
@@ -4878,6 +4884,7 @@ export namespace Prisma {
     totalBoletos: number | null
     boletosVendidos: number | null
     estado: string | null
+    numeroWhatsApp: string | null
     _count: SorteoCountAggregateOutputType | null
     _avg: SorteoAvgAggregateOutputType | null
     _sum: SorteoSumAggregateOutputType | null
@@ -4910,6 +4917,7 @@ export namespace Prisma {
     totalBoletos?: boolean
     boletosVendidos?: boolean
     estado?: boolean
+    numeroWhatsApp?: boolean
     boletos?: boolean | Sorteo$boletosArgs<ExtArgs>
     _count?: boolean | SorteoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sorteo"]>
@@ -4925,6 +4933,7 @@ export namespace Prisma {
     totalBoletos?: boolean
     boletosVendidos?: boolean
     estado?: boolean
+    numeroWhatsApp?: boolean
   }, ExtArgs["result"]["sorteo"]>
 
   export type SorteoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4938,6 +4947,7 @@ export namespace Prisma {
     totalBoletos?: boolean
     boletosVendidos?: boolean
     estado?: boolean
+    numeroWhatsApp?: boolean
   }, ExtArgs["result"]["sorteo"]>
 
   export type SorteoSelectScalar = {
@@ -4951,9 +4961,10 @@ export namespace Prisma {
     totalBoletos?: boolean
     boletosVendidos?: boolean
     estado?: boolean
+    numeroWhatsApp?: boolean
   }
 
-  export type SorteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "imagen" | "fecha" | "cierreVentas" | "costoBoleto" | "totalBoletos" | "boletosVendidos" | "estado", ExtArgs["result"]["sorteo"]>
+  export type SorteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "imagen" | "fecha" | "cierreVentas" | "costoBoleto" | "totalBoletos" | "boletosVendidos" | "estado" | "numeroWhatsApp", ExtArgs["result"]["sorteo"]>
   export type SorteoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     boletos?: boolean | Sorteo$boletosArgs<ExtArgs>
     _count?: boolean | SorteoCountOutputTypeDefaultArgs<ExtArgs>
@@ -4977,6 +4988,7 @@ export namespace Prisma {
       totalBoletos: number | null
       boletosVendidos: number | null
       estado: string | null
+      numeroWhatsApp: string | null
     }, ExtArgs["result"]["sorteo"]>
     composites: {}
   }
@@ -5411,6 +5423,7 @@ export namespace Prisma {
     readonly totalBoletos: FieldRef<"Sorteo", 'Int'>
     readonly boletosVendidos: FieldRef<"Sorteo", 'Int'>
     readonly estado: FieldRef<"Sorteo", 'String'>
+    readonly numeroWhatsApp: FieldRef<"Sorteo", 'String'>
   }
     
 
@@ -5902,7 +5915,8 @@ export namespace Prisma {
     costoBoleto: 'costoBoleto',
     totalBoletos: 'totalBoletos',
     boletosVendidos: 'boletosVendidos',
-    estado: 'estado'
+    estado: 'estado',
+    numeroWhatsApp: 'numeroWhatsApp'
   };
 
   export type SorteoScalarFieldEnum = (typeof SorteoScalarFieldEnum)[keyof typeof SorteoScalarFieldEnum]
@@ -6207,6 +6221,7 @@ export namespace Prisma {
     totalBoletos?: IntNullableFilter<"Sorteo"> | number | null
     boletosVendidos?: IntNullableFilter<"Sorteo"> | number | null
     estado?: StringNullableFilter<"Sorteo"> | string | null
+    numeroWhatsApp?: StringNullableFilter<"Sorteo"> | string | null
     boletos?: BoletoListRelationFilter
   }
 
@@ -6221,6 +6236,7 @@ export namespace Prisma {
     totalBoletos?: SortOrderInput | SortOrder
     boletosVendidos?: SortOrderInput | SortOrder
     estado?: SortOrderInput | SortOrder
+    numeroWhatsApp?: SortOrderInput | SortOrder
     boletos?: BoletoOrderByRelationAggregateInput
   }
 
@@ -6238,6 +6254,7 @@ export namespace Prisma {
     totalBoletos?: IntNullableFilter<"Sorteo"> | number | null
     boletosVendidos?: IntNullableFilter<"Sorteo"> | number | null
     estado?: StringNullableFilter<"Sorteo"> | string | null
+    numeroWhatsApp?: StringNullableFilter<"Sorteo"> | string | null
     boletos?: BoletoListRelationFilter
   }, "id">
 
@@ -6252,6 +6269,7 @@ export namespace Prisma {
     totalBoletos?: SortOrderInput | SortOrder
     boletosVendidos?: SortOrderInput | SortOrder
     estado?: SortOrderInput | SortOrder
+    numeroWhatsApp?: SortOrderInput | SortOrder
     _count?: SorteoCountOrderByAggregateInput
     _avg?: SorteoAvgOrderByAggregateInput
     _max?: SorteoMaxOrderByAggregateInput
@@ -6273,6 +6291,7 @@ export namespace Prisma {
     totalBoletos?: IntNullableWithAggregatesFilter<"Sorteo"> | number | null
     boletosVendidos?: IntNullableWithAggregatesFilter<"Sorteo"> | number | null
     estado?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    numeroWhatsApp?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
   }
 
   export type CompradorCreateInput = {
@@ -6477,6 +6496,7 @@ export namespace Prisma {
     totalBoletos?: number | null
     boletosVendidos?: number | null
     estado?: string | null
+    numeroWhatsApp?: string | null
     boletos?: BoletoCreateNestedManyWithoutSorteoInput
   }
 
@@ -6491,6 +6511,7 @@ export namespace Prisma {
     totalBoletos?: number | null
     boletosVendidos?: number | null
     estado?: string | null
+    numeroWhatsApp?: string | null
     boletos?: BoletoUncheckedCreateNestedManyWithoutSorteoInput
   }
 
@@ -6504,6 +6525,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
     boletos?: BoletoUpdateManyWithoutSorteoNestedInput
   }
 
@@ -6518,6 +6540,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
     boletos?: BoletoUncheckedUpdateManyWithoutSorteoNestedInput
   }
 
@@ -6532,6 +6555,7 @@ export namespace Prisma {
     totalBoletos?: number | null
     boletosVendidos?: number | null
     estado?: string | null
+    numeroWhatsApp?: string | null
   }
 
   export type SorteoUpdateManyMutationInput = {
@@ -6544,6 +6568,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SorteoUncheckedUpdateManyInput = {
@@ -6557,6 +6582,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -6926,6 +6952,7 @@ export namespace Prisma {
     totalBoletos?: SortOrder
     boletosVendidos?: SortOrder
     estado?: SortOrder
+    numeroWhatsApp?: SortOrder
   }
 
   export type SorteoAvgOrderByAggregateInput = {
@@ -6946,6 +6973,7 @@ export namespace Prisma {
     totalBoletos?: SortOrder
     boletosVendidos?: SortOrder
     estado?: SortOrder
+    numeroWhatsApp?: SortOrder
   }
 
   export type SorteoMinOrderByAggregateInput = {
@@ -6959,6 +6987,7 @@ export namespace Prisma {
     totalBoletos?: SortOrder
     boletosVendidos?: SortOrder
     estado?: SortOrder
+    numeroWhatsApp?: SortOrder
   }
 
   export type SorteoSumOrderByAggregateInput = {
@@ -7583,6 +7612,7 @@ export namespace Prisma {
     totalBoletos?: number | null
     boletosVendidos?: number | null
     estado?: string | null
+    numeroWhatsApp?: string | null
   }
 
   export type SorteoUncheckedCreateWithoutBoletosInput = {
@@ -7596,6 +7626,7 @@ export namespace Prisma {
     totalBoletos?: number | null
     boletosVendidos?: number | null
     estado?: string | null
+    numeroWhatsApp?: string | null
   }
 
   export type SorteoCreateOrConnectWithoutBoletosInput = {
@@ -7676,6 +7707,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SorteoUncheckedUpdateWithoutBoletosInput = {
@@ -7689,6 +7721,7 @@ export namespace Prisma {
     totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
     boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
     estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type BoletoCreateWithoutSorteoInput = {

@@ -35,6 +35,7 @@ async create(dto: CreateSorteoDto) {
       totalBoletos: dto.totalBoletos,
       boletosVendidos: dto.boletosVendidos ?? 0,
       estado: dto.estado ?? 'activo',
+      numeroWhatsApp: dto.numeroWhatsApp,
     },
   });
 
