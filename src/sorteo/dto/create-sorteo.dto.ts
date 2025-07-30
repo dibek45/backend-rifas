@@ -44,7 +44,7 @@ export class CreateSorteoDto {
   estado?: string; // Ej: 'activo', 'cerrado', 'finalizado'
 
 
-    @IsOptional()
+  @IsOptional()
   @IsInt()
   @Min(1)
   costoBoleto?: number;
@@ -53,5 +53,10 @@ export class CreateSorteoDto {
   @IsInt()
   @Min(1)
   totalBoletos?: number;
+
+
+  @IsOptional()
+@IsString()
+numeroWhatsApp?: string; // Ej: '5216146087479'
 
 }
