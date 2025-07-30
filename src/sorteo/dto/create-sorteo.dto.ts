@@ -1,4 +1,10 @@
-import { IsDateString, IsOptional, IsString, IsInt, Min } from 'class-validator';
+import {
+  IsDateString,
+  IsOptional,
+  IsString,
+  IsInt,
+  Min,
+} from 'class-validator';
 
 export class CreateSorteoDto {
   @IsString()
@@ -27,4 +33,13 @@ export class CreateSorteoDto {
   @IsInt()
   @Min(1)
   precioBoletos?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(0)
+  boletosVendidos?: number;
+
+  @IsOptional()
+  @IsString()
+  estado?: string; // Ej: 'activo', 'cerrado', 'finalizado'
 }
