@@ -37,14 +37,15 @@ async getBoletosPorClienteSinSorteo(
   }
 
  // GET /boletos?sorteoId=123
-@Get()
-findAll(@Query('sorteoId') sorteoId: string) {
+@Get(':sorteoId')
+findAll(@Param('sorteoId') sorteoId: string) {
   const id = parseInt(sorteoId, 10);
   if (isNaN(id)) {
     throw new BadRequestException('sorteoId must be a valid number');
   }
   return this.boletoService.findAll(id);
 }
+
 
 
   @Get(':id')
