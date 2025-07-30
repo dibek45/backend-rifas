@@ -36,10 +36,11 @@ async getBoletosPorClienteSinSorteo(
     return this.boletoService.create(createBoletoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.boletoService.findAll();
-  }
+ // GET /boletos?sorteoId=123
+@Get()
+findAll(@Query('sorteoId') sorteoId: string) {
+  return this.boletoService.findAll(+sorteoId);
+}
 
   @Get(':id')
   findOne(@Param('id') id: string) {

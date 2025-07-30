@@ -9,15 +9,18 @@ export class BoletoService {
   constructor(private prisma: PrismaService,    private readonly sorteoGateway: SorteoGateway, // inyecta el gateway
 ) {}
 
-  findAll() {
-    return this.prisma.boleto.findMany({
-      include: {
-        comprador: true,
-        vendedor: true,
-        sorteo: true,
-      },
-    });
-  }
+ async findAll(sorteoId: number) {
+  return this.prisma.boleto.findMany({
+    where: {
+      sorteoId, // 👈 Filtra por sorteo
+    },
+    include: {
+      comprador: true,
+      vendedor: true,
+      sorteo: true,
+    },
+  });
+}
 
   findOne(id: number) {
     return this.prisma.boleto.findUnique({
