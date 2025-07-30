@@ -31,17 +31,22 @@ async create(dto: CreateSorteoDto) {
       imagen: dto.imagen,
       fecha: new Date(dto.fecha),
       cierreVentas: dto.cierreVentas ? new Date(dto.cierreVentas) : undefined,
+      costoBoleto: dto.costoBoleto,
+      totalBoletos: dto.totalBoletos,
+      boletosVendidos: dto.boletosVendidos ?? 0,
+      estado: dto.estado ?? 'activo',
     },
   });
 
   await this.boletoService.generarBoletosParaSorteo(
     sorteo.id,
     dto.cantidadBoletos,
-    dto.precioBoletos ?? 100,
+    dto.precioBoletos ?? dto.costoBoleto ?? 100,
   );
 
   return sorteo;
 }
+
 
 
 

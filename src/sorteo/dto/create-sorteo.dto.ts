@@ -42,4 +42,16 @@ export class CreateSorteoDto {
   @IsOptional()
   @IsString()
   estado?: string; // Ej: 'activo', 'cerrado', 'finalizado'
+
+
+    @IsOptional()
+  @IsInt()
+  @Min(1)
+  costoBoleto?: number;
+
+  @IsOptional()
+  @IsInt()
+  @Min(1)
+  totalBoletos?: number;
+
 }
