@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common';
 import { BoletoService } from './boleto.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
@@ -39,8 +39,13 @@ async getBoletosPorClienteSinSorteo(
  // GET /boletos?sorteoId=123
 @Get()
 findAll(@Query('sorteoId') sorteoId: string) {
-  return this.boletoService.findAll(+sorteoId);
+  const id = parseInt(sorteoId, 10);
+  if (isNaN(id)) {
+    throw new BadRequestException('sorteoId must be a valid number');
+  }
+  return this.boletoService.findAll(id);
 }
+
 
   @Get(':id')
   findOne(@Param('id') id: string) {
