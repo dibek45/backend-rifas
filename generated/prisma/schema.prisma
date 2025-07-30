@@ -43,11 +43,16 @@ model Boleto {
 }
 
 model Sorteo {
-  id           Int       @id @default(autoincrement())
-  nombre       String
-  descripcion  String?
-  imagen       String?
-  fecha        DateTime
-  cierreVentas DateTime?
-  boletos      Boleto[]
+  id              Int       @id @default(autoincrement())
+  nombre          String
+  descripcion     String?
+  imagen          String?
+  fecha           DateTime
+  cierreVentas    DateTime?
+  costoBoleto     Float? // 💵 Opcional
+  totalBoletos    Int? // 🎟️ Opcional
+  boletosVendidos Int? // ✅ Opcional
+  estado          String? // 📌 Opcional
+
+  boletos Boleto[]
 }

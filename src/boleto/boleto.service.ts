@@ -99,17 +99,18 @@ async update(id: number, data: UpdateBoletoDto) {
   }
 
   async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
-    const boletos = Array.from({ length: cantidad }, (_, i) => ({
-      numero: i + 1,
-      precio,
-      estado: 'disponible',
-      sorteoId,
-    }));
+  const boletos = Array.from({ length: cantidad }, (_, i) => ({
+    numero: i, // 👈 empieza en 0, termina en cantidad - 1
+    precio,
+    estado: 'disponible',
+    sorteoId,
+  }));
 
-    return this.prisma.boleto.createMany({
-      data: boletos,
-    });
-  }
+  return this.prisma.boleto.createMany({
+    data: boletos,
+  });
+}
+
 
  async apartarBoletosEnLote(
   compradorId: number,

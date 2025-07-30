@@ -154,7 +154,11 @@ exports.Prisma.SorteoScalarFieldEnum = {
   descripcion: 'descripcion',
   imagen: 'imagen',
   fecha: 'fecha',
-  cierreVentas: 'cierreVentas'
+  cierreVentas: 'cierreVentas',
+  costoBoleto: 'costoBoleto',
+  totalBoletos: 'totalBoletos',
+  boletosVendidos: 'boletosVendidos',
+  estado: 'estado'
 };
 
 exports.Prisma.SortOrder = {
