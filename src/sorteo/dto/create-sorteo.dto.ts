@@ -41,8 +41,7 @@ export class CreateSorteoDto {
 
   @IsOptional()
   @IsString()
-  estado?: string; // Ej: 'activo', 'cerrado', 'finalizado'
-
+  estado?: string;
 
   @IsOptional()
   @IsInt()
@@ -54,26 +53,52 @@ export class CreateSorteoDto {
   @Min(1)
   totalBoletos?: number;
 
-
   @IsOptional()
-@IsString()
-numeroWhatsApp?: string; 
-
+  @IsString()
+  numeroWhatsApp?: string;
 
   @IsOptional()
   @IsString()
-  nombreEmpresa?: string; 
+  nombreEmpresa?: string;
 
   @IsOptional()
   @IsString()
-  linkfacebook?: string; 
-
-
-    @IsOptional()
-  @IsString()
-  numeroCuenta?: string; 
+  linkfacebook?: string;
 
   @IsOptional()
   @IsString()
-  tipoBanco?: string;    
+  numeroCuenta?: string;
+
+  @IsOptional()
+  @IsString()
+  tipoBanco?: string;
+
+  // 🔥 NUEVOS CAMPOS para mensajes de WhatsApp y número de sorteo
+  @IsOptional()
+  @IsString()
+  mensajeWhatsappInfo?: string;
+
+  @IsOptional()
+  @IsString()
+  mensajeWhatsappApartado?: string;
+
+  @IsOptional()
+  @IsString()
+  mensajeWhatsappConfirmado?: string;
+
+  @IsOptional()
+  @IsString()
+  mensajeWhatsappAnuncio?: string;
+
+  @IsOptional()
+  @IsString()
+  numeroDeSorteo?: string;
+
+  @IsInt()
+adminId: number;
+
+@IsOptional()
+@IsInt()
+cuentaBancariaId?: number;
+
 }

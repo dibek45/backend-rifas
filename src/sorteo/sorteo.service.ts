@@ -25,42 +25,37 @@ export class SorteoService {
 
 async create(dto: CreateSorteoDto) {
   const sorteo = await this.prisma.sorteo.create({
-    data: {
-      nombre: dto.nombre,
-      descripcion: dto.descripcion,
-      imagen: dto.imagen,
-      fecha: new Date(dto.fecha),
-      cierreVentas: dto.cierreVentas ? new Date(dto.cierreVentas) : undefined,
-      costoBoleto: dto.costoBoleto,
-      totalBoletos: dto.totalBoletos,
-      boletosVendidos: dto.boletosVendidos ?? 0,
-      estado: dto.estado ?? 'activo',
-      numeroWhatsApp: dto.numeroWhatsApp,
-      nombreEmpresa: dto.nombreEmpresa,
-      linkfacebook: dto.linkfacebook,
-      numeroCuenta: dto.numeroCuenta,
-      tipoBanco: dto.tipoBanco,
+  data: {
+    nombre: dto.nombre,
+    descripcion: dto.descripcion,
+    imagen: dto.imagen,
+    fecha: new Date(dto.fecha),
+    cierreVentas: dto.cierreVentas ? new Date(dto.cierreVentas) : undefined,
+    costoBoleto: dto.costoBoleto,
+    totalBoletos: dto.totalBoletos,
+    boletosVendidos: dto.boletosVendidos ?? 0,
+    estado: dto.estado ?? 'activo',
+    numeroWhatsApp: dto.numeroWhatsApp,
+    nombreEmpresa: dto.nombreEmpresa,
+    linkfacebook: dto.linkfacebook,
+    numeroCuenta: dto.numeroCuenta,
+    tipoBanco: dto.tipoBanco,
+    numeroDeSorteo: dto.numeroDeSorteo,
+    mensajeWhatsappInfo: dto.mensajeWhatsappInfo,
+    mensajeWhatsappApartado: dto.mensajeWhatsappApartado,
+    mensajeWhatsappConfirmado: dto.mensajeWhatsappConfirmado,
+    mensajeWhatsappAnuncio: dto.mensajeWhatsappAnuncio,
 
-      // 🔢 Nuevos campos
-      numeroDeSorteo: dto.numeroDeSorteo,
-      mensajeWhatsappInfo: dto.mensajeWhatsappInfo,
-      mensajeWhatsappApartado: dto.mensajeWhatsappApartado,
-      mensajeWhatsappConfirmado: dto.mensajeWhatsappConfirmado,
-      mensajeWhatsappAnuncio: dto.mensajeWhatsappAnuncio,
-
-      // 🧑‍💼 Relación con Usuario (adminId)
-      admin: dto.adminId ? { connect: { id: dto.adminId } } : undefined,
-
-      // 💳 Relación con CuentaBancaria (opcional)
-      cuentaBancaria: dto.cuentaBancariaNumero
-        ? {
-            connect: {
-              numero: dto.cuentaBancariaNumero,
-            },
-          }
-        : undefined,
+    // 🔑 Relaciones:
+    admin: {
+      connect: { id: dto.adminId },
     },
-  });
+    cuentaBancaria: dto.cuentaBancariaId
+      ? { connect: { id: dto.cuentaBancariaId } }
+      : undefined,
+  },
+});
+
 
   // 🎟️ Generar boletos
   await this.boletoService.generarBoletosParaSorteo(
