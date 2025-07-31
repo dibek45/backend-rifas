@@ -1325,10 +1325,12 @@ export namespace Prisma {
 
   export type CompradorCountOutputType = {
     boletos: number
+    referidos: number
   }
 
   export type CompradorCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     boletos?: boolean | CompradorCountOutputTypeCountBoletosArgs
+    referidos?: boolean | CompradorCountOutputTypeCountReferidosArgs
   }
 
   // Custom InputTypes
@@ -1347,6 +1349,13 @@ export namespace Prisma {
    */
   export type CompradorCountOutputTypeCountBoletosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BoletoWhereInput
+  }
+
+  /**
+   * CompradorCountOutputType without action
+   */
+  export type CompradorCountOutputTypeCountReferidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CompradorWhereInput
   }
 
 
@@ -1501,10 +1510,12 @@ export namespace Prisma {
 
   export type CompradorAvgAggregateOutputType = {
     id: number | null
+    referidoId: number | null
   }
 
   export type CompradorSumAggregateOutputType = {
     id: number | null
+    referidoId: number | null
   }
 
   export type CompradorMinAggregateOutputType = {
@@ -1512,7 +1523,8 @@ export namespace Prisma {
     nombre: string | null
     email: string | null
     telefono: string | null
-    createdAt: Date | null
+    creadoEn: Date | null
+    referidoId: number | null
   }
 
   export type CompradorMaxAggregateOutputType = {
@@ -1520,7 +1532,8 @@ export namespace Prisma {
     nombre: string | null
     email: string | null
     telefono: string | null
-    createdAt: Date | null
+    creadoEn: Date | null
+    referidoId: number | null
   }
 
   export type CompradorCountAggregateOutputType = {
@@ -1528,17 +1541,20 @@ export namespace Prisma {
     nombre: number
     email: number
     telefono: number
-    createdAt: number
+    creadoEn: number
+    referidoId: number
     _all: number
   }
 
 
   export type CompradorAvgAggregateInputType = {
     id?: true
+    referidoId?: true
   }
 
   export type CompradorSumAggregateInputType = {
     id?: true
+    referidoId?: true
   }
 
   export type CompradorMinAggregateInputType = {
@@ -1546,7 +1562,8 @@ export namespace Prisma {
     nombre?: true
     email?: true
     telefono?: true
-    createdAt?: true
+    creadoEn?: true
+    referidoId?: true
   }
 
   export type CompradorMaxAggregateInputType = {
@@ -1554,7 +1571,8 @@ export namespace Prisma {
     nombre?: true
     email?: true
     telefono?: true
-    createdAt?: true
+    creadoEn?: true
+    referidoId?: true
   }
 
   export type CompradorCountAggregateInputType = {
@@ -1562,7 +1580,8 @@ export namespace Prisma {
     nombre?: true
     email?: true
     telefono?: true
-    createdAt?: true
+    creadoEn?: true
+    referidoId?: true
     _all?: true
   }
 
@@ -1657,7 +1676,8 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono: string | null
-    createdAt: Date
+    creadoEn: Date
+    referidoId: number | null
     _count: CompradorCountAggregateOutputType | null
     _avg: CompradorAvgAggregateOutputType | null
     _sum: CompradorSumAggregateOutputType | null
@@ -1684,8 +1704,11 @@ export namespace Prisma {
     nombre?: boolean
     email?: boolean
     telefono?: boolean
-    createdAt?: boolean
+    creadoEn?: boolean
+    referidoId?: boolean
     boletos?: boolean | Comprador$boletosArgs<ExtArgs>
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
+    referidos?: boolean | Comprador$referidosArgs<ExtArgs>
     _count?: boolean | CompradorCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["comprador"]>
 
@@ -1694,7 +1717,9 @@ export namespace Prisma {
     nombre?: boolean
     email?: boolean
     telefono?: boolean
-    createdAt?: boolean
+    creadoEn?: boolean
+    referidoId?: boolean
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
   }, ExtArgs["result"]["comprador"]>
 
   export type CompradorSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -1702,7 +1727,9 @@ export namespace Prisma {
     nombre?: boolean
     email?: boolean
     telefono?: boolean
-    createdAt?: boolean
+    creadoEn?: boolean
+    referidoId?: boolean
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
   }, ExtArgs["result"]["comprador"]>
 
   export type CompradorSelectScalar = {
@@ -1710,28 +1737,38 @@ export namespace Prisma {
     nombre?: boolean
     email?: boolean
     telefono?: boolean
-    createdAt?: boolean
+    creadoEn?: boolean
+    referidoId?: boolean
   }
 
-  export type CompradorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "email" | "telefono" | "createdAt", ExtArgs["result"]["comprador"]>
+  export type CompradorOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "email" | "telefono" | "creadoEn" | "referidoId", ExtArgs["result"]["comprador"]>
   export type CompradorInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     boletos?: boolean | Comprador$boletosArgs<ExtArgs>
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
+    referidos?: boolean | Comprador$referidosArgs<ExtArgs>
     _count?: boolean | CompradorCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type CompradorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type CompradorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type CompradorIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
+  }
+  export type CompradorIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    referido?: boolean | Comprador$referidoArgs<ExtArgs>
+  }
 
   export type $CompradorPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Comprador"
     objects: {
       boletos: Prisma.$BoletoPayload<ExtArgs>[]
+      referido: Prisma.$CompradorPayload<ExtArgs> | null
+      referidos: Prisma.$CompradorPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       nombre: string
       email: string
       telefono: string | null
-      createdAt: Date
+      creadoEn: Date
+      referidoId: number | null
     }, ExtArgs["result"]["comprador"]>
     composites: {}
   }
@@ -2127,6 +2164,8 @@ export namespace Prisma {
   export interface Prisma__CompradorClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     boletos<T extends Comprador$boletosArgs<ExtArgs> = {}>(args?: Subset<T, Comprador$boletosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoletoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    referido<T extends Comprador$referidoArgs<ExtArgs> = {}>(args?: Subset<T, Comprador$referidoArgs<ExtArgs>>): Prisma__CompradorClient<$Result.GetResult<Prisma.$CompradorPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    referidos<T extends Comprador$referidosArgs<ExtArgs> = {}>(args?: Subset<T, Comprador$referidosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CompradorPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2160,7 +2199,8 @@ export namespace Prisma {
     readonly nombre: FieldRef<"Comprador", 'String'>
     readonly email: FieldRef<"Comprador", 'String'>
     readonly telefono: FieldRef<"Comprador", 'String'>
-    readonly createdAt: FieldRef<"Comprador", 'DateTime'>
+    readonly creadoEn: FieldRef<"Comprador", 'DateTime'>
+    readonly referidoId: FieldRef<"Comprador", 'Int'>
   }
     
 
@@ -2410,6 +2450,10 @@ export namespace Prisma {
      */
     data: CompradorCreateManyInput | CompradorCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompradorIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2480,6 +2524,10 @@ export namespace Prisma {
      * Limit how many Compradors to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompradorIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2570,6 +2618,49 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: BoletoScalarFieldEnum | BoletoScalarFieldEnum[]
+  }
+
+  /**
+   * Comprador.referido
+   */
+  export type Comprador$referidoArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comprador
+     */
+    select?: CompradorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comprador
+     */
+    omit?: CompradorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompradorInclude<ExtArgs> | null
+    where?: CompradorWhereInput
+  }
+
+  /**
+   * Comprador.referidos
+   */
+  export type Comprador$referidosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Comprador
+     */
+    select?: CompradorSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Comprador
+     */
+    omit?: CompradorOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CompradorInclude<ExtArgs> | null
+    where?: CompradorWhereInput
+    orderBy?: CompradorOrderByWithRelationInput | CompradorOrderByWithRelationInput[]
+    cursor?: CompradorWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CompradorScalarFieldEnum | CompradorScalarFieldEnum[]
   }
 
   /**
@@ -8580,7 +8671,8 @@ export namespace Prisma {
     nombre: 'nombre',
     email: 'email',
     telefono: 'telefono',
-    createdAt: 'createdAt'
+    creadoEn: 'creadoEn',
+    referidoId: 'referidoId'
   };
 
   export type CompradorScalarFieldEnum = (typeof CompradorScalarFieldEnum)[keyof typeof CompradorScalarFieldEnum]
@@ -8758,8 +8850,11 @@ export namespace Prisma {
     nombre?: StringFilter<"Comprador"> | string
     email?: StringFilter<"Comprador"> | string
     telefono?: StringNullableFilter<"Comprador"> | string | null
-    createdAt?: DateTimeFilter<"Comprador"> | Date | string
+    creadoEn?: DateTimeFilter<"Comprador"> | Date | string
+    referidoId?: IntNullableFilter<"Comprador"> | number | null
     boletos?: BoletoListRelationFilter
+    referido?: XOR<CompradorNullableScalarRelationFilter, CompradorWhereInput> | null
+    referidos?: CompradorListRelationFilter
   }
 
   export type CompradorOrderByWithRelationInput = {
@@ -8767,8 +8862,11 @@ export namespace Prisma {
     nombre?: SortOrder
     email?: SortOrder
     telefono?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    creadoEn?: SortOrder
+    referidoId?: SortOrderInput | SortOrder
     boletos?: BoletoOrderByRelationAggregateInput
+    referido?: CompradorOrderByWithRelationInput
+    referidos?: CompradorOrderByRelationAggregateInput
   }
 
   export type CompradorWhereUniqueInput = Prisma.AtLeast<{
@@ -8779,8 +8877,11 @@ export namespace Prisma {
     NOT?: CompradorWhereInput | CompradorWhereInput[]
     nombre?: StringFilter<"Comprador"> | string
     telefono?: StringNullableFilter<"Comprador"> | string | null
-    createdAt?: DateTimeFilter<"Comprador"> | Date | string
+    creadoEn?: DateTimeFilter<"Comprador"> | Date | string
+    referidoId?: IntNullableFilter<"Comprador"> | number | null
     boletos?: BoletoListRelationFilter
+    referido?: XOR<CompradorNullableScalarRelationFilter, CompradorWhereInput> | null
+    referidos?: CompradorListRelationFilter
   }, "id" | "email">
 
   export type CompradorOrderByWithAggregationInput = {
@@ -8788,7 +8889,8 @@ export namespace Prisma {
     nombre?: SortOrder
     email?: SortOrder
     telefono?: SortOrderInput | SortOrder
-    createdAt?: SortOrder
+    creadoEn?: SortOrder
+    referidoId?: SortOrderInput | SortOrder
     _count?: CompradorCountOrderByAggregateInput
     _avg?: CompradorAvgOrderByAggregateInput
     _max?: CompradorMaxOrderByAggregateInput
@@ -8804,7 +8906,8 @@ export namespace Prisma {
     nombre?: StringWithAggregatesFilter<"Comprador"> | string
     email?: StringWithAggregatesFilter<"Comprador"> | string
     telefono?: StringNullableWithAggregatesFilter<"Comprador"> | string | null
-    createdAt?: DateTimeWithAggregatesFilter<"Comprador"> | Date | string
+    creadoEn?: DateTimeWithAggregatesFilter<"Comprador"> | Date | string
+    referidoId?: IntNullableWithAggregatesFilter<"Comprador"> | number | null
   }
 
   export type VendedorWhereInput = {
@@ -9219,8 +9322,10 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono?: string | null
-    createdAt?: Date | string
+    creadoEn?: Date | string
     boletos?: BoletoCreateNestedManyWithoutCompradorInput
+    referido?: CompradorCreateNestedOneWithoutReferidosInput
+    referidos?: CompradorCreateNestedManyWithoutReferidoInput
   }
 
   export type CompradorUncheckedCreateInput = {
@@ -9228,16 +9333,20 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono?: string | null
-    createdAt?: Date | string
+    creadoEn?: Date | string
+    referidoId?: number | null
     boletos?: BoletoUncheckedCreateNestedManyWithoutCompradorInput
+    referidos?: CompradorUncheckedCreateNestedManyWithoutReferidoInput
   }
 
   export type CompradorUpdateInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
     boletos?: BoletoUpdateManyWithoutCompradorNestedInput
+    referido?: CompradorUpdateOneWithoutReferidosNestedInput
+    referidos?: CompradorUpdateManyWithoutReferidoNestedInput
   }
 
   export type CompradorUncheckedUpdateInput = {
@@ -9245,8 +9354,10 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    referidoId?: NullableIntFieldUpdateOperationsInput | number | null
     boletos?: BoletoUncheckedUpdateManyWithoutCompradorNestedInput
+    referidos?: CompradorUncheckedUpdateManyWithoutReferidoNestedInput
   }
 
   export type CompradorCreateManyInput = {
@@ -9254,14 +9365,15 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono?: string | null
-    createdAt?: Date | string
+    creadoEn?: Date | string
+    referidoId?: number | null
   }
 
   export type CompradorUpdateManyMutationInput = {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type CompradorUncheckedUpdateManyInput = {
@@ -9269,7 +9381,8 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    referidoId?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type VendedorCreateInput = {
@@ -9750,10 +9863,32 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type BoletoListRelationFilter = {
     every?: BoletoWhereInput
     some?: BoletoWhereInput
     none?: BoletoWhereInput
+  }
+
+  export type CompradorNullableScalarRelationFilter = {
+    is?: CompradorWhereInput | null
+    isNot?: CompradorWhereInput | null
+  }
+
+  export type CompradorListRelationFilter = {
+    every?: CompradorWhereInput
+    some?: CompradorWhereInput
+    none?: CompradorWhereInput
   }
 
   export type SortOrderInput = {
@@ -9765,16 +9900,22 @@ export namespace Prisma {
     _count?: SortOrder
   }
 
+  export type CompradorOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
   export type CompradorCountOrderByAggregateInput = {
     id?: SortOrder
     nombre?: SortOrder
     email?: SortOrder
     telefono?: SortOrder
-    createdAt?: SortOrder
+    creadoEn?: SortOrder
+    referidoId?: SortOrder
   }
 
   export type CompradorAvgOrderByAggregateInput = {
     id?: SortOrder
+    referidoId?: SortOrder
   }
 
   export type CompradorMaxOrderByAggregateInput = {
@@ -9782,7 +9923,8 @@ export namespace Prisma {
     nombre?: SortOrder
     email?: SortOrder
     telefono?: SortOrder
-    createdAt?: SortOrder
+    creadoEn?: SortOrder
+    referidoId?: SortOrder
   }
 
   export type CompradorMinOrderByAggregateInput = {
@@ -9790,11 +9932,13 @@ export namespace Prisma {
     nombre?: SortOrder
     email?: SortOrder
     telefono?: SortOrder
-    createdAt?: SortOrder
+    creadoEn?: SortOrder
+    referidoId?: SortOrder
   }
 
   export type CompradorSumOrderByAggregateInput = {
     id?: SortOrder
+    referidoId?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -9863,6 +10007,22 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
   export type VendedorCountOrderByAggregateInput = {
     id?: SortOrder
     nombre?: SortOrder
@@ -9915,22 +10075,6 @@ export namespace Prisma {
     gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     not?: NestedDateTimeNullableFilter<$PrismaModel> | Date | string | null
-  }
-
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
-  export type CompradorNullableScalarRelationFilter = {
-    is?: CompradorWhereInput | null
-    isNot?: CompradorWhereInput | null
   }
 
   export type VendedorNullableScalarRelationFilter = {
@@ -10025,22 +10169,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type CuentaBancariaListRelationFilter = {
@@ -10266,11 +10394,31 @@ export namespace Prisma {
     connect?: BoletoWhereUniqueInput | BoletoWhereUniqueInput[]
   }
 
+  export type CompradorCreateNestedOneWithoutReferidosInput = {
+    create?: XOR<CompradorCreateWithoutReferidosInput, CompradorUncheckedCreateWithoutReferidosInput>
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidosInput
+    connect?: CompradorWhereUniqueInput
+  }
+
+  export type CompradorCreateNestedManyWithoutReferidoInput = {
+    create?: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput> | CompradorCreateWithoutReferidoInput[] | CompradorUncheckedCreateWithoutReferidoInput[]
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidoInput | CompradorCreateOrConnectWithoutReferidoInput[]
+    createMany?: CompradorCreateManyReferidoInputEnvelope
+    connect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+  }
+
   export type BoletoUncheckedCreateNestedManyWithoutCompradorInput = {
     create?: XOR<BoletoCreateWithoutCompradorInput, BoletoUncheckedCreateWithoutCompradorInput> | BoletoCreateWithoutCompradorInput[] | BoletoUncheckedCreateWithoutCompradorInput[]
     connectOrCreate?: BoletoCreateOrConnectWithoutCompradorInput | BoletoCreateOrConnectWithoutCompradorInput[]
     createMany?: BoletoCreateManyCompradorInputEnvelope
     connect?: BoletoWhereUniqueInput | BoletoWhereUniqueInput[]
+  }
+
+  export type CompradorUncheckedCreateNestedManyWithoutReferidoInput = {
+    create?: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput> | CompradorCreateWithoutReferidoInput[] | CompradorUncheckedCreateWithoutReferidoInput[]
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidoInput | CompradorCreateOrConnectWithoutReferidoInput[]
+    createMany?: CompradorCreateManyReferidoInputEnvelope
+    connect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -10299,8 +10447,40 @@ export namespace Prisma {
     deleteMany?: BoletoScalarWhereInput | BoletoScalarWhereInput[]
   }
 
+  export type CompradorUpdateOneWithoutReferidosNestedInput = {
+    create?: XOR<CompradorCreateWithoutReferidosInput, CompradorUncheckedCreateWithoutReferidosInput>
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidosInput
+    upsert?: CompradorUpsertWithoutReferidosInput
+    disconnect?: CompradorWhereInput | boolean
+    delete?: CompradorWhereInput | boolean
+    connect?: CompradorWhereUniqueInput
+    update?: XOR<XOR<CompradorUpdateToOneWithWhereWithoutReferidosInput, CompradorUpdateWithoutReferidosInput>, CompradorUncheckedUpdateWithoutReferidosInput>
+  }
+
+  export type CompradorUpdateManyWithoutReferidoNestedInput = {
+    create?: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput> | CompradorCreateWithoutReferidoInput[] | CompradorUncheckedCreateWithoutReferidoInput[]
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidoInput | CompradorCreateOrConnectWithoutReferidoInput[]
+    upsert?: CompradorUpsertWithWhereUniqueWithoutReferidoInput | CompradorUpsertWithWhereUniqueWithoutReferidoInput[]
+    createMany?: CompradorCreateManyReferidoInputEnvelope
+    set?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    disconnect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    delete?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    connect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    update?: CompradorUpdateWithWhereUniqueWithoutReferidoInput | CompradorUpdateWithWhereUniqueWithoutReferidoInput[]
+    updateMany?: CompradorUpdateManyWithWhereWithoutReferidoInput | CompradorUpdateManyWithWhereWithoutReferidoInput[]
+    deleteMany?: CompradorScalarWhereInput | CompradorScalarWhereInput[]
+  }
+
   export type IntFieldUpdateOperationsInput = {
     set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
     increment?: number
     decrement?: number
     multiply?: number
@@ -10319,6 +10499,20 @@ export namespace Prisma {
     update?: BoletoUpdateWithWhereUniqueWithoutCompradorInput | BoletoUpdateWithWhereUniqueWithoutCompradorInput[]
     updateMany?: BoletoUpdateManyWithWhereWithoutCompradorInput | BoletoUpdateManyWithWhereWithoutCompradorInput[]
     deleteMany?: BoletoScalarWhereInput | BoletoScalarWhereInput[]
+  }
+
+  export type CompradorUncheckedUpdateManyWithoutReferidoNestedInput = {
+    create?: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput> | CompradorCreateWithoutReferidoInput[] | CompradorUncheckedCreateWithoutReferidoInput[]
+    connectOrCreate?: CompradorCreateOrConnectWithoutReferidoInput | CompradorCreateOrConnectWithoutReferidoInput[]
+    upsert?: CompradorUpsertWithWhereUniqueWithoutReferidoInput | CompradorUpsertWithWhereUniqueWithoutReferidoInput[]
+    createMany?: CompradorCreateManyReferidoInputEnvelope
+    set?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    disconnect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    delete?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    connect?: CompradorWhereUniqueInput | CompradorWhereUniqueInput[]
+    update?: CompradorUpdateWithWhereUniqueWithoutReferidoInput | CompradorUpdateWithWhereUniqueWithoutReferidoInput[]
+    updateMany?: CompradorUpdateManyWithWhereWithoutReferidoInput | CompradorUpdateManyWithWhereWithoutReferidoInput[]
+    deleteMany?: CompradorScalarWhereInput | CompradorScalarWhereInput[]
   }
 
   export type BoletoCreateNestedManyWithoutVendedorInput = {
@@ -10419,14 +10613,6 @@ export namespace Prisma {
     upsert?: SorteoUpsertWithoutBoletosInput
     connect?: SorteoWhereUniqueInput
     update?: XOR<XOR<SorteoUpdateToOneWithWhereWithoutBoletosInput, SorteoUpdateWithoutBoletosInput>, SorteoUncheckedUpdateWithoutBoletosInput>
-  }
-
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
   }
 
   export type CuentaBancariaCreateNestedManyWithoutUsuarioInput = {
@@ -10699,6 +10885,17 @@ export namespace Prisma {
     not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
+  export type NestedIntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
   export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel>
     in?: number[] | ListIntFieldRefInput<$PrismaModel>
@@ -10760,17 +10957,6 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type NestedIntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
     equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
     in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
@@ -10783,6 +10969,33 @@ export namespace Prisma {
     _count?: NestedIntFilter<$PrismaModel>
     _min?: NestedDateTimeFilter<$PrismaModel>
     _max?: NestedDateTimeFilter<$PrismaModel>
+  }
+
+  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
+  }
+
+  export type NestedFloatNullableFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedDateTimeNullableFilter<$PrismaModel = never> = {
@@ -10824,33 +11037,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
-  }
-
-  export type NestedFloatNullableFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatNullableFilter<$PrismaModel> | number | null
   }
 
   export type NestedFloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -10900,6 +11086,59 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CompradorCreateWithoutReferidosInput = {
+    nombre: string
+    email: string
+    telefono?: string | null
+    creadoEn?: Date | string
+    boletos?: BoletoCreateNestedManyWithoutCompradorInput
+    referido?: CompradorCreateNestedOneWithoutReferidosInput
+  }
+
+  export type CompradorUncheckedCreateWithoutReferidosInput = {
+    id?: number
+    nombre: string
+    email: string
+    telefono?: string | null
+    creadoEn?: Date | string
+    referidoId?: number | null
+    boletos?: BoletoUncheckedCreateNestedManyWithoutCompradorInput
+  }
+
+  export type CompradorCreateOrConnectWithoutReferidosInput = {
+    where: CompradorWhereUniqueInput
+    create: XOR<CompradorCreateWithoutReferidosInput, CompradorUncheckedCreateWithoutReferidosInput>
+  }
+
+  export type CompradorCreateWithoutReferidoInput = {
+    nombre: string
+    email: string
+    telefono?: string | null
+    creadoEn?: Date | string
+    boletos?: BoletoCreateNestedManyWithoutCompradorInput
+    referidos?: CompradorCreateNestedManyWithoutReferidoInput
+  }
+
+  export type CompradorUncheckedCreateWithoutReferidoInput = {
+    id?: number
+    nombre: string
+    email: string
+    telefono?: string | null
+    creadoEn?: Date | string
+    boletos?: BoletoUncheckedCreateNestedManyWithoutCompradorInput
+    referidos?: CompradorUncheckedCreateNestedManyWithoutReferidoInput
+  }
+
+  export type CompradorCreateOrConnectWithoutReferidoInput = {
+    where: CompradorWhereUniqueInput
+    create: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput>
+  }
+
+  export type CompradorCreateManyReferidoInputEnvelope = {
+    data: CompradorCreateManyReferidoInput | CompradorCreateManyReferidoInput[]
+    skipDuplicates?: boolean
+  }
+
   export type BoletoUpsertWithWhereUniqueWithoutCompradorInput = {
     where: BoletoWhereUniqueInput
     update: XOR<BoletoUpdateWithoutCompradorInput, BoletoUncheckedUpdateWithoutCompradorInput>
@@ -10929,6 +11168,64 @@ export namespace Prisma {
     compradorId?: IntNullableFilter<"Boleto"> | number | null
     vendedorId?: IntNullableFilter<"Boleto"> | number | null
     sorteoId?: IntFilter<"Boleto"> | number
+  }
+
+  export type CompradorUpsertWithoutReferidosInput = {
+    update: XOR<CompradorUpdateWithoutReferidosInput, CompradorUncheckedUpdateWithoutReferidosInput>
+    create: XOR<CompradorCreateWithoutReferidosInput, CompradorUncheckedCreateWithoutReferidosInput>
+    where?: CompradorWhereInput
+  }
+
+  export type CompradorUpdateToOneWithWhereWithoutReferidosInput = {
+    where?: CompradorWhereInput
+    data: XOR<CompradorUpdateWithoutReferidosInput, CompradorUncheckedUpdateWithoutReferidosInput>
+  }
+
+  export type CompradorUpdateWithoutReferidosInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telefono?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    boletos?: BoletoUpdateManyWithoutCompradorNestedInput
+    referido?: CompradorUpdateOneWithoutReferidosNestedInput
+  }
+
+  export type CompradorUncheckedUpdateWithoutReferidosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telefono?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    referidoId?: NullableIntFieldUpdateOperationsInput | number | null
+    boletos?: BoletoUncheckedUpdateManyWithoutCompradorNestedInput
+  }
+
+  export type CompradorUpsertWithWhereUniqueWithoutReferidoInput = {
+    where: CompradorWhereUniqueInput
+    update: XOR<CompradorUpdateWithoutReferidoInput, CompradorUncheckedUpdateWithoutReferidoInput>
+    create: XOR<CompradorCreateWithoutReferidoInput, CompradorUncheckedCreateWithoutReferidoInput>
+  }
+
+  export type CompradorUpdateWithWhereUniqueWithoutReferidoInput = {
+    where: CompradorWhereUniqueInput
+    data: XOR<CompradorUpdateWithoutReferidoInput, CompradorUncheckedUpdateWithoutReferidoInput>
+  }
+
+  export type CompradorUpdateManyWithWhereWithoutReferidoInput = {
+    where: CompradorScalarWhereInput
+    data: XOR<CompradorUpdateManyMutationInput, CompradorUncheckedUpdateManyWithoutReferidoInput>
+  }
+
+  export type CompradorScalarWhereInput = {
+    AND?: CompradorScalarWhereInput | CompradorScalarWhereInput[]
+    OR?: CompradorScalarWhereInput[]
+    NOT?: CompradorScalarWhereInput | CompradorScalarWhereInput[]
+    id?: IntFilter<"Comprador"> | number
+    nombre?: StringFilter<"Comprador"> | string
+    email?: StringFilter<"Comprador"> | string
+    telefono?: StringNullableFilter<"Comprador"> | string | null
+    creadoEn?: DateTimeFilter<"Comprador"> | Date | string
+    referidoId?: IntNullableFilter<"Comprador"> | number | null
   }
 
   export type BoletoCreateWithoutVendedorInput = {
@@ -10982,7 +11279,9 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono?: string | null
-    createdAt?: Date | string
+    creadoEn?: Date | string
+    referido?: CompradorCreateNestedOneWithoutReferidosInput
+    referidos?: CompradorCreateNestedManyWithoutReferidoInput
   }
 
   export type CompradorUncheckedCreateWithoutBoletosInput = {
@@ -10990,7 +11289,9 @@ export namespace Prisma {
     nombre: string
     email: string
     telefono?: string | null
-    createdAt?: Date | string
+    creadoEn?: Date | string
+    referidoId?: number | null
+    referidos?: CompradorUncheckedCreateNestedManyWithoutReferidoInput
   }
 
   export type CompradorCreateOrConnectWithoutBoletosInput = {
@@ -11087,7 +11388,9 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    referido?: CompradorUpdateOneWithoutReferidosNestedInput
+    referidos?: CompradorUpdateManyWithoutReferidoNestedInput
   }
 
   export type CompradorUncheckedUpdateWithoutBoletosInput = {
@@ -11095,7 +11398,9 @@ export namespace Prisma {
     nombre?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     telefono?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    referidoId?: NullableIntFieldUpdateOperationsInput | number | null
+    referidos?: CompradorUncheckedUpdateManyWithoutReferidoNestedInput
   }
 
   export type VendedorUpsertWithoutBoletosInput = {
@@ -11618,6 +11923,14 @@ export namespace Prisma {
     sorteoId: number
   }
 
+  export type CompradorCreateManyReferidoInput = {
+    id?: number
+    nombre: string
+    email: string
+    telefono?: string | null
+    creadoEn?: Date | string
+  }
+
   export type BoletoUpdateWithoutCompradorInput = {
     numero?: IntFieldUpdateOperationsInput | number
     precio?: FloatFieldUpdateOperationsInput | number
@@ -11648,6 +11961,33 @@ export namespace Prisma {
     fechaCompra?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     vendedorId?: NullableIntFieldUpdateOperationsInput | number | null
     sorteoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CompradorUpdateWithoutReferidoInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telefono?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    boletos?: BoletoUpdateManyWithoutCompradorNestedInput
+    referidos?: CompradorUpdateManyWithoutReferidoNestedInput
+  }
+
+  export type CompradorUncheckedUpdateWithoutReferidoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telefono?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
+    boletos?: BoletoUncheckedUpdateManyWithoutCompradorNestedInput
+    referidos?: CompradorUncheckedUpdateManyWithoutReferidoNestedInput
+  }
+
+  export type CompradorUncheckedUpdateManyWithoutReferidoInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    telefono?: NullableStringFieldUpdateOperationsInput | string | null
+    creadoEn?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BoletoCreateManyVendedorInput = {
