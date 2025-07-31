@@ -38,6 +38,8 @@ async create(dto: CreateSorteoDto) {
       numeroWhatsApp: dto.numeroWhatsApp,
       nombreEmpresa: dto.nombreEmpresa,
       linkfacebook: dto.linkfacebook,
+      numerCuenta: dto.numeroCuenta,
+      tipoBanco: dto.tipoBanco,
     },
   });
 
