@@ -10,15 +10,15 @@ datasource db {
 }
 
 model Comprador {
-  id        Int      @id @default(autoincrement())
-  nombre    String
-  email     String   @unique
-  telefono  String?
-  boletos   Boleto[]
- referidoId Int?        
-  referido   Comprador?  @relation("Referido", fields: [referidoId], references: [id])
-  referidos  Comprador[] @relation("Referido")
-  createdAt DateTime @default(now())
+  id          Int          @id @default(autoincrement())
+  nombre      String
+  email       String       @unique
+  telefono    String?
+  boletos     Boleto[]
+  referidoId  Int?
+  referido    Comprador?   @relation("Referido", fields: [referidoId], references: [id])
+  referidos   Comprador[]  @relation("Referido")
+  createdAt   DateTime     @default(now())
 }
 
 model Vendedor {
