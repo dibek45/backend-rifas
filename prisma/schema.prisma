@@ -43,21 +43,53 @@ model Boleto {
   sorteoId     Int
 }
 
-model Sorteo {
-  id              Int       @id @default(autoincrement())
+model Usuario {
+  id              Int              @id @default(autoincrement())
   nombre          String
-  descripcion     String?
-  imagen          String?
-  fecha           DateTime
-  cierreVentas    DateTime?
-  costoBoleto     Float?     // 💵 Opcional
-  totalBoletos    Int?       // 🎟️ Opcional
-  boletosVendidos Int?       // ✅ Opcional
-  estado          String?    // 📌 Opcional
-  numeroWhatsApp  String?    // 📞 Opcional
-  nombreEmpresa String?    // 🏢 Opcional
-  linkfacebook String?    // 📘 Opcional
-  numeroCuenta String?
-  tipoBanco String?
-  boletos         Boleto[]
+  email           String           @unique
+  password        String
+  rol             String           @default("admin")
+  cuentasBancarias CuentaBancaria[] @relation("UsuarioCuentas")
+  sorteos         Sorteo[]         @relation("AdminSorteos")
+}
+
+model CuentaBancaria {
+  id         Int      @id @default(autoincrement())
+  banco      String
+  numero     String
+  titular    String
+  usuario    Usuario  @relation("UsuarioCuentas", fields: [usuarioId], references: [id])
+  usuarioId  Int
+  sorteos    Sorteo[] // 👈 una cuenta puede estar en muchos sorteos
+}
+
+model Sorteo {
+  id                       Int              @id @default(autoincrement())
+  nombre                   String
+  descripcion              String?
+  imagen                   String?
+  fecha                    DateTime
+  cierreVentas             DateTime?
+  costoBoleto              Float?
+  totalBoletos             Int?
+  boletosVendidos          Int?
+  estado                   String?
+  numeroWhatsApp           String?
+  nombreEmpresa            String?
+  linkfacebook             String?
+  numeroCuenta             String?
+  tipoBanco                String?
+  numeroDeSorteo           String?
+  mensajeWhatsappInfo      String?
+  mensajeWhatsappApartado  String?
+  mensajeWhatsappConfirmado String?
+  mensajeWhatsappAnuncio   String?
+
+  boletos                  Boleto[]
+
+  cuentaBancariaId         Int?
+  cuentaBancaria           CuentaBancaria? @relation(fields: [cuentaBancariaId], references: [id])
+
+  adminId                  Int
+  admin                    Usuario          @relation("AdminSorteos", fields: [adminId], references: [id])
 }

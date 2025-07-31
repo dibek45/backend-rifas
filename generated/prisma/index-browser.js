@@ -148,6 +148,22 @@ exports.Prisma.BoletoScalarFieldEnum = {
   sorteoId: 'sorteoId'
 };
 
+exports.Prisma.UsuarioScalarFieldEnum = {
+  id: 'id',
+  nombre: 'nombre',
+  email: 'email',
+  password: 'password',
+  rol: 'rol'
+};
+
+exports.Prisma.CuentaBancariaScalarFieldEnum = {
+  id: 'id',
+  banco: 'banco',
+  numero: 'numero',
+  titular: 'titular',
+  usuarioId: 'usuarioId'
+};
+
 exports.Prisma.SorteoScalarFieldEnum = {
   id: 'id',
   nombre: 'nombre',
@@ -163,7 +179,14 @@ exports.Prisma.SorteoScalarFieldEnum = {
   nombreEmpresa: 'nombreEmpresa',
   linkfacebook: 'linkfacebook',
   numeroCuenta: 'numeroCuenta',
-  tipoBanco: 'tipoBanco'
+  tipoBanco: 'tipoBanco',
+  numeroDeSorteo: 'numeroDeSorteo',
+  mensajeWhatsappInfo: 'mensajeWhatsappInfo',
+  mensajeWhatsappApartado: 'mensajeWhatsappApartado',
+  mensajeWhatsappConfirmado: 'mensajeWhatsappConfirmado',
+  mensajeWhatsappAnuncio: 'mensajeWhatsappAnuncio',
+  cuentaBancariaId: 'cuentaBancariaId',
+  adminId: 'adminId'
 };
 
 exports.Prisma.SortOrder = {
@@ -186,6 +209,8 @@ exports.Prisma.ModelName = {
   Comprador: 'Comprador',
   Vendedor: 'Vendedor',
   Boleto: 'Boleto',
+  Usuario: 'Usuario',
+  CuentaBancaria: 'CuentaBancaria',
   Sorteo: 'Sorteo'
 };
 

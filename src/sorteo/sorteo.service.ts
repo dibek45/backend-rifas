@@ -40,9 +40,29 @@ async create(dto: CreateSorteoDto) {
       linkfacebook: dto.linkfacebook,
       numeroCuenta: dto.numeroCuenta,
       tipoBanco: dto.tipoBanco,
+
+      // 🔢 Nuevos campos
+      numeroDeSorteo: dto.numeroDeSorteo,
+      mensajeWhatsappInfo: dto.mensajeWhatsappInfo,
+      mensajeWhatsappApartado: dto.mensajeWhatsappApartado,
+      mensajeWhatsappConfirmado: dto.mensajeWhatsappConfirmado,
+      mensajeWhatsappAnuncio: dto.mensajeWhatsappAnuncio,
+
+      // 🧑‍💼 Relación con Usuario (adminId)
+      admin: dto.adminId ? { connect: { id: dto.adminId } } : undefined,
+
+      // 💳 Relación con CuentaBancaria (opcional)
+      cuentaBancaria: dto.cuentaBancariaNumero
+        ? {
+            connect: {
+              numero: dto.cuentaBancariaNumero,
+            },
+          }
+        : undefined,
     },
   });
 
+  // 🎟️ Generar boletos
   await this.boletoService.generarBoletosParaSorteo(
     sorteo.id,
     dto.cantidadBoletos,

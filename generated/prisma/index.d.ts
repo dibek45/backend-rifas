@@ -29,6 +29,16 @@ export type Vendedor = $Result.DefaultSelection<Prisma.$VendedorPayload>
  */
 export type Boleto = $Result.DefaultSelection<Prisma.$BoletoPayload>
 /**
+ * Model Usuario
+ * 
+ */
+export type Usuario = $Result.DefaultSelection<Prisma.$UsuarioPayload>
+/**
+ * Model CuentaBancaria
+ * 
+ */
+export type CuentaBancaria = $Result.DefaultSelection<Prisma.$CuentaBancariaPayload>
+/**
  * Model Sorteo
  * 
  */
@@ -188,6 +198,26 @@ export class PrismaClient<
     * ```
     */
   get boleto(): Prisma.BoletoDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.usuario`: Exposes CRUD operations for the **Usuario** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Usuarios
+    * const usuarios = await prisma.usuario.findMany()
+    * ```
+    */
+  get usuario(): Prisma.UsuarioDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.cuentaBancaria`: Exposes CRUD operations for the **CuentaBancaria** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more CuentaBancarias
+    * const cuentaBancarias = await prisma.cuentaBancaria.findMany()
+    * ```
+    */
+  get cuentaBancaria(): Prisma.CuentaBancariaDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.sorteo`: Exposes CRUD operations for the **Sorteo** model.
@@ -641,6 +671,8 @@ export namespace Prisma {
     Comprador: 'Comprador',
     Vendedor: 'Vendedor',
     Boleto: 'Boleto',
+    Usuario: 'Usuario',
+    CuentaBancaria: 'CuentaBancaria',
     Sorteo: 'Sorteo'
   };
 
@@ -660,7 +692,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "comprador" | "vendedor" | "boleto" | "sorteo"
+      modelProps: "comprador" | "vendedor" | "boleto" | "usuario" | "cuentaBancaria" | "sorteo"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -886,6 +918,154 @@ export namespace Prisma {
           }
         }
       }
+      Usuario: {
+        payload: Prisma.$UsuarioPayload<ExtArgs>
+        fields: Prisma.UsuarioFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UsuarioFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UsuarioFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          findFirst: {
+            args: Prisma.UsuarioFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UsuarioFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          findMany: {
+            args: Prisma.UsuarioFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
+          }
+          create: {
+            args: Prisma.UsuarioCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          createMany: {
+            args: Prisma.UsuarioCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UsuarioCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
+          }
+          delete: {
+            args: Prisma.UsuarioDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          update: {
+            args: Prisma.UsuarioUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          deleteMany: {
+            args: Prisma.UsuarioDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UsuarioUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UsuarioUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>[]
+          }
+          upsert: {
+            args: Prisma.UsuarioUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UsuarioPayload>
+          }
+          aggregate: {
+            args: Prisma.UsuarioAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUsuario>
+          }
+          groupBy: {
+            args: Prisma.UsuarioGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UsuarioCountArgs<ExtArgs>
+            result: $Utils.Optional<UsuarioCountAggregateOutputType> | number
+          }
+        }
+      }
+      CuentaBancaria: {
+        payload: Prisma.$CuentaBancariaPayload<ExtArgs>
+        fields: Prisma.CuentaBancariaFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.CuentaBancariaFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.CuentaBancariaFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          findFirst: {
+            args: Prisma.CuentaBancariaFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.CuentaBancariaFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          findMany: {
+            args: Prisma.CuentaBancariaFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>[]
+          }
+          create: {
+            args: Prisma.CuentaBancariaCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          createMany: {
+            args: Prisma.CuentaBancariaCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.CuentaBancariaCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>[]
+          }
+          delete: {
+            args: Prisma.CuentaBancariaDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          update: {
+            args: Prisma.CuentaBancariaUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          deleteMany: {
+            args: Prisma.CuentaBancariaDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.CuentaBancariaUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.CuentaBancariaUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>[]
+          }
+          upsert: {
+            args: Prisma.CuentaBancariaUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$CuentaBancariaPayload>
+          }
+          aggregate: {
+            args: Prisma.CuentaBancariaAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateCuentaBancaria>
+          }
+          groupBy: {
+            args: Prisma.CuentaBancariaGroupByArgs<ExtArgs>
+            result: $Utils.Optional<CuentaBancariaGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.CuentaBancariaCountArgs<ExtArgs>
+            result: $Utils.Optional<CuentaBancariaCountAggregateOutputType> | number
+          }
+        }
+      }
       Sorteo: {
         payload: Prisma.$SorteoPayload<ExtArgs>
         fields: Prisma.SorteoFieldRefs
@@ -1047,6 +1227,8 @@ export namespace Prisma {
     comprador?: CompradorOmit
     vendedor?: VendedorOmit
     boleto?: BoletoOmit
+    usuario?: UsuarioOmit
+    cuentaBancaria?: CuentaBancariaOmit
     sorteo?: SorteoOmit
   }
 
@@ -1196,6 +1378,77 @@ export namespace Prisma {
    */
   export type VendedorCountOutputTypeCountBoletosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: BoletoWhereInput
+  }
+
+
+  /**
+   * Count Type UsuarioCountOutputType
+   */
+
+  export type UsuarioCountOutputType = {
+    cuentasBancarias: number
+    sorteos: number
+  }
+
+  export type UsuarioCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cuentasBancarias?: boolean | UsuarioCountOutputTypeCountCuentasBancariasArgs
+    sorteos?: boolean | UsuarioCountOutputTypeCountSorteosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UsuarioCountOutputType
+     */
+    select?: UsuarioCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountCuentasBancariasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CuentaBancariaWhereInput
+  }
+
+  /**
+   * UsuarioCountOutputType without action
+   */
+  export type UsuarioCountOutputTypeCountSorteosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SorteoWhereInput
+  }
+
+
+  /**
+   * Count Type CuentaBancariaCountOutputType
+   */
+
+  export type CuentaBancariaCountOutputType = {
+    sorteos: number
+  }
+
+  export type CuentaBancariaCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    sorteos?: boolean | CuentaBancariaCountOutputTypeCountSorteosArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * CuentaBancariaCountOutputType without action
+   */
+  export type CuentaBancariaCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancariaCountOutputType
+     */
+    select?: CuentaBancariaCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CuentaBancariaCountOutputType without action
+   */
+  export type CuentaBancariaCountOutputTypeCountSorteosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SorteoWhereInput
   }
 
 
@@ -4661,6 +4914,2264 @@ export namespace Prisma {
 
 
   /**
+   * Model Usuario
+   */
+
+  export type AggregateUsuario = {
+    _count: UsuarioCountAggregateOutputType | null
+    _avg: UsuarioAvgAggregateOutputType | null
+    _sum: UsuarioSumAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
+  }
+
+  export type UsuarioAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UsuarioSumAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UsuarioMinAggregateOutputType = {
+    id: number | null
+    nombre: string | null
+    email: string | null
+    password: string | null
+    rol: string | null
+  }
+
+  export type UsuarioMaxAggregateOutputType = {
+    id: number | null
+    nombre: string | null
+    email: string | null
+    password: string | null
+    rol: string | null
+  }
+
+  export type UsuarioCountAggregateOutputType = {
+    id: number
+    nombre: number
+    email: number
+    password: number
+    rol: number
+    _all: number
+  }
+
+
+  export type UsuarioAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UsuarioSumAggregateInputType = {
+    id?: true
+  }
+
+  export type UsuarioMinAggregateInputType = {
+    id?: true
+    nombre?: true
+    email?: true
+    password?: true
+    rol?: true
+  }
+
+  export type UsuarioMaxAggregateInputType = {
+    id?: true
+    nombre?: true
+    email?: true
+    password?: true
+    rol?: true
+  }
+
+  export type UsuarioCountAggregateInputType = {
+    id?: true
+    nombre?: true
+    email?: true
+    password?: true
+    rol?: true
+    _all?: true
+  }
+
+  export type UsuarioAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Usuario to aggregate.
+     */
+    where?: UsuarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Usuarios to fetch.
+     */
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UsuarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Usuarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Usuarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Usuarios
+    **/
+    _count?: true | UsuarioCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: UsuarioAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UsuarioSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UsuarioMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UsuarioMaxAggregateInputType
+  }
+
+  export type GetUsuarioAggregateType<T extends UsuarioAggregateArgs> = {
+        [P in keyof T & keyof AggregateUsuario]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUsuario[P]>
+      : GetScalarType<T[P], AggregateUsuario[P]>
+  }
+
+
+
+
+  export type UsuarioGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UsuarioWhereInput
+    orderBy?: UsuarioOrderByWithAggregationInput | UsuarioOrderByWithAggregationInput[]
+    by: UsuarioScalarFieldEnum[] | UsuarioScalarFieldEnum
+    having?: UsuarioScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UsuarioCountAggregateInputType | true
+    _avg?: UsuarioAvgAggregateInputType
+    _sum?: UsuarioSumAggregateInputType
+    _min?: UsuarioMinAggregateInputType
+    _max?: UsuarioMaxAggregateInputType
+  }
+
+  export type UsuarioGroupByOutputType = {
+    id: number
+    nombre: string
+    email: string
+    password: string
+    rol: string
+    _count: UsuarioCountAggregateOutputType | null
+    _avg: UsuarioAvgAggregateOutputType | null
+    _sum: UsuarioSumAggregateOutputType | null
+    _min: UsuarioMinAggregateOutputType | null
+    _max: UsuarioMaxAggregateOutputType | null
+  }
+
+  type GetUsuarioGroupByPayload<T extends UsuarioGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UsuarioGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UsuarioGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
+            : GetScalarType<T[P], UsuarioGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UsuarioSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    email?: boolean
+    password?: boolean
+    rol?: boolean
+    cuentasBancarias?: boolean | Usuario$cuentasBancariasArgs<ExtArgs>
+    sorteos?: boolean | Usuario$sorteosArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["usuario"]>
+
+  export type UsuarioSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    email?: boolean
+    password?: boolean
+    rol?: boolean
+  }, ExtArgs["result"]["usuario"]>
+
+  export type UsuarioSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    nombre?: boolean
+    email?: boolean
+    password?: boolean
+    rol?: boolean
+  }, ExtArgs["result"]["usuario"]>
+
+  export type UsuarioSelectScalar = {
+    id?: boolean
+    nombre?: boolean
+    email?: boolean
+    password?: boolean
+    rol?: boolean
+  }
+
+  export type UsuarioOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "email" | "password" | "rol", ExtArgs["result"]["usuario"]>
+  export type UsuarioInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cuentasBancarias?: boolean | Usuario$cuentasBancariasArgs<ExtArgs>
+    sorteos?: boolean | Usuario$sorteosArgs<ExtArgs>
+    _count?: boolean | UsuarioCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UsuarioIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UsuarioIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+
+  export type $UsuarioPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Usuario"
+    objects: {
+      cuentasBancarias: Prisma.$CuentaBancariaPayload<ExtArgs>[]
+      sorteos: Prisma.$SorteoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      nombre: string
+      email: string
+      password: string
+      rol: string
+    }, ExtArgs["result"]["usuario"]>
+    composites: {}
+  }
+
+  type UsuarioGetPayload<S extends boolean | null | undefined | UsuarioDefaultArgs> = $Result.GetResult<Prisma.$UsuarioPayload, S>
+
+  type UsuarioCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UsuarioFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UsuarioCountAggregateInputType | true
+    }
+
+  export interface UsuarioDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Usuario'], meta: { name: 'Usuario' } }
+    /**
+     * Find zero or one Usuario that matches the filter.
+     * @param {UsuarioFindUniqueArgs} args - Arguments to find a Usuario
+     * @example
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UsuarioFindUniqueArgs>(args: SelectSubset<T, UsuarioFindUniqueArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Usuario that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UsuarioFindUniqueOrThrowArgs} args - Arguments to find a Usuario
+     * @example
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UsuarioFindUniqueOrThrowArgs>(args: SelectSubset<T, UsuarioFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usuario that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioFindFirstArgs} args - Arguments to find a Usuario
+     * @example
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UsuarioFindFirstArgs>(args?: SelectSubset<T, UsuarioFindFirstArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Usuario that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioFindFirstOrThrowArgs} args - Arguments to find a Usuario
+     * @example
+     * // Get one Usuario
+     * const usuario = await prisma.usuario.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UsuarioFindFirstOrThrowArgs>(args?: SelectSubset<T, UsuarioFindFirstOrThrowArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Usuarios that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Usuarios
+     * const usuarios = await prisma.usuario.findMany()
+     * 
+     * // Get first 10 Usuarios
+     * const usuarios = await prisma.usuario.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const usuarioWithIdOnly = await prisma.usuario.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UsuarioFindManyArgs>(args?: SelectSubset<T, UsuarioFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Usuario.
+     * @param {UsuarioCreateArgs} args - Arguments to create a Usuario.
+     * @example
+     * // Create one Usuario
+     * const Usuario = await prisma.usuario.create({
+     *   data: {
+     *     // ... data to create a Usuario
+     *   }
+     * })
+     * 
+     */
+    create<T extends UsuarioCreateArgs>(args: SelectSubset<T, UsuarioCreateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Usuarios.
+     * @param {UsuarioCreateManyArgs} args - Arguments to create many Usuarios.
+     * @example
+     * // Create many Usuarios
+     * const usuario = await prisma.usuario.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UsuarioCreateManyArgs>(args?: SelectSubset<T, UsuarioCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Usuarios and returns the data saved in the database.
+     * @param {UsuarioCreateManyAndReturnArgs} args - Arguments to create many Usuarios.
+     * @example
+     * // Create many Usuarios
+     * const usuario = await prisma.usuario.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Usuarios and only return the `id`
+     * const usuarioWithIdOnly = await prisma.usuario.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UsuarioCreateManyAndReturnArgs>(args?: SelectSubset<T, UsuarioCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Usuario.
+     * @param {UsuarioDeleteArgs} args - Arguments to delete one Usuario.
+     * @example
+     * // Delete one Usuario
+     * const Usuario = await prisma.usuario.delete({
+     *   where: {
+     *     // ... filter to delete one Usuario
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UsuarioDeleteArgs>(args: SelectSubset<T, UsuarioDeleteArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Usuario.
+     * @param {UsuarioUpdateArgs} args - Arguments to update one Usuario.
+     * @example
+     * // Update one Usuario
+     * const usuario = await prisma.usuario.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UsuarioUpdateArgs>(args: SelectSubset<T, UsuarioUpdateArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Usuarios.
+     * @param {UsuarioDeleteManyArgs} args - Arguments to filter Usuarios to delete.
+     * @example
+     * // Delete a few Usuarios
+     * const { count } = await prisma.usuario.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UsuarioDeleteManyArgs>(args?: SelectSubset<T, UsuarioDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usuarios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Usuarios
+     * const usuario = await prisma.usuario.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UsuarioUpdateManyArgs>(args: SelectSubset<T, UsuarioUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Usuarios and returns the data updated in the database.
+     * @param {UsuarioUpdateManyAndReturnArgs} args - Arguments to update many Usuarios.
+     * @example
+     * // Update many Usuarios
+     * const usuario = await prisma.usuario.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Usuarios and only return the `id`
+     * const usuarioWithIdOnly = await prisma.usuario.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UsuarioUpdateManyAndReturnArgs>(args: SelectSubset<T, UsuarioUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Usuario.
+     * @param {UsuarioUpsertArgs} args - Arguments to update or create a Usuario.
+     * @example
+     * // Update or create a Usuario
+     * const usuario = await prisma.usuario.upsert({
+     *   create: {
+     *     // ... data to create a Usuario
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Usuario we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UsuarioUpsertArgs>(args: SelectSubset<T, UsuarioUpsertArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Usuarios.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioCountArgs} args - Arguments to filter Usuarios to count.
+     * @example
+     * // Count the number of Usuarios
+     * const count = await prisma.usuario.count({
+     *   where: {
+     *     // ... the filter for the Usuarios we want to count
+     *   }
+     * })
+    **/
+    count<T extends UsuarioCountArgs>(
+      args?: Subset<T, UsuarioCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UsuarioCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Usuario.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UsuarioAggregateArgs>(args: Subset<T, UsuarioAggregateArgs>): Prisma.PrismaPromise<GetUsuarioAggregateType<T>>
+
+    /**
+     * Group by Usuario.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UsuarioGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UsuarioGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UsuarioGroupByArgs['orderBy'] }
+        : { orderBy?: UsuarioGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UsuarioGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUsuarioGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Usuario model
+   */
+  readonly fields: UsuarioFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Usuario.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UsuarioClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    cuentasBancarias<T extends Usuario$cuentasBancariasArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$cuentasBancariasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    sorteos<T extends Usuario$sorteosArgs<ExtArgs> = {}>(args?: Subset<T, Usuario$sorteosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SorteoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Usuario model
+   */
+  interface UsuarioFieldRefs {
+    readonly id: FieldRef<"Usuario", 'Int'>
+    readonly nombre: FieldRef<"Usuario", 'String'>
+    readonly email: FieldRef<"Usuario", 'String'>
+    readonly password: FieldRef<"Usuario", 'String'>
+    readonly rol: FieldRef<"Usuario", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Usuario findUnique
+   */
+  export type UsuarioFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where: UsuarioWhereUniqueInput
+  }
+
+  /**
+   * Usuario findUniqueOrThrow
+   */
+  export type UsuarioFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where: UsuarioWhereUniqueInput
+  }
+
+  /**
+   * Usuario findFirst
+   */
+  export type UsuarioFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where?: UsuarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Usuarios to fetch.
+     */
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Usuarios.
+     */
+    cursor?: UsuarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Usuarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Usuarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Usuarios.
+     */
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario findFirstOrThrow
+   */
+  export type UsuarioFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuario to fetch.
+     */
+    where?: UsuarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Usuarios to fetch.
+     */
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Usuarios.
+     */
+    cursor?: UsuarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Usuarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Usuarios.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Usuarios.
+     */
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario findMany
+   */
+  export type UsuarioFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter, which Usuarios to fetch.
+     */
+    where?: UsuarioWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Usuarios to fetch.
+     */
+    orderBy?: UsuarioOrderByWithRelationInput | UsuarioOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Usuarios.
+     */
+    cursor?: UsuarioWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Usuarios from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Usuarios.
+     */
+    skip?: number
+    distinct?: UsuarioScalarFieldEnum | UsuarioScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario create
+   */
+  export type UsuarioCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Usuario.
+     */
+    data: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
+  }
+
+  /**
+   * Usuario createMany
+   */
+  export type UsuarioCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Usuarios.
+     */
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Usuario createManyAndReturn
+   */
+  export type UsuarioCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * The data used to create many Usuarios.
+     */
+    data: UsuarioCreateManyInput | UsuarioCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Usuario update
+   */
+  export type UsuarioUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Usuario.
+     */
+    data: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
+    /**
+     * Choose, which Usuario to update.
+     */
+    where: UsuarioWhereUniqueInput
+  }
+
+  /**
+   * Usuario updateMany
+   */
+  export type UsuarioUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Usuarios.
+     */
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
+    /**
+     * Filter which Usuarios to update
+     */
+    where?: UsuarioWhereInput
+    /**
+     * Limit how many Usuarios to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Usuario updateManyAndReturn
+   */
+  export type UsuarioUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * The data used to update Usuarios.
+     */
+    data: XOR<UsuarioUpdateManyMutationInput, UsuarioUncheckedUpdateManyInput>
+    /**
+     * Filter which Usuarios to update
+     */
+    where?: UsuarioWhereInput
+    /**
+     * Limit how many Usuarios to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Usuario upsert
+   */
+  export type UsuarioUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Usuario to update in case it exists.
+     */
+    where: UsuarioWhereUniqueInput
+    /**
+     * In case the Usuario found by the `where` argument doesn't exist, create a new Usuario with this data.
+     */
+    create: XOR<UsuarioCreateInput, UsuarioUncheckedCreateInput>
+    /**
+     * In case the Usuario was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UsuarioUpdateInput, UsuarioUncheckedUpdateInput>
+  }
+
+  /**
+   * Usuario delete
+   */
+  export type UsuarioDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+    /**
+     * Filter which Usuario to delete.
+     */
+    where: UsuarioWhereUniqueInput
+  }
+
+  /**
+   * Usuario deleteMany
+   */
+  export type UsuarioDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Usuarios to delete
+     */
+    where?: UsuarioWhereInput
+    /**
+     * Limit how many Usuarios to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Usuario.cuentasBancarias
+   */
+  export type Usuario$cuentasBancariasArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    where?: CuentaBancariaWhereInput
+    orderBy?: CuentaBancariaOrderByWithRelationInput | CuentaBancariaOrderByWithRelationInput[]
+    cursor?: CuentaBancariaWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: CuentaBancariaScalarFieldEnum | CuentaBancariaScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario.sorteos
+   */
+  export type Usuario$sorteosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sorteo
+     */
+    select?: SorteoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sorteo
+     */
+    omit?: SorteoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SorteoInclude<ExtArgs> | null
+    where?: SorteoWhereInput
+    orderBy?: SorteoOrderByWithRelationInput | SorteoOrderByWithRelationInput[]
+    cursor?: SorteoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SorteoScalarFieldEnum | SorteoScalarFieldEnum[]
+  }
+
+  /**
+   * Usuario without action
+   */
+  export type UsuarioDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Usuario
+     */
+    select?: UsuarioSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Usuario
+     */
+    omit?: UsuarioOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UsuarioInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model CuentaBancaria
+   */
+
+  export type AggregateCuentaBancaria = {
+    _count: CuentaBancariaCountAggregateOutputType | null
+    _avg: CuentaBancariaAvgAggregateOutputType | null
+    _sum: CuentaBancariaSumAggregateOutputType | null
+    _min: CuentaBancariaMinAggregateOutputType | null
+    _max: CuentaBancariaMaxAggregateOutputType | null
+  }
+
+  export type CuentaBancariaAvgAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+  }
+
+  export type CuentaBancariaSumAggregateOutputType = {
+    id: number | null
+    usuarioId: number | null
+  }
+
+  export type CuentaBancariaMinAggregateOutputType = {
+    id: number | null
+    banco: string | null
+    numero: string | null
+    titular: string | null
+    usuarioId: number | null
+  }
+
+  export type CuentaBancariaMaxAggregateOutputType = {
+    id: number | null
+    banco: string | null
+    numero: string | null
+    titular: string | null
+    usuarioId: number | null
+  }
+
+  export type CuentaBancariaCountAggregateOutputType = {
+    id: number
+    banco: number
+    numero: number
+    titular: number
+    usuarioId: number
+    _all: number
+  }
+
+
+  export type CuentaBancariaAvgAggregateInputType = {
+    id?: true
+    usuarioId?: true
+  }
+
+  export type CuentaBancariaSumAggregateInputType = {
+    id?: true
+    usuarioId?: true
+  }
+
+  export type CuentaBancariaMinAggregateInputType = {
+    id?: true
+    banco?: true
+    numero?: true
+    titular?: true
+    usuarioId?: true
+  }
+
+  export type CuentaBancariaMaxAggregateInputType = {
+    id?: true
+    banco?: true
+    numero?: true
+    titular?: true
+    usuarioId?: true
+  }
+
+  export type CuentaBancariaCountAggregateInputType = {
+    id?: true
+    banco?: true
+    numero?: true
+    titular?: true
+    usuarioId?: true
+    _all?: true
+  }
+
+  export type CuentaBancariaAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CuentaBancaria to aggregate.
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CuentaBancarias to fetch.
+     */
+    orderBy?: CuentaBancariaOrderByWithRelationInput | CuentaBancariaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: CuentaBancariaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CuentaBancarias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CuentaBancarias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned CuentaBancarias
+    **/
+    _count?: true | CuentaBancariaCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: CuentaBancariaAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: CuentaBancariaSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: CuentaBancariaMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: CuentaBancariaMaxAggregateInputType
+  }
+
+  export type GetCuentaBancariaAggregateType<T extends CuentaBancariaAggregateArgs> = {
+        [P in keyof T & keyof AggregateCuentaBancaria]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateCuentaBancaria[P]>
+      : GetScalarType<T[P], AggregateCuentaBancaria[P]>
+  }
+
+
+
+
+  export type CuentaBancariaGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: CuentaBancariaWhereInput
+    orderBy?: CuentaBancariaOrderByWithAggregationInput | CuentaBancariaOrderByWithAggregationInput[]
+    by: CuentaBancariaScalarFieldEnum[] | CuentaBancariaScalarFieldEnum
+    having?: CuentaBancariaScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: CuentaBancariaCountAggregateInputType | true
+    _avg?: CuentaBancariaAvgAggregateInputType
+    _sum?: CuentaBancariaSumAggregateInputType
+    _min?: CuentaBancariaMinAggregateInputType
+    _max?: CuentaBancariaMaxAggregateInputType
+  }
+
+  export type CuentaBancariaGroupByOutputType = {
+    id: number
+    banco: string
+    numero: string
+    titular: string
+    usuarioId: number
+    _count: CuentaBancariaCountAggregateOutputType | null
+    _avg: CuentaBancariaAvgAggregateOutputType | null
+    _sum: CuentaBancariaSumAggregateOutputType | null
+    _min: CuentaBancariaMinAggregateOutputType | null
+    _max: CuentaBancariaMaxAggregateOutputType | null
+  }
+
+  type GetCuentaBancariaGroupByPayload<T extends CuentaBancariaGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<CuentaBancariaGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof CuentaBancariaGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], CuentaBancariaGroupByOutputType[P]>
+            : GetScalarType<T[P], CuentaBancariaGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type CuentaBancariaSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    banco?: boolean
+    numero?: boolean
+    titular?: boolean
+    usuarioId?: boolean
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    sorteos?: boolean | CuentaBancaria$sorteosArgs<ExtArgs>
+    _count?: boolean | CuentaBancariaCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cuentaBancaria"]>
+
+  export type CuentaBancariaSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    banco?: boolean
+    numero?: boolean
+    titular?: boolean
+    usuarioId?: boolean
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cuentaBancaria"]>
+
+  export type CuentaBancariaSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    banco?: boolean
+    numero?: boolean
+    titular?: boolean
+    usuarioId?: boolean
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["cuentaBancaria"]>
+
+  export type CuentaBancariaSelectScalar = {
+    id?: boolean
+    banco?: boolean
+    numero?: boolean
+    titular?: boolean
+    usuarioId?: boolean
+  }
+
+  export type CuentaBancariaOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "banco" | "numero" | "titular" | "usuarioId", ExtArgs["result"]["cuentaBancaria"]>
+  export type CuentaBancariaInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+    sorteos?: boolean | CuentaBancaria$sorteosArgs<ExtArgs>
+    _count?: boolean | CuentaBancariaCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type CuentaBancariaIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+  export type CuentaBancariaIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    usuario?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+
+  export type $CuentaBancariaPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "CuentaBancaria"
+    objects: {
+      usuario: Prisma.$UsuarioPayload<ExtArgs>
+      sorteos: Prisma.$SorteoPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: number
+      banco: string
+      numero: string
+      titular: string
+      usuarioId: number
+    }, ExtArgs["result"]["cuentaBancaria"]>
+    composites: {}
+  }
+
+  type CuentaBancariaGetPayload<S extends boolean | null | undefined | CuentaBancariaDefaultArgs> = $Result.GetResult<Prisma.$CuentaBancariaPayload, S>
+
+  type CuentaBancariaCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<CuentaBancariaFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: CuentaBancariaCountAggregateInputType | true
+    }
+
+  export interface CuentaBancariaDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['CuentaBancaria'], meta: { name: 'CuentaBancaria' } }
+    /**
+     * Find zero or one CuentaBancaria that matches the filter.
+     * @param {CuentaBancariaFindUniqueArgs} args - Arguments to find a CuentaBancaria
+     * @example
+     * // Get one CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends CuentaBancariaFindUniqueArgs>(args: SelectSubset<T, CuentaBancariaFindUniqueArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one CuentaBancaria that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {CuentaBancariaFindUniqueOrThrowArgs} args - Arguments to find a CuentaBancaria
+     * @example
+     * // Get one CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends CuentaBancariaFindUniqueOrThrowArgs>(args: SelectSubset<T, CuentaBancariaFindUniqueOrThrowArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CuentaBancaria that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaFindFirstArgs} args - Arguments to find a CuentaBancaria
+     * @example
+     * // Get one CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends CuentaBancariaFindFirstArgs>(args?: SelectSubset<T, CuentaBancariaFindFirstArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first CuentaBancaria that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaFindFirstOrThrowArgs} args - Arguments to find a CuentaBancaria
+     * @example
+     * // Get one CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends CuentaBancariaFindFirstOrThrowArgs>(args?: SelectSubset<T, CuentaBancariaFindFirstOrThrowArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more CuentaBancarias that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all CuentaBancarias
+     * const cuentaBancarias = await prisma.cuentaBancaria.findMany()
+     * 
+     * // Get first 10 CuentaBancarias
+     * const cuentaBancarias = await prisma.cuentaBancaria.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const cuentaBancariaWithIdOnly = await prisma.cuentaBancaria.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends CuentaBancariaFindManyArgs>(args?: SelectSubset<T, CuentaBancariaFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a CuentaBancaria.
+     * @param {CuentaBancariaCreateArgs} args - Arguments to create a CuentaBancaria.
+     * @example
+     * // Create one CuentaBancaria
+     * const CuentaBancaria = await prisma.cuentaBancaria.create({
+     *   data: {
+     *     // ... data to create a CuentaBancaria
+     *   }
+     * })
+     * 
+     */
+    create<T extends CuentaBancariaCreateArgs>(args: SelectSubset<T, CuentaBancariaCreateArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many CuentaBancarias.
+     * @param {CuentaBancariaCreateManyArgs} args - Arguments to create many CuentaBancarias.
+     * @example
+     * // Create many CuentaBancarias
+     * const cuentaBancaria = await prisma.cuentaBancaria.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends CuentaBancariaCreateManyArgs>(args?: SelectSubset<T, CuentaBancariaCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many CuentaBancarias and returns the data saved in the database.
+     * @param {CuentaBancariaCreateManyAndReturnArgs} args - Arguments to create many CuentaBancarias.
+     * @example
+     * // Create many CuentaBancarias
+     * const cuentaBancaria = await prisma.cuentaBancaria.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many CuentaBancarias and only return the `id`
+     * const cuentaBancariaWithIdOnly = await prisma.cuentaBancaria.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends CuentaBancariaCreateManyAndReturnArgs>(args?: SelectSubset<T, CuentaBancariaCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a CuentaBancaria.
+     * @param {CuentaBancariaDeleteArgs} args - Arguments to delete one CuentaBancaria.
+     * @example
+     * // Delete one CuentaBancaria
+     * const CuentaBancaria = await prisma.cuentaBancaria.delete({
+     *   where: {
+     *     // ... filter to delete one CuentaBancaria
+     *   }
+     * })
+     * 
+     */
+    delete<T extends CuentaBancariaDeleteArgs>(args: SelectSubset<T, CuentaBancariaDeleteArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one CuentaBancaria.
+     * @param {CuentaBancariaUpdateArgs} args - Arguments to update one CuentaBancaria.
+     * @example
+     * // Update one CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends CuentaBancariaUpdateArgs>(args: SelectSubset<T, CuentaBancariaUpdateArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more CuentaBancarias.
+     * @param {CuentaBancariaDeleteManyArgs} args - Arguments to filter CuentaBancarias to delete.
+     * @example
+     * // Delete a few CuentaBancarias
+     * const { count } = await prisma.cuentaBancaria.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends CuentaBancariaDeleteManyArgs>(args?: SelectSubset<T, CuentaBancariaDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CuentaBancarias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many CuentaBancarias
+     * const cuentaBancaria = await prisma.cuentaBancaria.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends CuentaBancariaUpdateManyArgs>(args: SelectSubset<T, CuentaBancariaUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more CuentaBancarias and returns the data updated in the database.
+     * @param {CuentaBancariaUpdateManyAndReturnArgs} args - Arguments to update many CuentaBancarias.
+     * @example
+     * // Update many CuentaBancarias
+     * const cuentaBancaria = await prisma.cuentaBancaria.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more CuentaBancarias and only return the `id`
+     * const cuentaBancariaWithIdOnly = await prisma.cuentaBancaria.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends CuentaBancariaUpdateManyAndReturnArgs>(args: SelectSubset<T, CuentaBancariaUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one CuentaBancaria.
+     * @param {CuentaBancariaUpsertArgs} args - Arguments to update or create a CuentaBancaria.
+     * @example
+     * // Update or create a CuentaBancaria
+     * const cuentaBancaria = await prisma.cuentaBancaria.upsert({
+     *   create: {
+     *     // ... data to create a CuentaBancaria
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the CuentaBancaria we want to update
+     *   }
+     * })
+     */
+    upsert<T extends CuentaBancariaUpsertArgs>(args: SelectSubset<T, CuentaBancariaUpsertArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of CuentaBancarias.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaCountArgs} args - Arguments to filter CuentaBancarias to count.
+     * @example
+     * // Count the number of CuentaBancarias
+     * const count = await prisma.cuentaBancaria.count({
+     *   where: {
+     *     // ... the filter for the CuentaBancarias we want to count
+     *   }
+     * })
+    **/
+    count<T extends CuentaBancariaCountArgs>(
+      args?: Subset<T, CuentaBancariaCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], CuentaBancariaCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a CuentaBancaria.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends CuentaBancariaAggregateArgs>(args: Subset<T, CuentaBancariaAggregateArgs>): Prisma.PrismaPromise<GetCuentaBancariaAggregateType<T>>
+
+    /**
+     * Group by CuentaBancaria.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {CuentaBancariaGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends CuentaBancariaGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: CuentaBancariaGroupByArgs['orderBy'] }
+        : { orderBy?: CuentaBancariaGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, CuentaBancariaGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetCuentaBancariaGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the CuentaBancaria model
+   */
+  readonly fields: CuentaBancariaFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for CuentaBancaria.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__CuentaBancariaClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    usuario<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    sorteos<T extends CuentaBancaria$sorteosArgs<ExtArgs> = {}>(args?: Subset<T, CuentaBancaria$sorteosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SorteoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the CuentaBancaria model
+   */
+  interface CuentaBancariaFieldRefs {
+    readonly id: FieldRef<"CuentaBancaria", 'Int'>
+    readonly banco: FieldRef<"CuentaBancaria", 'String'>
+    readonly numero: FieldRef<"CuentaBancaria", 'String'>
+    readonly titular: FieldRef<"CuentaBancaria", 'String'>
+    readonly usuarioId: FieldRef<"CuentaBancaria", 'Int'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * CuentaBancaria findUnique
+   */
+  export type CuentaBancariaFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter, which CuentaBancaria to fetch.
+     */
+    where: CuentaBancariaWhereUniqueInput
+  }
+
+  /**
+   * CuentaBancaria findUniqueOrThrow
+   */
+  export type CuentaBancariaFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter, which CuentaBancaria to fetch.
+     */
+    where: CuentaBancariaWhereUniqueInput
+  }
+
+  /**
+   * CuentaBancaria findFirst
+   */
+  export type CuentaBancariaFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter, which CuentaBancaria to fetch.
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CuentaBancarias to fetch.
+     */
+    orderBy?: CuentaBancariaOrderByWithRelationInput | CuentaBancariaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CuentaBancarias.
+     */
+    cursor?: CuentaBancariaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CuentaBancarias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CuentaBancarias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CuentaBancarias.
+     */
+    distinct?: CuentaBancariaScalarFieldEnum | CuentaBancariaScalarFieldEnum[]
+  }
+
+  /**
+   * CuentaBancaria findFirstOrThrow
+   */
+  export type CuentaBancariaFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter, which CuentaBancaria to fetch.
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CuentaBancarias to fetch.
+     */
+    orderBy?: CuentaBancariaOrderByWithRelationInput | CuentaBancariaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for CuentaBancarias.
+     */
+    cursor?: CuentaBancariaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CuentaBancarias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CuentaBancarias.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of CuentaBancarias.
+     */
+    distinct?: CuentaBancariaScalarFieldEnum | CuentaBancariaScalarFieldEnum[]
+  }
+
+  /**
+   * CuentaBancaria findMany
+   */
+  export type CuentaBancariaFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter, which CuentaBancarias to fetch.
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of CuentaBancarias to fetch.
+     */
+    orderBy?: CuentaBancariaOrderByWithRelationInput | CuentaBancariaOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing CuentaBancarias.
+     */
+    cursor?: CuentaBancariaWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` CuentaBancarias from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` CuentaBancarias.
+     */
+    skip?: number
+    distinct?: CuentaBancariaScalarFieldEnum | CuentaBancariaScalarFieldEnum[]
+  }
+
+  /**
+   * CuentaBancaria create
+   */
+  export type CuentaBancariaCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * The data needed to create a CuentaBancaria.
+     */
+    data: XOR<CuentaBancariaCreateInput, CuentaBancariaUncheckedCreateInput>
+  }
+
+  /**
+   * CuentaBancaria createMany
+   */
+  export type CuentaBancariaCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many CuentaBancarias.
+     */
+    data: CuentaBancariaCreateManyInput | CuentaBancariaCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * CuentaBancaria createManyAndReturn
+   */
+  export type CuentaBancariaCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * The data used to create many CuentaBancarias.
+     */
+    data: CuentaBancariaCreateManyInput | CuentaBancariaCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CuentaBancaria update
+   */
+  export type CuentaBancariaUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * The data needed to update a CuentaBancaria.
+     */
+    data: XOR<CuentaBancariaUpdateInput, CuentaBancariaUncheckedUpdateInput>
+    /**
+     * Choose, which CuentaBancaria to update.
+     */
+    where: CuentaBancariaWhereUniqueInput
+  }
+
+  /**
+   * CuentaBancaria updateMany
+   */
+  export type CuentaBancariaUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update CuentaBancarias.
+     */
+    data: XOR<CuentaBancariaUpdateManyMutationInput, CuentaBancariaUncheckedUpdateManyInput>
+    /**
+     * Filter which CuentaBancarias to update
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * Limit how many CuentaBancarias to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * CuentaBancaria updateManyAndReturn
+   */
+  export type CuentaBancariaUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * The data used to update CuentaBancarias.
+     */
+    data: XOR<CuentaBancariaUpdateManyMutationInput, CuentaBancariaUncheckedUpdateManyInput>
+    /**
+     * Filter which CuentaBancarias to update
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * Limit how many CuentaBancarias to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * CuentaBancaria upsert
+   */
+  export type CuentaBancariaUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * The filter to search for the CuentaBancaria to update in case it exists.
+     */
+    where: CuentaBancariaWhereUniqueInput
+    /**
+     * In case the CuentaBancaria found by the `where` argument doesn't exist, create a new CuentaBancaria with this data.
+     */
+    create: XOR<CuentaBancariaCreateInput, CuentaBancariaUncheckedCreateInput>
+    /**
+     * In case the CuentaBancaria was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<CuentaBancariaUpdateInput, CuentaBancariaUncheckedUpdateInput>
+  }
+
+  /**
+   * CuentaBancaria delete
+   */
+  export type CuentaBancariaDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    /**
+     * Filter which CuentaBancaria to delete.
+     */
+    where: CuentaBancariaWhereUniqueInput
+  }
+
+  /**
+   * CuentaBancaria deleteMany
+   */
+  export type CuentaBancariaDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which CuentaBancarias to delete
+     */
+    where?: CuentaBancariaWhereInput
+    /**
+     * Limit how many CuentaBancarias to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * CuentaBancaria.sorteos
+   */
+  export type CuentaBancaria$sorteosArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Sorteo
+     */
+    select?: SorteoSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Sorteo
+     */
+    omit?: SorteoOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SorteoInclude<ExtArgs> | null
+    where?: SorteoWhereInput
+    orderBy?: SorteoOrderByWithRelationInput | SorteoOrderByWithRelationInput[]
+    cursor?: SorteoWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: SorteoScalarFieldEnum | SorteoScalarFieldEnum[]
+  }
+
+  /**
+   * CuentaBancaria without action
+   */
+  export type CuentaBancariaDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model Sorteo
    */
 
@@ -4677,6 +7188,8 @@ export namespace Prisma {
     costoBoleto: number | null
     totalBoletos: number | null
     boletosVendidos: number | null
+    cuentaBancariaId: number | null
+    adminId: number | null
   }
 
   export type SorteoSumAggregateOutputType = {
@@ -4684,6 +7197,8 @@ export namespace Prisma {
     costoBoleto: number | null
     totalBoletos: number | null
     boletosVendidos: number | null
+    cuentaBancariaId: number | null
+    adminId: number | null
   }
 
   export type SorteoMinAggregateOutputType = {
@@ -4702,6 +7217,13 @@ export namespace Prisma {
     linkfacebook: string | null
     numeroCuenta: string | null
     tipoBanco: string | null
+    numeroDeSorteo: string | null
+    mensajeWhatsappInfo: string | null
+    mensajeWhatsappApartado: string | null
+    mensajeWhatsappConfirmado: string | null
+    mensajeWhatsappAnuncio: string | null
+    cuentaBancariaId: number | null
+    adminId: number | null
   }
 
   export type SorteoMaxAggregateOutputType = {
@@ -4720,6 +7242,13 @@ export namespace Prisma {
     linkfacebook: string | null
     numeroCuenta: string | null
     tipoBanco: string | null
+    numeroDeSorteo: string | null
+    mensajeWhatsappInfo: string | null
+    mensajeWhatsappApartado: string | null
+    mensajeWhatsappConfirmado: string | null
+    mensajeWhatsappAnuncio: string | null
+    cuentaBancariaId: number | null
+    adminId: number | null
   }
 
   export type SorteoCountAggregateOutputType = {
@@ -4738,6 +7267,13 @@ export namespace Prisma {
     linkfacebook: number
     numeroCuenta: number
     tipoBanco: number
+    numeroDeSorteo: number
+    mensajeWhatsappInfo: number
+    mensajeWhatsappApartado: number
+    mensajeWhatsappConfirmado: number
+    mensajeWhatsappAnuncio: number
+    cuentaBancariaId: number
+    adminId: number
     _all: number
   }
 
@@ -4747,6 +7283,8 @@ export namespace Prisma {
     costoBoleto?: true
     totalBoletos?: true
     boletosVendidos?: true
+    cuentaBancariaId?: true
+    adminId?: true
   }
 
   export type SorteoSumAggregateInputType = {
@@ -4754,6 +7292,8 @@ export namespace Prisma {
     costoBoleto?: true
     totalBoletos?: true
     boletosVendidos?: true
+    cuentaBancariaId?: true
+    adminId?: true
   }
 
   export type SorteoMinAggregateInputType = {
@@ -4772,6 +7312,13 @@ export namespace Prisma {
     linkfacebook?: true
     numeroCuenta?: true
     tipoBanco?: true
+    numeroDeSorteo?: true
+    mensajeWhatsappInfo?: true
+    mensajeWhatsappApartado?: true
+    mensajeWhatsappConfirmado?: true
+    mensajeWhatsappAnuncio?: true
+    cuentaBancariaId?: true
+    adminId?: true
   }
 
   export type SorteoMaxAggregateInputType = {
@@ -4790,6 +7337,13 @@ export namespace Prisma {
     linkfacebook?: true
     numeroCuenta?: true
     tipoBanco?: true
+    numeroDeSorteo?: true
+    mensajeWhatsappInfo?: true
+    mensajeWhatsappApartado?: true
+    mensajeWhatsappConfirmado?: true
+    mensajeWhatsappAnuncio?: true
+    cuentaBancariaId?: true
+    adminId?: true
   }
 
   export type SorteoCountAggregateInputType = {
@@ -4808,6 +7362,13 @@ export namespace Prisma {
     linkfacebook?: true
     numeroCuenta?: true
     tipoBanco?: true
+    numeroDeSorteo?: true
+    mensajeWhatsappInfo?: true
+    mensajeWhatsappApartado?: true
+    mensajeWhatsappConfirmado?: true
+    mensajeWhatsappAnuncio?: true
+    cuentaBancariaId?: true
+    adminId?: true
     _all?: true
   }
 
@@ -4913,6 +7474,13 @@ export namespace Prisma {
     linkfacebook: string | null
     numeroCuenta: string | null
     tipoBanco: string | null
+    numeroDeSorteo: string | null
+    mensajeWhatsappInfo: string | null
+    mensajeWhatsappApartado: string | null
+    mensajeWhatsappConfirmado: string | null
+    mensajeWhatsappAnuncio: string | null
+    cuentaBancariaId: number | null
+    adminId: number
     _count: SorteoCountAggregateOutputType | null
     _avg: SorteoAvgAggregateOutputType | null
     _sum: SorteoSumAggregateOutputType | null
@@ -4950,7 +7518,16 @@ export namespace Prisma {
     linkfacebook?: boolean
     numeroCuenta?: boolean
     tipoBanco?: boolean
+    numeroDeSorteo?: boolean
+    mensajeWhatsappInfo?: boolean
+    mensajeWhatsappApartado?: boolean
+    mensajeWhatsappConfirmado?: boolean
+    mensajeWhatsappAnuncio?: boolean
+    cuentaBancariaId?: boolean
+    adminId?: boolean
     boletos?: boolean | Sorteo$boletosArgs<ExtArgs>
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
     _count?: boolean | SorteoCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sorteo"]>
 
@@ -4970,6 +7547,15 @@ export namespace Prisma {
     linkfacebook?: boolean
     numeroCuenta?: boolean
     tipoBanco?: boolean
+    numeroDeSorteo?: boolean
+    mensajeWhatsappInfo?: boolean
+    mensajeWhatsappApartado?: boolean
+    mensajeWhatsappConfirmado?: boolean
+    mensajeWhatsappAnuncio?: boolean
+    cuentaBancariaId?: boolean
+    adminId?: boolean
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sorteo"]>
 
   export type SorteoSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4988,6 +7574,15 @@ export namespace Prisma {
     linkfacebook?: boolean
     numeroCuenta?: boolean
     tipoBanco?: boolean
+    numeroDeSorteo?: boolean
+    mensajeWhatsappInfo?: boolean
+    mensajeWhatsappApartado?: boolean
+    mensajeWhatsappConfirmado?: boolean
+    mensajeWhatsappAnuncio?: boolean
+    cuentaBancariaId?: boolean
+    adminId?: boolean
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["sorteo"]>
 
   export type SorteoSelectScalar = {
@@ -5006,20 +7601,37 @@ export namespace Prisma {
     linkfacebook?: boolean
     numeroCuenta?: boolean
     tipoBanco?: boolean
+    numeroDeSorteo?: boolean
+    mensajeWhatsappInfo?: boolean
+    mensajeWhatsappApartado?: boolean
+    mensajeWhatsappConfirmado?: boolean
+    mensajeWhatsappAnuncio?: boolean
+    cuentaBancariaId?: boolean
+    adminId?: boolean
   }
 
-  export type SorteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "imagen" | "fecha" | "cierreVentas" | "costoBoleto" | "totalBoletos" | "boletosVendidos" | "estado" | "numeroWhatsApp" | "nombreEmpresa" | "linkfacebook" | "numeroCuenta" | "tipoBanco", ExtArgs["result"]["sorteo"]>
+  export type SorteoOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "nombre" | "descripcion" | "imagen" | "fecha" | "cierreVentas" | "costoBoleto" | "totalBoletos" | "boletosVendidos" | "estado" | "numeroWhatsApp" | "nombreEmpresa" | "linkfacebook" | "numeroCuenta" | "tipoBanco" | "numeroDeSorteo" | "mensajeWhatsappInfo" | "mensajeWhatsappApartado" | "mensajeWhatsappConfirmado" | "mensajeWhatsappAnuncio" | "cuentaBancariaId" | "adminId", ExtArgs["result"]["sorteo"]>
   export type SorteoInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     boletos?: boolean | Sorteo$boletosArgs<ExtArgs>
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
     _count?: boolean | SorteoCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type SorteoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type SorteoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type SorteoIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
+  export type SorteoIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    cuentaBancaria?: boolean | Sorteo$cuentaBancariaArgs<ExtArgs>
+    admin?: boolean | UsuarioDefaultArgs<ExtArgs>
+  }
 
   export type $SorteoPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Sorteo"
     objects: {
       boletos: Prisma.$BoletoPayload<ExtArgs>[]
+      cuentaBancaria: Prisma.$CuentaBancariaPayload<ExtArgs> | null
+      admin: Prisma.$UsuarioPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -5037,6 +7649,13 @@ export namespace Prisma {
       linkfacebook: string | null
       numeroCuenta: string | null
       tipoBanco: string | null
+      numeroDeSorteo: string | null
+      mensajeWhatsappInfo: string | null
+      mensajeWhatsappApartado: string | null
+      mensajeWhatsappConfirmado: string | null
+      mensajeWhatsappAnuncio: string | null
+      cuentaBancariaId: number | null
+      adminId: number
     }, ExtArgs["result"]["sorteo"]>
     composites: {}
   }
@@ -5432,6 +8051,8 @@ export namespace Prisma {
   export interface Prisma__SorteoClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     boletos<T extends Sorteo$boletosArgs<ExtArgs> = {}>(args?: Subset<T, Sorteo$boletosArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$BoletoPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    cuentaBancaria<T extends Sorteo$cuentaBancariaArgs<ExtArgs> = {}>(args?: Subset<T, Sorteo$cuentaBancariaArgs<ExtArgs>>): Prisma__CuentaBancariaClient<$Result.GetResult<Prisma.$CuentaBancariaPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    admin<T extends UsuarioDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UsuarioDefaultArgs<ExtArgs>>): Prisma__UsuarioClient<$Result.GetResult<Prisma.$UsuarioPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -5476,6 +8097,13 @@ export namespace Prisma {
     readonly linkfacebook: FieldRef<"Sorteo", 'String'>
     readonly numeroCuenta: FieldRef<"Sorteo", 'String'>
     readonly tipoBanco: FieldRef<"Sorteo", 'String'>
+    readonly numeroDeSorteo: FieldRef<"Sorteo", 'String'>
+    readonly mensajeWhatsappInfo: FieldRef<"Sorteo", 'String'>
+    readonly mensajeWhatsappApartado: FieldRef<"Sorteo", 'String'>
+    readonly mensajeWhatsappConfirmado: FieldRef<"Sorteo", 'String'>
+    readonly mensajeWhatsappAnuncio: FieldRef<"Sorteo", 'String'>
+    readonly cuentaBancariaId: FieldRef<"Sorteo", 'Int'>
+    readonly adminId: FieldRef<"Sorteo", 'Int'>
   }
     
 
@@ -5725,6 +8353,10 @@ export namespace Prisma {
      */
     data: SorteoCreateManyInput | SorteoCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SorteoIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5795,6 +8427,10 @@ export namespace Prisma {
      * Limit how many Sorteos to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SorteoIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -5888,6 +8524,25 @@ export namespace Prisma {
   }
 
   /**
+   * Sorteo.cuentaBancaria
+   */
+  export type Sorteo$cuentaBancariaArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the CuentaBancaria
+     */
+    select?: CuentaBancariaSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the CuentaBancaria
+     */
+    omit?: CuentaBancariaOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: CuentaBancariaInclude<ExtArgs> | null
+    where?: CuentaBancariaWhereInput
+  }
+
+  /**
    * Sorteo without action
    */
   export type SorteoDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -5957,6 +8612,28 @@ export namespace Prisma {
   export type BoletoScalarFieldEnum = (typeof BoletoScalarFieldEnum)[keyof typeof BoletoScalarFieldEnum]
 
 
+  export const UsuarioScalarFieldEnum: {
+    id: 'id',
+    nombre: 'nombre',
+    email: 'email',
+    password: 'password',
+    rol: 'rol'
+  };
+
+  export type UsuarioScalarFieldEnum = (typeof UsuarioScalarFieldEnum)[keyof typeof UsuarioScalarFieldEnum]
+
+
+  export const CuentaBancariaScalarFieldEnum: {
+    id: 'id',
+    banco: 'banco',
+    numero: 'numero',
+    titular: 'titular',
+    usuarioId: 'usuarioId'
+  };
+
+  export type CuentaBancariaScalarFieldEnum = (typeof CuentaBancariaScalarFieldEnum)[keyof typeof CuentaBancariaScalarFieldEnum]
+
+
   export const SorteoScalarFieldEnum: {
     id: 'id',
     nombre: 'nombre',
@@ -5972,7 +8649,14 @@ export namespace Prisma {
     nombreEmpresa: 'nombreEmpresa',
     linkfacebook: 'linkfacebook',
     numeroCuenta: 'numeroCuenta',
-    tipoBanco: 'tipoBanco'
+    tipoBanco: 'tipoBanco',
+    numeroDeSorteo: 'numeroDeSorteo',
+    mensajeWhatsappInfo: 'mensajeWhatsappInfo',
+    mensajeWhatsappApartado: 'mensajeWhatsappApartado',
+    mensajeWhatsappConfirmado: 'mensajeWhatsappConfirmado',
+    mensajeWhatsappAnuncio: 'mensajeWhatsappAnuncio',
+    cuentaBancariaId: 'cuentaBancariaId',
+    adminId: 'adminId'
   };
 
   export type SorteoScalarFieldEnum = (typeof SorteoScalarFieldEnum)[keyof typeof SorteoScalarFieldEnum]
@@ -6263,6 +8947,126 @@ export namespace Prisma {
     sorteoId?: IntWithAggregatesFilter<"Boleto"> | number
   }
 
+  export type UsuarioWhereInput = {
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    id?: IntFilter<"Usuario"> | number
+    nombre?: StringFilter<"Usuario"> | string
+    email?: StringFilter<"Usuario"> | string
+    password?: StringFilter<"Usuario"> | string
+    rol?: StringFilter<"Usuario"> | string
+    cuentasBancarias?: CuentaBancariaListRelationFilter
+    sorteos?: SorteoListRelationFilter
+  }
+
+  export type UsuarioOrderByWithRelationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    rol?: SortOrder
+    cuentasBancarias?: CuentaBancariaOrderByRelationAggregateInput
+    sorteos?: SorteoOrderByRelationAggregateInput
+  }
+
+  export type UsuarioWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    email?: string
+    AND?: UsuarioWhereInput | UsuarioWhereInput[]
+    OR?: UsuarioWhereInput[]
+    NOT?: UsuarioWhereInput | UsuarioWhereInput[]
+    nombre?: StringFilter<"Usuario"> | string
+    password?: StringFilter<"Usuario"> | string
+    rol?: StringFilter<"Usuario"> | string
+    cuentasBancarias?: CuentaBancariaListRelationFilter
+    sorteos?: SorteoListRelationFilter
+  }, "id" | "email">
+
+  export type UsuarioOrderByWithAggregationInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    rol?: SortOrder
+    _count?: UsuarioCountOrderByAggregateInput
+    _avg?: UsuarioAvgOrderByAggregateInput
+    _max?: UsuarioMaxOrderByAggregateInput
+    _min?: UsuarioMinOrderByAggregateInput
+    _sum?: UsuarioSumOrderByAggregateInput
+  }
+
+  export type UsuarioScalarWhereWithAggregatesInput = {
+    AND?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    OR?: UsuarioScalarWhereWithAggregatesInput[]
+    NOT?: UsuarioScalarWhereWithAggregatesInput | UsuarioScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"Usuario"> | number
+    nombre?: StringWithAggregatesFilter<"Usuario"> | string
+    email?: StringWithAggregatesFilter<"Usuario"> | string
+    password?: StringWithAggregatesFilter<"Usuario"> | string
+    rol?: StringWithAggregatesFilter<"Usuario"> | string
+  }
+
+  export type CuentaBancariaWhereInput = {
+    AND?: CuentaBancariaWhereInput | CuentaBancariaWhereInput[]
+    OR?: CuentaBancariaWhereInput[]
+    NOT?: CuentaBancariaWhereInput | CuentaBancariaWhereInput[]
+    id?: IntFilter<"CuentaBancaria"> | number
+    banco?: StringFilter<"CuentaBancaria"> | string
+    numero?: StringFilter<"CuentaBancaria"> | string
+    titular?: StringFilter<"CuentaBancaria"> | string
+    usuarioId?: IntFilter<"CuentaBancaria"> | number
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    sorteos?: SorteoListRelationFilter
+  }
+
+  export type CuentaBancariaOrderByWithRelationInput = {
+    id?: SortOrder
+    banco?: SortOrder
+    numero?: SortOrder
+    titular?: SortOrder
+    usuarioId?: SortOrder
+    usuario?: UsuarioOrderByWithRelationInput
+    sorteos?: SorteoOrderByRelationAggregateInput
+  }
+
+  export type CuentaBancariaWhereUniqueInput = Prisma.AtLeast<{
+    id?: number
+    AND?: CuentaBancariaWhereInput | CuentaBancariaWhereInput[]
+    OR?: CuentaBancariaWhereInput[]
+    NOT?: CuentaBancariaWhereInput | CuentaBancariaWhereInput[]
+    banco?: StringFilter<"CuentaBancaria"> | string
+    numero?: StringFilter<"CuentaBancaria"> | string
+    titular?: StringFilter<"CuentaBancaria"> | string
+    usuarioId?: IntFilter<"CuentaBancaria"> | number
+    usuario?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
+    sorteos?: SorteoListRelationFilter
+  }, "id">
+
+  export type CuentaBancariaOrderByWithAggregationInput = {
+    id?: SortOrder
+    banco?: SortOrder
+    numero?: SortOrder
+    titular?: SortOrder
+    usuarioId?: SortOrder
+    _count?: CuentaBancariaCountOrderByAggregateInput
+    _avg?: CuentaBancariaAvgOrderByAggregateInput
+    _max?: CuentaBancariaMaxOrderByAggregateInput
+    _min?: CuentaBancariaMinOrderByAggregateInput
+    _sum?: CuentaBancariaSumOrderByAggregateInput
+  }
+
+  export type CuentaBancariaScalarWhereWithAggregatesInput = {
+    AND?: CuentaBancariaScalarWhereWithAggregatesInput | CuentaBancariaScalarWhereWithAggregatesInput[]
+    OR?: CuentaBancariaScalarWhereWithAggregatesInput[]
+    NOT?: CuentaBancariaScalarWhereWithAggregatesInput | CuentaBancariaScalarWhereWithAggregatesInput[]
+    id?: IntWithAggregatesFilter<"CuentaBancaria"> | number
+    banco?: StringWithAggregatesFilter<"CuentaBancaria"> | string
+    numero?: StringWithAggregatesFilter<"CuentaBancaria"> | string
+    titular?: StringWithAggregatesFilter<"CuentaBancaria"> | string
+    usuarioId?: IntWithAggregatesFilter<"CuentaBancaria"> | number
+  }
+
   export type SorteoWhereInput = {
     AND?: SorteoWhereInput | SorteoWhereInput[]
     OR?: SorteoWhereInput[]
@@ -6282,7 +9086,16 @@ export namespace Prisma {
     linkfacebook?: StringNullableFilter<"Sorteo"> | string | null
     numeroCuenta?: StringNullableFilter<"Sorteo"> | string | null
     tipoBanco?: StringNullableFilter<"Sorteo"> | string | null
+    numeroDeSorteo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappInfo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappApartado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappConfirmado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappAnuncio?: StringNullableFilter<"Sorteo"> | string | null
+    cuentaBancariaId?: IntNullableFilter<"Sorteo"> | number | null
+    adminId?: IntFilter<"Sorteo"> | number
     boletos?: BoletoListRelationFilter
+    cuentaBancaria?: XOR<CuentaBancariaNullableScalarRelationFilter, CuentaBancariaWhereInput> | null
+    admin?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
   }
 
   export type SorteoOrderByWithRelationInput = {
@@ -6301,7 +9114,16 @@ export namespace Prisma {
     linkfacebook?: SortOrderInput | SortOrder
     numeroCuenta?: SortOrderInput | SortOrder
     tipoBanco?: SortOrderInput | SortOrder
+    numeroDeSorteo?: SortOrderInput | SortOrder
+    mensajeWhatsappInfo?: SortOrderInput | SortOrder
+    mensajeWhatsappApartado?: SortOrderInput | SortOrder
+    mensajeWhatsappConfirmado?: SortOrderInput | SortOrder
+    mensajeWhatsappAnuncio?: SortOrderInput | SortOrder
+    cuentaBancariaId?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     boletos?: BoletoOrderByRelationAggregateInput
+    cuentaBancaria?: CuentaBancariaOrderByWithRelationInput
+    admin?: UsuarioOrderByWithRelationInput
   }
 
   export type SorteoWhereUniqueInput = Prisma.AtLeast<{
@@ -6323,7 +9145,16 @@ export namespace Prisma {
     linkfacebook?: StringNullableFilter<"Sorteo"> | string | null
     numeroCuenta?: StringNullableFilter<"Sorteo"> | string | null
     tipoBanco?: StringNullableFilter<"Sorteo"> | string | null
+    numeroDeSorteo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappInfo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappApartado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappConfirmado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappAnuncio?: StringNullableFilter<"Sorteo"> | string | null
+    cuentaBancariaId?: IntNullableFilter<"Sorteo"> | number | null
+    adminId?: IntFilter<"Sorteo"> | number
     boletos?: BoletoListRelationFilter
+    cuentaBancaria?: XOR<CuentaBancariaNullableScalarRelationFilter, CuentaBancariaWhereInput> | null
+    admin?: XOR<UsuarioScalarRelationFilter, UsuarioWhereInput>
   }, "id">
 
   export type SorteoOrderByWithAggregationInput = {
@@ -6342,6 +9173,13 @@ export namespace Prisma {
     linkfacebook?: SortOrderInput | SortOrder
     numeroCuenta?: SortOrderInput | SortOrder
     tipoBanco?: SortOrderInput | SortOrder
+    numeroDeSorteo?: SortOrderInput | SortOrder
+    mensajeWhatsappInfo?: SortOrderInput | SortOrder
+    mensajeWhatsappApartado?: SortOrderInput | SortOrder
+    mensajeWhatsappConfirmado?: SortOrderInput | SortOrder
+    mensajeWhatsappAnuncio?: SortOrderInput | SortOrder
+    cuentaBancariaId?: SortOrderInput | SortOrder
+    adminId?: SortOrder
     _count?: SorteoCountOrderByAggregateInput
     _avg?: SorteoAvgOrderByAggregateInput
     _max?: SorteoMaxOrderByAggregateInput
@@ -6368,6 +9206,13 @@ export namespace Prisma {
     linkfacebook?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
     numeroCuenta?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
     tipoBanco?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    numeroDeSorteo?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    mensajeWhatsappInfo?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    mensajeWhatsappApartado?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    mensajeWhatsappConfirmado?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    mensajeWhatsappAnuncio?: StringNullableWithAggregatesFilter<"Sorteo"> | string | null
+    cuentaBancariaId?: IntNullableWithAggregatesFilter<"Sorteo"> | number | null
+    adminId?: IntWithAggregatesFilter<"Sorteo"> | number
   }
 
   export type CompradorCreateInput = {
@@ -6562,6 +9407,123 @@ export namespace Prisma {
     sorteoId?: IntFieldUpdateOperationsInput | number
   }
 
+  export type UsuarioCreateInput = {
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    cuentasBancarias?: CuentaBancariaCreateNestedManyWithoutUsuarioInput
+    sorteos?: SorteoCreateNestedManyWithoutAdminInput
+  }
+
+  export type UsuarioUncheckedCreateInput = {
+    id?: number
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    cuentasBancarias?: CuentaBancariaUncheckedCreateNestedManyWithoutUsuarioInput
+    sorteos?: SorteoUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type UsuarioUpdateInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    cuentasBancarias?: CuentaBancariaUpdateManyWithoutUsuarioNestedInput
+    sorteos?: SorteoUpdateManyWithoutAdminNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    cuentasBancarias?: CuentaBancariaUncheckedUpdateManyWithoutUsuarioNestedInput
+    sorteos?: SorteoUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type UsuarioCreateManyInput = {
+    id?: number
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+  }
+
+  export type UsuarioUpdateManyMutationInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UsuarioUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CuentaBancariaCreateInput = {
+    banco: string
+    numero: string
+    titular: string
+    usuario: UsuarioCreateNestedOneWithoutCuentasBancariasInput
+    sorteos?: SorteoCreateNestedManyWithoutCuentaBancariaInput
+  }
+
+  export type CuentaBancariaUncheckedCreateInput = {
+    id?: number
+    banco: string
+    numero: string
+    titular: string
+    usuarioId: number
+    sorteos?: SorteoUncheckedCreateNestedManyWithoutCuentaBancariaInput
+  }
+
+  export type CuentaBancariaUpdateInput = {
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    usuario?: UsuarioUpdateOneRequiredWithoutCuentasBancariasNestedInput
+    sorteos?: SorteoUpdateManyWithoutCuentaBancariaNestedInput
+  }
+
+  export type CuentaBancariaUncheckedUpdateInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
+    sorteos?: SorteoUncheckedUpdateManyWithoutCuentaBancariaNestedInput
+  }
+
+  export type CuentaBancariaCreateManyInput = {
+    id?: number
+    banco: string
+    numero: string
+    titular: string
+    usuarioId: number
+  }
+
+  export type CuentaBancariaUpdateManyMutationInput = {
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type CuentaBancariaUncheckedUpdateManyInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
+  }
+
   export type SorteoCreateInput = {
     nombre: string
     descripcion?: string | null
@@ -6577,7 +9539,14 @@ export namespace Prisma {
     linkfacebook?: string | null
     numeroCuenta?: string | null
     tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
     boletos?: BoletoCreateNestedManyWithoutSorteoInput
+    cuentaBancaria?: CuentaBancariaCreateNestedOneWithoutSorteosInput
+    admin: UsuarioCreateNestedOneWithoutSorteosInput
   }
 
   export type SorteoUncheckedCreateInput = {
@@ -6596,6 +9565,13 @@ export namespace Prisma {
     linkfacebook?: string | null
     numeroCuenta?: string | null
     tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancariaId?: number | null
+    adminId: number
     boletos?: BoletoUncheckedCreateNestedManyWithoutSorteoInput
   }
 
@@ -6614,7 +9590,14 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
     boletos?: BoletoUpdateManyWithoutSorteoNestedInput
+    cuentaBancaria?: CuentaBancariaUpdateOneWithoutSorteosNestedInput
+    admin?: UsuarioUpdateOneRequiredWithoutSorteosNestedInput
   }
 
   export type SorteoUncheckedUpdateInput = {
@@ -6633,6 +9616,13 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancariaId?: NullableIntFieldUpdateOperationsInput | number | null
+    adminId?: IntFieldUpdateOperationsInput | number
     boletos?: BoletoUncheckedUpdateManyWithoutSorteoNestedInput
   }
 
@@ -6652,6 +9642,13 @@ export namespace Prisma {
     linkfacebook?: string | null
     numeroCuenta?: string | null
     tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancariaId?: number | null
+    adminId: number
   }
 
   export type SorteoUpdateManyMutationInput = {
@@ -6669,6 +9666,11 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type SorteoUncheckedUpdateManyInput = {
@@ -6687,6 +9689,13 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancariaId?: NullableIntFieldUpdateOperationsInput | number | null
+    adminId?: IntFieldUpdateOperationsInput | number
   }
 
   export type IntFilter<$PrismaModel = never> = {
@@ -7034,6 +10043,97 @@ export namespace Prisma {
     _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
+  export type CuentaBancariaListRelationFilter = {
+    every?: CuentaBancariaWhereInput
+    some?: CuentaBancariaWhereInput
+    none?: CuentaBancariaWhereInput
+  }
+
+  export type SorteoListRelationFilter = {
+    every?: SorteoWhereInput
+    some?: SorteoWhereInput
+    none?: SorteoWhereInput
+  }
+
+  export type CuentaBancariaOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type SorteoOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type UsuarioCountOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    rol?: SortOrder
+  }
+
+  export type UsuarioAvgOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UsuarioMaxOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    rol?: SortOrder
+  }
+
+  export type UsuarioMinOrderByAggregateInput = {
+    id?: SortOrder
+    nombre?: SortOrder
+    email?: SortOrder
+    password?: SortOrder
+    rol?: SortOrder
+  }
+
+  export type UsuarioSumOrderByAggregateInput = {
+    id?: SortOrder
+  }
+
+  export type UsuarioScalarRelationFilter = {
+    is?: UsuarioWhereInput
+    isNot?: UsuarioWhereInput
+  }
+
+  export type CuentaBancariaCountOrderByAggregateInput = {
+    id?: SortOrder
+    banco?: SortOrder
+    numero?: SortOrder
+    titular?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type CuentaBancariaAvgOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type CuentaBancariaMaxOrderByAggregateInput = {
+    id?: SortOrder
+    banco?: SortOrder
+    numero?: SortOrder
+    titular?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type CuentaBancariaMinOrderByAggregateInput = {
+    id?: SortOrder
+    banco?: SortOrder
+    numero?: SortOrder
+    titular?: SortOrder
+    usuarioId?: SortOrder
+  }
+
+  export type CuentaBancariaSumOrderByAggregateInput = {
+    id?: SortOrder
+    usuarioId?: SortOrder
+  }
+
   export type FloatNullableFilter<$PrismaModel = never> = {
     equals?: number | FloatFieldRefInput<$PrismaModel> | null
     in?: number[] | ListFloatFieldRefInput<$PrismaModel> | null
@@ -7043,6 +10143,11 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type CuentaBancariaNullableScalarRelationFilter = {
+    is?: CuentaBancariaWhereInput | null
+    isNot?: CuentaBancariaWhereInput | null
   }
 
   export type SorteoCountOrderByAggregateInput = {
@@ -7061,6 +10166,13 @@ export namespace Prisma {
     linkfacebook?: SortOrder
     numeroCuenta?: SortOrder
     tipoBanco?: SortOrder
+    numeroDeSorteo?: SortOrder
+    mensajeWhatsappInfo?: SortOrder
+    mensajeWhatsappApartado?: SortOrder
+    mensajeWhatsappConfirmado?: SortOrder
+    mensajeWhatsappAnuncio?: SortOrder
+    cuentaBancariaId?: SortOrder
+    adminId?: SortOrder
   }
 
   export type SorteoAvgOrderByAggregateInput = {
@@ -7068,6 +10180,8 @@ export namespace Prisma {
     costoBoleto?: SortOrder
     totalBoletos?: SortOrder
     boletosVendidos?: SortOrder
+    cuentaBancariaId?: SortOrder
+    adminId?: SortOrder
   }
 
   export type SorteoMaxOrderByAggregateInput = {
@@ -7086,6 +10200,13 @@ export namespace Prisma {
     linkfacebook?: SortOrder
     numeroCuenta?: SortOrder
     tipoBanco?: SortOrder
+    numeroDeSorteo?: SortOrder
+    mensajeWhatsappInfo?: SortOrder
+    mensajeWhatsappApartado?: SortOrder
+    mensajeWhatsappConfirmado?: SortOrder
+    mensajeWhatsappAnuncio?: SortOrder
+    cuentaBancariaId?: SortOrder
+    adminId?: SortOrder
   }
 
   export type SorteoMinOrderByAggregateInput = {
@@ -7104,6 +10225,13 @@ export namespace Prisma {
     linkfacebook?: SortOrder
     numeroCuenta?: SortOrder
     tipoBanco?: SortOrder
+    numeroDeSorteo?: SortOrder
+    mensajeWhatsappInfo?: SortOrder
+    mensajeWhatsappApartado?: SortOrder
+    mensajeWhatsappConfirmado?: SortOrder
+    mensajeWhatsappAnuncio?: SortOrder
+    cuentaBancariaId?: SortOrder
+    adminId?: SortOrder
   }
 
   export type SorteoSumOrderByAggregateInput = {
@@ -7111,6 +10239,8 @@ export namespace Prisma {
     costoBoleto?: SortOrder
     totalBoletos?: SortOrder
     boletosVendidos?: SortOrder
+    cuentaBancariaId?: SortOrder
+    adminId?: SortOrder
   }
 
   export type FloatNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -7299,11 +10429,163 @@ export namespace Prisma {
     divide?: number
   }
 
+  export type CuentaBancariaCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput> | CuentaBancariaCreateWithoutUsuarioInput[] | CuentaBancariaUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutUsuarioInput | CuentaBancariaCreateOrConnectWithoutUsuarioInput[]
+    createMany?: CuentaBancariaCreateManyUsuarioInputEnvelope
+    connect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+  }
+
+  export type SorteoCreateNestedManyWithoutAdminInput = {
+    create?: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput> | SorteoCreateWithoutAdminInput[] | SorteoUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutAdminInput | SorteoCreateOrConnectWithoutAdminInput[]
+    createMany?: SorteoCreateManyAdminInputEnvelope
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+  }
+
+  export type CuentaBancariaUncheckedCreateNestedManyWithoutUsuarioInput = {
+    create?: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput> | CuentaBancariaCreateWithoutUsuarioInput[] | CuentaBancariaUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutUsuarioInput | CuentaBancariaCreateOrConnectWithoutUsuarioInput[]
+    createMany?: CuentaBancariaCreateManyUsuarioInputEnvelope
+    connect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+  }
+
+  export type SorteoUncheckedCreateNestedManyWithoutAdminInput = {
+    create?: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput> | SorteoCreateWithoutAdminInput[] | SorteoUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutAdminInput | SorteoCreateOrConnectWithoutAdminInput[]
+    createMany?: SorteoCreateManyAdminInputEnvelope
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+  }
+
+  export type CuentaBancariaUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput> | CuentaBancariaCreateWithoutUsuarioInput[] | CuentaBancariaUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutUsuarioInput | CuentaBancariaCreateOrConnectWithoutUsuarioInput[]
+    upsert?: CuentaBancariaUpsertWithWhereUniqueWithoutUsuarioInput | CuentaBancariaUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: CuentaBancariaCreateManyUsuarioInputEnvelope
+    set?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    disconnect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    delete?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    connect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    update?: CuentaBancariaUpdateWithWhereUniqueWithoutUsuarioInput | CuentaBancariaUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: CuentaBancariaUpdateManyWithWhereWithoutUsuarioInput | CuentaBancariaUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: CuentaBancariaScalarWhereInput | CuentaBancariaScalarWhereInput[]
+  }
+
+  export type SorteoUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput> | SorteoCreateWithoutAdminInput[] | SorteoUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutAdminInput | SorteoCreateOrConnectWithoutAdminInput[]
+    upsert?: SorteoUpsertWithWhereUniqueWithoutAdminInput | SorteoUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: SorteoCreateManyAdminInputEnvelope
+    set?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    disconnect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    delete?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    update?: SorteoUpdateWithWhereUniqueWithoutAdminInput | SorteoUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: SorteoUpdateManyWithWhereWithoutAdminInput | SorteoUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+  }
+
+  export type CuentaBancariaUncheckedUpdateManyWithoutUsuarioNestedInput = {
+    create?: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput> | CuentaBancariaCreateWithoutUsuarioInput[] | CuentaBancariaUncheckedCreateWithoutUsuarioInput[]
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutUsuarioInput | CuentaBancariaCreateOrConnectWithoutUsuarioInput[]
+    upsert?: CuentaBancariaUpsertWithWhereUniqueWithoutUsuarioInput | CuentaBancariaUpsertWithWhereUniqueWithoutUsuarioInput[]
+    createMany?: CuentaBancariaCreateManyUsuarioInputEnvelope
+    set?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    disconnect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    delete?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    connect?: CuentaBancariaWhereUniqueInput | CuentaBancariaWhereUniqueInput[]
+    update?: CuentaBancariaUpdateWithWhereUniqueWithoutUsuarioInput | CuentaBancariaUpdateWithWhereUniqueWithoutUsuarioInput[]
+    updateMany?: CuentaBancariaUpdateManyWithWhereWithoutUsuarioInput | CuentaBancariaUpdateManyWithWhereWithoutUsuarioInput[]
+    deleteMany?: CuentaBancariaScalarWhereInput | CuentaBancariaScalarWhereInput[]
+  }
+
+  export type SorteoUncheckedUpdateManyWithoutAdminNestedInput = {
+    create?: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput> | SorteoCreateWithoutAdminInput[] | SorteoUncheckedCreateWithoutAdminInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutAdminInput | SorteoCreateOrConnectWithoutAdminInput[]
+    upsert?: SorteoUpsertWithWhereUniqueWithoutAdminInput | SorteoUpsertWithWhereUniqueWithoutAdminInput[]
+    createMany?: SorteoCreateManyAdminInputEnvelope
+    set?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    disconnect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    delete?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    update?: SorteoUpdateWithWhereUniqueWithoutAdminInput | SorteoUpdateWithWhereUniqueWithoutAdminInput[]
+    updateMany?: SorteoUpdateManyWithWhereWithoutAdminInput | SorteoUpdateManyWithWhereWithoutAdminInput[]
+    deleteMany?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+  }
+
+  export type UsuarioCreateNestedOneWithoutCuentasBancariasInput = {
+    create?: XOR<UsuarioCreateWithoutCuentasBancariasInput, UsuarioUncheckedCreateWithoutCuentasBancariasInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutCuentasBancariasInput
+    connect?: UsuarioWhereUniqueInput
+  }
+
+  export type SorteoCreateNestedManyWithoutCuentaBancariaInput = {
+    create?: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput> | SorteoCreateWithoutCuentaBancariaInput[] | SorteoUncheckedCreateWithoutCuentaBancariaInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutCuentaBancariaInput | SorteoCreateOrConnectWithoutCuentaBancariaInput[]
+    createMany?: SorteoCreateManyCuentaBancariaInputEnvelope
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+  }
+
+  export type SorteoUncheckedCreateNestedManyWithoutCuentaBancariaInput = {
+    create?: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput> | SorteoCreateWithoutCuentaBancariaInput[] | SorteoUncheckedCreateWithoutCuentaBancariaInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutCuentaBancariaInput | SorteoCreateOrConnectWithoutCuentaBancariaInput[]
+    createMany?: SorteoCreateManyCuentaBancariaInputEnvelope
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutCuentasBancariasNestedInput = {
+    create?: XOR<UsuarioCreateWithoutCuentasBancariasInput, UsuarioUncheckedCreateWithoutCuentasBancariasInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutCuentasBancariasInput
+    upsert?: UsuarioUpsertWithoutCuentasBancariasInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutCuentasBancariasInput, UsuarioUpdateWithoutCuentasBancariasInput>, UsuarioUncheckedUpdateWithoutCuentasBancariasInput>
+  }
+
+  export type SorteoUpdateManyWithoutCuentaBancariaNestedInput = {
+    create?: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput> | SorteoCreateWithoutCuentaBancariaInput[] | SorteoUncheckedCreateWithoutCuentaBancariaInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutCuentaBancariaInput | SorteoCreateOrConnectWithoutCuentaBancariaInput[]
+    upsert?: SorteoUpsertWithWhereUniqueWithoutCuentaBancariaInput | SorteoUpsertWithWhereUniqueWithoutCuentaBancariaInput[]
+    createMany?: SorteoCreateManyCuentaBancariaInputEnvelope
+    set?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    disconnect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    delete?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    update?: SorteoUpdateWithWhereUniqueWithoutCuentaBancariaInput | SorteoUpdateWithWhereUniqueWithoutCuentaBancariaInput[]
+    updateMany?: SorteoUpdateManyWithWhereWithoutCuentaBancariaInput | SorteoUpdateManyWithWhereWithoutCuentaBancariaInput[]
+    deleteMany?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+  }
+
+  export type SorteoUncheckedUpdateManyWithoutCuentaBancariaNestedInput = {
+    create?: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput> | SorteoCreateWithoutCuentaBancariaInput[] | SorteoUncheckedCreateWithoutCuentaBancariaInput[]
+    connectOrCreate?: SorteoCreateOrConnectWithoutCuentaBancariaInput | SorteoCreateOrConnectWithoutCuentaBancariaInput[]
+    upsert?: SorteoUpsertWithWhereUniqueWithoutCuentaBancariaInput | SorteoUpsertWithWhereUniqueWithoutCuentaBancariaInput[]
+    createMany?: SorteoCreateManyCuentaBancariaInputEnvelope
+    set?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    disconnect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    delete?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    connect?: SorteoWhereUniqueInput | SorteoWhereUniqueInput[]
+    update?: SorteoUpdateWithWhereUniqueWithoutCuentaBancariaInput | SorteoUpdateWithWhereUniqueWithoutCuentaBancariaInput[]
+    updateMany?: SorteoUpdateManyWithWhereWithoutCuentaBancariaInput | SorteoUpdateManyWithWhereWithoutCuentaBancariaInput[]
+    deleteMany?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+  }
+
   export type BoletoCreateNestedManyWithoutSorteoInput = {
     create?: XOR<BoletoCreateWithoutSorteoInput, BoletoUncheckedCreateWithoutSorteoInput> | BoletoCreateWithoutSorteoInput[] | BoletoUncheckedCreateWithoutSorteoInput[]
     connectOrCreate?: BoletoCreateOrConnectWithoutSorteoInput | BoletoCreateOrConnectWithoutSorteoInput[]
     createMany?: BoletoCreateManySorteoInputEnvelope
     connect?: BoletoWhereUniqueInput | BoletoWhereUniqueInput[]
+  }
+
+  export type CuentaBancariaCreateNestedOneWithoutSorteosInput = {
+    create?: XOR<CuentaBancariaCreateWithoutSorteosInput, CuentaBancariaUncheckedCreateWithoutSorteosInput>
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutSorteosInput
+    connect?: CuentaBancariaWhereUniqueInput
+  }
+
+  export type UsuarioCreateNestedOneWithoutSorteosInput = {
+    create?: XOR<UsuarioCreateWithoutSorteosInput, UsuarioUncheckedCreateWithoutSorteosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSorteosInput
+    connect?: UsuarioWhereUniqueInput
   }
 
   export type BoletoUncheckedCreateNestedManyWithoutSorteoInput = {
@@ -7333,6 +10615,24 @@ export namespace Prisma {
     update?: BoletoUpdateWithWhereUniqueWithoutSorteoInput | BoletoUpdateWithWhereUniqueWithoutSorteoInput[]
     updateMany?: BoletoUpdateManyWithWhereWithoutSorteoInput | BoletoUpdateManyWithWhereWithoutSorteoInput[]
     deleteMany?: BoletoScalarWhereInput | BoletoScalarWhereInput[]
+  }
+
+  export type CuentaBancariaUpdateOneWithoutSorteosNestedInput = {
+    create?: XOR<CuentaBancariaCreateWithoutSorteosInput, CuentaBancariaUncheckedCreateWithoutSorteosInput>
+    connectOrCreate?: CuentaBancariaCreateOrConnectWithoutSorteosInput
+    upsert?: CuentaBancariaUpsertWithoutSorteosInput
+    disconnect?: CuentaBancariaWhereInput | boolean
+    delete?: CuentaBancariaWhereInput | boolean
+    connect?: CuentaBancariaWhereUniqueInput
+    update?: XOR<XOR<CuentaBancariaUpdateToOneWithWhereWithoutSorteosInput, CuentaBancariaUpdateWithoutSorteosInput>, CuentaBancariaUncheckedUpdateWithoutSorteosInput>
+  }
+
+  export type UsuarioUpdateOneRequiredWithoutSorteosNestedInput = {
+    create?: XOR<UsuarioCreateWithoutSorteosInput, UsuarioUncheckedCreateWithoutSorteosInput>
+    connectOrCreate?: UsuarioCreateOrConnectWithoutSorteosInput
+    upsert?: UsuarioUpsertWithoutSorteosInput
+    connect?: UsuarioWhereUniqueInput
+    update?: XOR<XOR<UsuarioUpdateToOneWithWhereWithoutSorteosInput, UsuarioUpdateWithoutSorteosInput>, UsuarioUncheckedUpdateWithoutSorteosInput>
   }
 
   export type BoletoUncheckedUpdateManyWithoutSorteoNestedInput = {
@@ -7733,6 +11033,13 @@ export namespace Prisma {
     linkfacebook?: string | null
     numeroCuenta?: string | null
     tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancaria?: CuentaBancariaCreateNestedOneWithoutSorteosInput
+    admin: UsuarioCreateNestedOneWithoutSorteosInput
   }
 
   export type SorteoUncheckedCreateWithoutBoletosInput = {
@@ -7751,6 +11058,13 @@ export namespace Prisma {
     linkfacebook?: string | null
     numeroCuenta?: string | null
     tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancariaId?: number | null
+    adminId: number
   }
 
   export type SorteoCreateOrConnectWithoutBoletosInput = {
@@ -7836,6 +11150,13 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancaria?: CuentaBancariaUpdateOneWithoutSorteosNestedInput
+    admin?: UsuarioUpdateOneRequiredWithoutSorteosNestedInput
   }
 
   export type SorteoUncheckedUpdateWithoutBoletosInput = {
@@ -7854,6 +11175,293 @@ export namespace Prisma {
     linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
     numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
     tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancariaId?: NullableIntFieldUpdateOperationsInput | number | null
+    adminId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CuentaBancariaCreateWithoutUsuarioInput = {
+    banco: string
+    numero: string
+    titular: string
+    sorteos?: SorteoCreateNestedManyWithoutCuentaBancariaInput
+  }
+
+  export type CuentaBancariaUncheckedCreateWithoutUsuarioInput = {
+    id?: number
+    banco: string
+    numero: string
+    titular: string
+    sorteos?: SorteoUncheckedCreateNestedManyWithoutCuentaBancariaInput
+  }
+
+  export type CuentaBancariaCreateOrConnectWithoutUsuarioInput = {
+    where: CuentaBancariaWhereUniqueInput
+    create: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type CuentaBancariaCreateManyUsuarioInputEnvelope = {
+    data: CuentaBancariaCreateManyUsuarioInput | CuentaBancariaCreateManyUsuarioInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type SorteoCreateWithoutAdminInput = {
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    boletos?: BoletoCreateNestedManyWithoutSorteoInput
+    cuentaBancaria?: CuentaBancariaCreateNestedOneWithoutSorteosInput
+  }
+
+  export type SorteoUncheckedCreateWithoutAdminInput = {
+    id?: number
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancariaId?: number | null
+    boletos?: BoletoUncheckedCreateNestedManyWithoutSorteoInput
+  }
+
+  export type SorteoCreateOrConnectWithoutAdminInput = {
+    where: SorteoWhereUniqueInput
+    create: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput>
+  }
+
+  export type SorteoCreateManyAdminInputEnvelope = {
+    data: SorteoCreateManyAdminInput | SorteoCreateManyAdminInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type CuentaBancariaUpsertWithWhereUniqueWithoutUsuarioInput = {
+    where: CuentaBancariaWhereUniqueInput
+    update: XOR<CuentaBancariaUpdateWithoutUsuarioInput, CuentaBancariaUncheckedUpdateWithoutUsuarioInput>
+    create: XOR<CuentaBancariaCreateWithoutUsuarioInput, CuentaBancariaUncheckedCreateWithoutUsuarioInput>
+  }
+
+  export type CuentaBancariaUpdateWithWhereUniqueWithoutUsuarioInput = {
+    where: CuentaBancariaWhereUniqueInput
+    data: XOR<CuentaBancariaUpdateWithoutUsuarioInput, CuentaBancariaUncheckedUpdateWithoutUsuarioInput>
+  }
+
+  export type CuentaBancariaUpdateManyWithWhereWithoutUsuarioInput = {
+    where: CuentaBancariaScalarWhereInput
+    data: XOR<CuentaBancariaUpdateManyMutationInput, CuentaBancariaUncheckedUpdateManyWithoutUsuarioInput>
+  }
+
+  export type CuentaBancariaScalarWhereInput = {
+    AND?: CuentaBancariaScalarWhereInput | CuentaBancariaScalarWhereInput[]
+    OR?: CuentaBancariaScalarWhereInput[]
+    NOT?: CuentaBancariaScalarWhereInput | CuentaBancariaScalarWhereInput[]
+    id?: IntFilter<"CuentaBancaria"> | number
+    banco?: StringFilter<"CuentaBancaria"> | string
+    numero?: StringFilter<"CuentaBancaria"> | string
+    titular?: StringFilter<"CuentaBancaria"> | string
+    usuarioId?: IntFilter<"CuentaBancaria"> | number
+  }
+
+  export type SorteoUpsertWithWhereUniqueWithoutAdminInput = {
+    where: SorteoWhereUniqueInput
+    update: XOR<SorteoUpdateWithoutAdminInput, SorteoUncheckedUpdateWithoutAdminInput>
+    create: XOR<SorteoCreateWithoutAdminInput, SorteoUncheckedCreateWithoutAdminInput>
+  }
+
+  export type SorteoUpdateWithWhereUniqueWithoutAdminInput = {
+    where: SorteoWhereUniqueInput
+    data: XOR<SorteoUpdateWithoutAdminInput, SorteoUncheckedUpdateWithoutAdminInput>
+  }
+
+  export type SorteoUpdateManyWithWhereWithoutAdminInput = {
+    where: SorteoScalarWhereInput
+    data: XOR<SorteoUpdateManyMutationInput, SorteoUncheckedUpdateManyWithoutAdminInput>
+  }
+
+  export type SorteoScalarWhereInput = {
+    AND?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+    OR?: SorteoScalarWhereInput[]
+    NOT?: SorteoScalarWhereInput | SorteoScalarWhereInput[]
+    id?: IntFilter<"Sorteo"> | number
+    nombre?: StringFilter<"Sorteo"> | string
+    descripcion?: StringNullableFilter<"Sorteo"> | string | null
+    imagen?: StringNullableFilter<"Sorteo"> | string | null
+    fecha?: DateTimeFilter<"Sorteo"> | Date | string
+    cierreVentas?: DateTimeNullableFilter<"Sorteo"> | Date | string | null
+    costoBoleto?: FloatNullableFilter<"Sorteo"> | number | null
+    totalBoletos?: IntNullableFilter<"Sorteo"> | number | null
+    boletosVendidos?: IntNullableFilter<"Sorteo"> | number | null
+    estado?: StringNullableFilter<"Sorteo"> | string | null
+    numeroWhatsApp?: StringNullableFilter<"Sorteo"> | string | null
+    nombreEmpresa?: StringNullableFilter<"Sorteo"> | string | null
+    linkfacebook?: StringNullableFilter<"Sorteo"> | string | null
+    numeroCuenta?: StringNullableFilter<"Sorteo"> | string | null
+    tipoBanco?: StringNullableFilter<"Sorteo"> | string | null
+    numeroDeSorteo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappInfo?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappApartado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappConfirmado?: StringNullableFilter<"Sorteo"> | string | null
+    mensajeWhatsappAnuncio?: StringNullableFilter<"Sorteo"> | string | null
+    cuentaBancariaId?: IntNullableFilter<"Sorteo"> | number | null
+    adminId?: IntFilter<"Sorteo"> | number
+  }
+
+  export type UsuarioCreateWithoutCuentasBancariasInput = {
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    sorteos?: SorteoCreateNestedManyWithoutAdminInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutCuentasBancariasInput = {
+    id?: number
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    sorteos?: SorteoUncheckedCreateNestedManyWithoutAdminInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutCuentasBancariasInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutCuentasBancariasInput, UsuarioUncheckedCreateWithoutCuentasBancariasInput>
+  }
+
+  export type SorteoCreateWithoutCuentaBancariaInput = {
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    boletos?: BoletoCreateNestedManyWithoutSorteoInput
+    admin: UsuarioCreateNestedOneWithoutSorteosInput
+  }
+
+  export type SorteoUncheckedCreateWithoutCuentaBancariaInput = {
+    id?: number
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    adminId: number
+    boletos?: BoletoUncheckedCreateNestedManyWithoutSorteoInput
+  }
+
+  export type SorteoCreateOrConnectWithoutCuentaBancariaInput = {
+    where: SorteoWhereUniqueInput
+    create: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput>
+  }
+
+  export type SorteoCreateManyCuentaBancariaInputEnvelope = {
+    data: SorteoCreateManyCuentaBancariaInput | SorteoCreateManyCuentaBancariaInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type UsuarioUpsertWithoutCuentasBancariasInput = {
+    update: XOR<UsuarioUpdateWithoutCuentasBancariasInput, UsuarioUncheckedUpdateWithoutCuentasBancariasInput>
+    create: XOR<UsuarioCreateWithoutCuentasBancariasInput, UsuarioUncheckedCreateWithoutCuentasBancariasInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutCuentasBancariasInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutCuentasBancariasInput, UsuarioUncheckedUpdateWithoutCuentasBancariasInput>
+  }
+
+  export type UsuarioUpdateWithoutCuentasBancariasInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    sorteos?: SorteoUpdateManyWithoutAdminNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutCuentasBancariasInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    sorteos?: SorteoUncheckedUpdateManyWithoutAdminNestedInput
+  }
+
+  export type SorteoUpsertWithWhereUniqueWithoutCuentaBancariaInput = {
+    where: SorteoWhereUniqueInput
+    update: XOR<SorteoUpdateWithoutCuentaBancariaInput, SorteoUncheckedUpdateWithoutCuentaBancariaInput>
+    create: XOR<SorteoCreateWithoutCuentaBancariaInput, SorteoUncheckedCreateWithoutCuentaBancariaInput>
+  }
+
+  export type SorteoUpdateWithWhereUniqueWithoutCuentaBancariaInput = {
+    where: SorteoWhereUniqueInput
+    data: XOR<SorteoUpdateWithoutCuentaBancariaInput, SorteoUncheckedUpdateWithoutCuentaBancariaInput>
+  }
+
+  export type SorteoUpdateManyWithWhereWithoutCuentaBancariaInput = {
+    where: SorteoScalarWhereInput
+    data: XOR<SorteoUpdateManyMutationInput, SorteoUncheckedUpdateManyWithoutCuentaBancariaInput>
   }
 
   export type BoletoCreateWithoutSorteoInput = {
@@ -7887,6 +11495,48 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type CuentaBancariaCreateWithoutSorteosInput = {
+    banco: string
+    numero: string
+    titular: string
+    usuario: UsuarioCreateNestedOneWithoutCuentasBancariasInput
+  }
+
+  export type CuentaBancariaUncheckedCreateWithoutSorteosInput = {
+    id?: number
+    banco: string
+    numero: string
+    titular: string
+    usuarioId: number
+  }
+
+  export type CuentaBancariaCreateOrConnectWithoutSorteosInput = {
+    where: CuentaBancariaWhereUniqueInput
+    create: XOR<CuentaBancariaCreateWithoutSorteosInput, CuentaBancariaUncheckedCreateWithoutSorteosInput>
+  }
+
+  export type UsuarioCreateWithoutSorteosInput = {
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    cuentasBancarias?: CuentaBancariaCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioUncheckedCreateWithoutSorteosInput = {
+    id?: number
+    nombre: string
+    email: string
+    password: string
+    rol?: string
+    cuentasBancarias?: CuentaBancariaUncheckedCreateNestedManyWithoutUsuarioInput
+  }
+
+  export type UsuarioCreateOrConnectWithoutSorteosInput = {
+    where: UsuarioWhereUniqueInput
+    create: XOR<UsuarioCreateWithoutSorteosInput, UsuarioUncheckedCreateWithoutSorteosInput>
+  }
+
   export type BoletoUpsertWithWhereUniqueWithoutSorteoInput = {
     where: BoletoWhereUniqueInput
     update: XOR<BoletoUpdateWithoutSorteoInput, BoletoUncheckedUpdateWithoutSorteoInput>
@@ -7901,6 +11551,60 @@ export namespace Prisma {
   export type BoletoUpdateManyWithWhereWithoutSorteoInput = {
     where: BoletoScalarWhereInput
     data: XOR<BoletoUpdateManyMutationInput, BoletoUncheckedUpdateManyWithoutSorteoInput>
+  }
+
+  export type CuentaBancariaUpsertWithoutSorteosInput = {
+    update: XOR<CuentaBancariaUpdateWithoutSorteosInput, CuentaBancariaUncheckedUpdateWithoutSorteosInput>
+    create: XOR<CuentaBancariaCreateWithoutSorteosInput, CuentaBancariaUncheckedCreateWithoutSorteosInput>
+    where?: CuentaBancariaWhereInput
+  }
+
+  export type CuentaBancariaUpdateToOneWithWhereWithoutSorteosInput = {
+    where?: CuentaBancariaWhereInput
+    data: XOR<CuentaBancariaUpdateWithoutSorteosInput, CuentaBancariaUncheckedUpdateWithoutSorteosInput>
+  }
+
+  export type CuentaBancariaUpdateWithoutSorteosInput = {
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    usuario?: UsuarioUpdateOneRequiredWithoutCuentasBancariasNestedInput
+  }
+
+  export type CuentaBancariaUncheckedUpdateWithoutSorteosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    usuarioId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type UsuarioUpsertWithoutSorteosInput = {
+    update: XOR<UsuarioUpdateWithoutSorteosInput, UsuarioUncheckedUpdateWithoutSorteosInput>
+    create: XOR<UsuarioCreateWithoutSorteosInput, UsuarioUncheckedCreateWithoutSorteosInput>
+    where?: UsuarioWhereInput
+  }
+
+  export type UsuarioUpdateToOneWithWhereWithoutSorteosInput = {
+    where?: UsuarioWhereInput
+    data: XOR<UsuarioUpdateWithoutSorteosInput, UsuarioUncheckedUpdateWithoutSorteosInput>
+  }
+
+  export type UsuarioUpdateWithoutSorteosInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    cuentasBancarias?: CuentaBancariaUpdateManyWithoutUsuarioNestedInput
+  }
+
+  export type UsuarioUncheckedUpdateWithoutSorteosInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    password?: StringFieldUpdateOperationsInput | string
+    rol?: StringFieldUpdateOperationsInput | string
+    cuentasBancarias?: CuentaBancariaUncheckedUpdateManyWithoutUsuarioNestedInput
   }
 
   export type BoletoCreateManyCompradorInput = {
@@ -7987,6 +11691,229 @@ export namespace Prisma {
     fechaCompra?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     compradorId?: NullableIntFieldUpdateOperationsInput | number | null
     sorteoId?: IntFieldUpdateOperationsInput | number
+  }
+
+  export type CuentaBancariaCreateManyUsuarioInput = {
+    id?: number
+    banco: string
+    numero: string
+    titular: string
+  }
+
+  export type SorteoCreateManyAdminInput = {
+    id?: number
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    cuentaBancariaId?: number | null
+  }
+
+  export type CuentaBancariaUpdateWithoutUsuarioInput = {
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    sorteos?: SorteoUpdateManyWithoutCuentaBancariaNestedInput
+  }
+
+  export type CuentaBancariaUncheckedUpdateWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+    sorteos?: SorteoUncheckedUpdateManyWithoutCuentaBancariaNestedInput
+  }
+
+  export type CuentaBancariaUncheckedUpdateManyWithoutUsuarioInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    banco?: StringFieldUpdateOperationsInput | string
+    numero?: StringFieldUpdateOperationsInput | string
+    titular?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SorteoUpdateWithoutAdminInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    boletos?: BoletoUpdateManyWithoutSorteoNestedInput
+    cuentaBancaria?: CuentaBancariaUpdateOneWithoutSorteosNestedInput
+  }
+
+  export type SorteoUncheckedUpdateWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancariaId?: NullableIntFieldUpdateOperationsInput | number | null
+    boletos?: BoletoUncheckedUpdateManyWithoutSorteoNestedInput
+  }
+
+  export type SorteoUncheckedUpdateManyWithoutAdminInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    cuentaBancariaId?: NullableIntFieldUpdateOperationsInput | number | null
+  }
+
+  export type SorteoCreateManyCuentaBancariaInput = {
+    id?: number
+    nombre: string
+    descripcion?: string | null
+    imagen?: string | null
+    fecha: Date | string
+    cierreVentas?: Date | string | null
+    costoBoleto?: number | null
+    totalBoletos?: number | null
+    boletosVendidos?: number | null
+    estado?: string | null
+    numeroWhatsApp?: string | null
+    nombreEmpresa?: string | null
+    linkfacebook?: string | null
+    numeroCuenta?: string | null
+    tipoBanco?: string | null
+    numeroDeSorteo?: string | null
+    mensajeWhatsappInfo?: string | null
+    mensajeWhatsappApartado?: string | null
+    mensajeWhatsappConfirmado?: string | null
+    mensajeWhatsappAnuncio?: string | null
+    adminId: number
+  }
+
+  export type SorteoUpdateWithoutCuentaBancariaInput = {
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    boletos?: BoletoUpdateManyWithoutSorteoNestedInput
+    admin?: UsuarioUpdateOneRequiredWithoutSorteosNestedInput
+  }
+
+  export type SorteoUncheckedUpdateWithoutCuentaBancariaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: IntFieldUpdateOperationsInput | number
+    boletos?: BoletoUncheckedUpdateManyWithoutSorteoNestedInput
+  }
+
+  export type SorteoUncheckedUpdateManyWithoutCuentaBancariaInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    nombre?: StringFieldUpdateOperationsInput | string
+    descripcion?: NullableStringFieldUpdateOperationsInput | string | null
+    imagen?: NullableStringFieldUpdateOperationsInput | string | null
+    fecha?: DateTimeFieldUpdateOperationsInput | Date | string
+    cierreVentas?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    costoBoleto?: NullableFloatFieldUpdateOperationsInput | number | null
+    totalBoletos?: NullableIntFieldUpdateOperationsInput | number | null
+    boletosVendidos?: NullableIntFieldUpdateOperationsInput | number | null
+    estado?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroWhatsApp?: NullableStringFieldUpdateOperationsInput | string | null
+    nombreEmpresa?: NullableStringFieldUpdateOperationsInput | string | null
+    linkfacebook?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroCuenta?: NullableStringFieldUpdateOperationsInput | string | null
+    tipoBanco?: NullableStringFieldUpdateOperationsInput | string | null
+    numeroDeSorteo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappInfo?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappApartado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappConfirmado?: NullableStringFieldUpdateOperationsInput | string | null
+    mensajeWhatsappAnuncio?: NullableStringFieldUpdateOperationsInput | string | null
+    adminId?: IntFieldUpdateOperationsInput | number
   }
 
   export type BoletoCreateManySorteoInput = {
