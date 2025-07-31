@@ -104,6 +104,7 @@ async update(id: number, data: UpdateBoletoDto) {
     precio,
     estado: 'disponible',
     sorteoId,
+
   }));
 
   return this.prisma.boleto.createMany({
@@ -165,13 +166,15 @@ async update(id: number, data: UpdateBoletoDto) {
 async apartarLoteConComprador(
   nombre: string,
   telefono: string,
-  boletos: { id: number }[]
+  boletos: { id: number }[],
+  referidoId?: number
 ) {
   const comprador = await this.prisma.comprador.create({
     data: {
       nombre,
       telefono,
       email: `${Date.now()}@fake.com`,
+      referidoId,
     },
   });
 

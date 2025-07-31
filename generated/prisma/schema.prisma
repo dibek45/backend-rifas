@@ -83,6 +83,7 @@ model Sorteo {
   mensajeWhatsappApartado   String?
   mensajeWhatsappConfirmado String?
   mensajeWhatsappAnuncio    String?
+
   boletos Boleto[]
 
   cuentaBancariaId Int?
