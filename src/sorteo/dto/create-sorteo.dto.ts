@@ -59,4 +59,12 @@ export class CreateSorteoDto {
 @IsString()
 numeroWhatsApp?: string; // Ej: '5216146087479'
 
+
+  @IsOptional()
+  @IsString()
+  nombreEmpresa?: string; // 🏢 Nombre de empresa
+
+  @IsOptional()
+  @IsString()
+  linkfacebook?: string; // 📘 Enlace a Facebook
 }
