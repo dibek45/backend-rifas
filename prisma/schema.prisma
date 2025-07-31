@@ -57,7 +57,7 @@ model Sorteo {
   numeroWhatsApp  String?    // 📞 Opcional
   nombreEmpresa String?    // 🏢 Opcional
   linkfacebook String?    // 📘 Opcional
-  numerCuenta String?
+  numeroCuenta String?
   tipoBanco String?
   boletos         Boleto[]
 }

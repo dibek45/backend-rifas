@@ -162,7 +162,7 @@ exports.Prisma.SorteoScalarFieldEnum = {
   numeroWhatsApp: 'numeroWhatsApp',
   nombreEmpresa: 'nombreEmpresa',
   linkfacebook: 'linkfacebook',
-  numerCuenta: 'numerCuenta',
+  numeroCuenta: 'numeroCuenta',
   tipoBanco: 'tipoBanco'
 };
 
