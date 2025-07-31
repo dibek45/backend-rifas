@@ -174,7 +174,7 @@ async apartarLoteConComprador(
       nombre,
       telefono,
       email: `${Date.now()}@fake.com`,
-      referidoId,
+      referidoId: 1,
     },
   });
 
