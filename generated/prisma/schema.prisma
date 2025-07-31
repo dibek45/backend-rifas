@@ -15,6 +15,9 @@ model Comprador {
   email     String   @unique
   telefono  String?
   boletos   Boleto[]
+ referidoId Int?        
+  referido   Comprador?  @relation("Referido", fields: [referidoId], references: [id])
+  referidos  Comprador[] @relation("Referido")
   createdAt DateTime @default(now())
 }
 
