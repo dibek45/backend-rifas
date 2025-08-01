@@ -10,12 +10,13 @@ import { AuthService } from './auth.service';
         name: 'AUTH_SERVICE_RFS',
         transport: Transport.TCP,
         options: {
-          host: process.env.AUTH_SERVICE_HOST || 'auth-service2',
-port: parseInt(process.env.AUTH_SERVICE_PORT ?? '4003', 10),
+          host: process.env.AUTH_SERVICE_HOST || 'auth-service2', // o 'auth-r' si así se llama el contenedor
+          port: parseInt(process.env.AUTH_SERVICE_PORT ?? '4003', 10),
         },
       },
     ]),
   ],
-  providers: [AuthController, AuthService],
+  controllers: [AuthController], // ✅ Este va aquí
+  providers: [AuthService],       // ✅ Solo el service va aquí
 })
 export class AuthModule {}
