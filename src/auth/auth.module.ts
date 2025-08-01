@@ -10,7 +10,7 @@ import { AuthService } from './auth.service';
         name: 'AUTH_SERVICE_RFS',
         transport: Transport.TCP,
         options: {
-          host: process.env.AUTH_SERVICE_HOST || 'auth-service2', // o 'auth-r' si así se llama el contenedor
+          host: process.env.AUTH_SERVICE_HOST || 'authr-auth-r', // o 'auth-r' si así se llama el contenedor
           port: parseInt(process.env.AUTH_SERVICE_PORT ?? '4003', 10),
         },
       },
