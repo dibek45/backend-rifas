@@ -10,10 +10,11 @@ import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ aquí va Vendedor
+    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ aquí sí va bien
   ],
   controllers: [BoletoController],
-  providers: [BoletoService, SorteoGateway,Vendedor],
+  providers: [BoletoService, SorteoGateway], // ❌ quitamos Vendedor de aquí
   exports: [BoletoService],
 })
+
 export class BoletoModule {}
