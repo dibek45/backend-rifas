@@ -1,18 +1,19 @@
 import { Module } from '@nestjs/common';
-import { TypeOrmModule } from '@nestjs/typeorm'; // 👈 necesitas esto
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Boleto } from './entities/boleto.entity';
+import { Sorteo } from '../sorteo/entities/sorteo.entity';
+import { Comprador } from '../comprador/entities/comprador.entity';
 import { BoletoService } from './boleto.service';
 import { BoletoController } from './boleto.controller';
 import { SorteoGateway } from 'src/sockets/boletos.gateway';
-import { Boleto } from './entities/boleto.entity';
-import { Comprador } from '../comprador/entities/comprador.entity';
-import { Sorteo } from '../sorteo/entities/sorteo.entity';
+import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo]), // ✅ CORRECTO
+    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo]), // ✅ IMPORTANTE
   ],
   controllers: [BoletoController],
-  providers: [BoletoService, SorteoGateway],
+  providers: [BoletoService, SorteoGateway,Vendedor],
   exports: [BoletoService],
 })
 export class BoletoModule {}
