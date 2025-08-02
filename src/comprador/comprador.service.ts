@@ -1,39 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Comprador } from './entities/comprador.entity';
 import { CreateCompradorDto } from './dto/create-comprador.dto';
 import { UpdateCompradorDto } from './dto/update-comprador.dto';
 
 @Injectable()
 export class CompradorService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(Comprador)
+    private readonly compradorRepository: Repository<Comprador>,
+  ) {}
 
-  create(data: CreateCompradorDto) {
-    return this.prisma.comprador.create({ data });
+  async create(data: CreateCompradorDto) {
+    const comprador = this.compradorRepository.create(data);
+    return this.compradorRepository.save(comprador);
   }
 
-  findAll() {
-    return this.prisma.comprador.findMany({
-      include: { boletos: true },
+  async findAll() {
+    return this.compradorRepository.find({
+      relations: ['boletos'], // incluye los boletos relacionados
     });
   }
 
-  findOne(id: number) {
-    return this.prisma.comprador.findUnique({
+  async findOne(id: number) {
+    const comprador = await this.compradorRepository.findOne({
       where: { id },
-      include: { boletos: true },
+      relations: ['boletos'],
     });
+    if (!comprador) throw new NotFoundException('Comprador no encontrado');
+    return comprador;
   }
 
-  update(id: number, data: UpdateCompradorDto) {
-    return this.prisma.comprador.update({
-      where: { id },
-      data,
-    });
+  async update(id: number, data: UpdateCompradorDto) {
+    await this.compradorRepository.update(id, data);
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return this.prisma.comprador.delete({
-      where: { id },
-    });
+  async remove(id: number) {
+    return this.compradorRepository.delete(id);
   }
 }
