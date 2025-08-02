@@ -28,6 +28,8 @@ import { CuentaBancaria } from './vendedor/entities/cuenta-bancaria.entity';
       url: process.env.DATABASE_URL,  // Usamos la URL de conexión desde las variables de entorno
       entities: [Usuario, Sorteo, Comprador, Vendedor, Boleto, CuentaBancaria],  // Agregamos todas las entidades
       synchronize: true,  // Ten cuidado con esta opción en producción
+        autoLoadEntities: true,  // 🔥 Deja que Nest cargue automáticamente tus entidades
+
     }),
   ],
   controllers: [AppController],
