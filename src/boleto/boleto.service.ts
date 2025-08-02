@@ -14,28 +14,26 @@ import { SorteoGateway } from 'src/sockets/boletos.gateway';
 
 @Injectable()
 export class BoletoService {
+  
   constructor(
-    @InjectRepository(Boleto)
-    private readonly boletoRepository: Repository<Boleto>,
+  @InjectRepository(Boleto) private boletoRepo: Repository<Boleto>,
+  @InjectRepository(Comprador) private compradorRepo: Repository<Comprador>,
+  @InjectRepository(Sorteo) private sorteoRepo: Repository<Sorteo>,
+  @InjectRepository(Vendedor) private vendedorRepo: Repository<Vendedor>,
+  private readonly sorteoGateway: SorteoGateway,
 
-    @InjectRepository(Comprador)
-    private readonly compradorRepository: Repository<Comprador>,
 
-    @InjectRepository(Sorteo)
-    private readonly sorteoRepository: Repository<Sorteo>,
-
-    private readonly sorteoGateway: SorteoGateway,
   ) {}
 
   async findAll(sorteoId: number) {
-    return this.boletoRepository.find({
+    return this.boletoRepo.find({
       where: { sorteo: { id: sorteoId } },
       relations: ['comprador', 'vendedor', 'sorteo'],
     });
   }
 
   async findOne(id: number) {
-    const boleto = await this.boletoRepository.findOne({
+    const boleto = await this.boletoRepo.findOne({
       where: { id },
       relations: ['comprador', 'vendedor', 'sorteo'],
     });
@@ -44,10 +42,10 @@ export class BoletoService {
   }
 
  async create(data: CreateBoletoDto) {
-  const sorteo = await this.sorteoRepository.findOneBy({ id: data.sorteoId });
+  const sorteo = await this.sorteoRepo.findOneBy({ id: data.sorteoId });
   if (!sorteo) throw new NotFoundException('Sorteo not found');
 
-  const boleto = this.boletoRepository.create({
+  const boleto = this.boletoRepo.create({
     numero: data.numero,
     precio: data.precio,
     estado: data.estado ?? 'disponible',
@@ -58,11 +56,11 @@ export class BoletoService {
     vendedor: data.vendedorId ? { id: data.vendedorId } : undefined,
   });
 
-  return this.boletoRepository.save(boleto);
+  return this.boletoRepo.save(boleto);
 }
 
 async update(id: number, data: UpdateBoletoDto) {
-  const boleto = await this.boletoRepository.findOne({
+  const boleto = await this.boletoRepo.findOne({
     where: { id },
     relations: ['comprador', 'vendedor', 'sorteo'],
   });
@@ -98,7 +96,7 @@ boleto.comprador = data.compradorId ? { id: data.compradorId } as Comprador : un
 boleto.vendedor = data.vendedorId ? { id: data.vendedorId } as Vendedor : undefined;
   }
 
-  const updatedBoleto = await this.boletoRepository.save(boleto);
+  const updatedBoleto = await this.boletoRepo.save(boleto);
 
   this.sorteoGateway.emitBoletoActualizado(updatedBoleto);
 
@@ -106,11 +104,11 @@ boleto.vendedor = data.vendedorId ? { id: data.vendedorId } as Vendedor : undefi
 }
 
   async delete(id: number) {
-    return this.boletoRepository.delete(id);
+    return this.boletoRepo.delete(id);
   }
 
   async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
-    const sorteo = await this.sorteoRepository.findOneBy({ id: sorteoId });
+    const sorteo = await this.sorteoRepo.findOneBy({ id: sorteoId });
     if (!sorteo) throw new NotFoundException('Sorteo not found');
 
     const boletos: DeepPartial<Boleto>[] = Array.from({ length: cantidad }, (_, i) => ({
@@ -120,12 +118,12 @@ boleto.vendedor = data.vendedorId ? { id: data.vendedorId } as Vendedor : undefi
       sorteo,
     }));
 
-    return this.boletoRepository.save(boletos);
+    return this.boletoRepo.save(boletos);
   }
 
   async apartarBoletosEnLote(compradorId: number, boletos: { id: number }[]) {
     const ids = boletos.map(b => b.id);
-    const encontrados = await this.boletoRepository.find({
+    const encontrados = await this.boletoRepo.find({
       where: { id: In(ids) },
     });
 
@@ -136,7 +134,7 @@ boleto.vendedor = data.vendedorId ? { id: data.vendedorId } as Vendedor : undefi
 
 let actualizados: Boleto[] = [];
     if (disponibles.length > 0) {
-      actualizados = await this.boletoRepository.save(
+      actualizados = await this.boletoRepo.save(
         disponibles.map(boleto => ({
           ...boleto,
           estado: 'ocupado',
@@ -159,16 +157,16 @@ let actualizados: Boleto[] = [];
     boletos: { id: number }[],
     referidoId?: number,
   ) {
-    const comprador = this.compradorRepository.create({
+    const comprador = this.compradorRepo.create({
       nombre,
       telefono,
       email: `${Date.now()}@fake.com`,
 referidoId: referidoId ?? undefined,
     });
-    await this.compradorRepository.save(comprador);
+    await this.compradorRepo.save(comprador);
 
     const ids = boletos.map(b => b.id);
-    const encontrados = await this.boletoRepository.find({
+    const encontrados = await this.boletoRepo.find({
       where: { id: In(ids) },
     });
 
@@ -178,7 +176,7 @@ referidoId: referidoId ?? undefined,
     const disponibles = encontrados.filter(b => b.estado === 'disponible');
 
     if (disponibles.length > 0) {
-      const actualizados = await this.boletoRepository.save(
+      const actualizados = await this.boletoRepo.save(
         disponibles.map(boleto => ({
           ...boleto,
           estado: 'ocupado',
@@ -201,7 +199,7 @@ referidoId: referidoId ?? undefined,
       telefono,
     };
 
-    const comprador = await this.compradorRepository.findOne({
+    const comprador = await this.compradorRepo.findOne({
       where: whereComprador,
       relations: ['boletos', 'boletos.sorteo', 'boletos.vendedor'],
     });
@@ -227,7 +225,7 @@ referidoId: referidoId ?? undefined,
   }
 
   async getBoletosPorClienteSinSorteo(nombre: string, telefono: string) {
-    const comprador = await this.compradorRepository.findOne({
+    const comprador = await this.compradorRepo.findOne({
       where: { nombre: nombre.toLowerCase(), telefono },
       relations: ['boletos', 'boletos.sorteo', 'boletos.vendedor'],
     });
