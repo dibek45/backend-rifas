@@ -1,45 +1,43 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Vendedor } from './entities/vendedor.entity';
 import { CreateVendedorDto } from './dto/create-vendedor.dto';
 import { UpdateVendedorDto } from './dto/update-vendedor.dto';
 
 @Injectable()
 export class VendedorService {
-  constructor(private prisma: PrismaService) {}
+  constructor(
+    @InjectRepository(Vendedor)
+    private readonly vendedorRepository: Repository<Vendedor>,
+  ) {}
 
-  create(data: CreateVendedorDto) {
-    return this.prisma.vendedor.create({
-      data,
+  async create(data: CreateVendedorDto) {
+    const vendedor = this.vendedorRepository.create(data);
+    return this.vendedorRepository.save(vendedor);
+  }
+
+  async findAll() {
+    return this.vendedorRepository.find({
+      relations: ['boletos'], // incluir boletos vendidos
     });
   }
 
-  findAll() {
-    return this.prisma.vendedor.findMany({
-      include: {
-        boletos: true, // para ver los boletos que ha vendido
-      },
-    });
-  }
-
-  findOne(id: number) {
-    return this.prisma.vendedor.findUnique({
+  async findOne(id: number) {
+    const vendedor = await this.vendedorRepository.findOne({
       where: { id },
-      include: {
-        boletos: true,
-      },
+      relations: ['boletos'],
     });
+    if (!vendedor) throw new NotFoundException('Vendedor no encontrado');
+    return vendedor;
   }
 
-  update(id: number, data: UpdateVendedorDto) {
-    return this.prisma.vendedor.update({
-      where: { id },
-      data,
-    });
+  async update(id: number, data: UpdateVendedorDto) {
+    await this.vendedorRepository.update(id, data);
+    return this.findOne(id);
   }
 
-  remove(id: number) {
-    return this.prisma.vendedor.delete({
-      where: { id },
-    });
+  async remove(id: number) {
+    return this.vendedorRepository.delete(id);
   }
 }
