@@ -48,11 +48,6 @@ findAll(@Param('sorteoId') sorteoId: string) {
 
 
 
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.boletoService.findOne(+id);
-  }
-
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateBoletoDto: UpdateBoletoDto) {
     return this.boletoService.update(+id, updateBoletoDto);

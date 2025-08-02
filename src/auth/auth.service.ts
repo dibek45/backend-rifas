@@ -7,7 +7,7 @@ export class AuthService {
   constructor(@Inject('AUTH_SERVICE_RFS') private readonly authClient: ClientProxy) {}
 
   async login(email: string, password: string) {
-    console.log('📤 Enviando mensaje a auth-service2...', { email, password });
+    console.log('📤 Enviando mensaje a authr...', { email, password });
 
     try {
 
