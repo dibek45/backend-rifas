@@ -10,7 +10,7 @@ import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo]), // ✅ IMPORTANTE
+    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ aquí va Vendedor
   ],
   controllers: [BoletoController],
   providers: [BoletoService, SorteoGateway,Vendedor],
