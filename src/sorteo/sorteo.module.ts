@@ -8,7 +8,7 @@ import { SorteoGateway } from 'src/sockets/boletos.gateway';
 @Module({
   imports: [BoletoModule], // 👈 agrégalo aquí
   controllers: [SorteoController],
-  providers: [SorteoService,SorteoGateway],
+  providers: [SorteoService,SorteoGateway,BoletoService],
   exports:[SorteoGateway]
 })
 export class SorteoModule {}
