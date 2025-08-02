@@ -10,38 +10,26 @@ export class Boleto {
   id: number;
 
   @Column()
-  numero: number;
+  numero: number;   // Must be "numero", not "number" or anything else
 
-  @Column()
+  @Column('float')
   precio: number;
 
   @Column({ default: 'disponible' })
   estado: string;
 
   @Column({ nullable: true })
-  metodoPago: string;
+  metodoPago?: string;
 
-  @Column({ nullable: true })
-  fechaCompra: Date;
-
-  @ManyToOne(() => Comprador, comprador => comprador.boletos, { nullable: true })
-  @JoinColumn({ name: 'compradorId' })
-  comprador: Comprador;
-
-  @Column({ nullable: true })
-  compradorId: number;
-
-  @ManyToOne(() => Vendedor, vendedor => vendedor.boletos, { nullable: true })
-  @JoinColumn({ name: 'vendedorId' })
-  vendedor: Vendedor;
-
-  @Column({ nullable: true })
-  vendedorId: number;
+  @Column({ nullable: true, type: 'timestamp' })
+  fechaCompra?: Date;
 
   @ManyToOne(() => Sorteo, sorteo => sorteo.boletos)
-  @JoinColumn({ name: 'sorteoId' })
   sorteo: Sorteo;
 
-  @Column()
-  sorteoId: number;
+  @ManyToOne(() => Comprador, comprador => comprador.boletos, { nullable: true })
+  comprador?: Comprador;
+
+  @ManyToOne(() => Vendedor, vendedor => vendedor.boletos, { nullable: true })
+  vendedor?: Vendedor;
 }

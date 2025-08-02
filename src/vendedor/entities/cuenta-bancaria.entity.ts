@@ -24,7 +24,7 @@ export class CuentaBancaria {
   usuarioId: number;  // Clave foránea que hace referencia a Usuario
 
   // Relación muchos a uno con Sorteo
-  @ManyToOne(() => Sorteo, sorteo => sorteo.cuentasBancarias)
+  @ManyToOne(() => Sorteo, sorteo => sorteo.cuentaBancaria)
   sorteo: Sorteo;
 
   @Column()

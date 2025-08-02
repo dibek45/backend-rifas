@@ -1,326 +1,248 @@
-import { Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository, In, DeepPartial } from 'typeorm';
+
+import { Boleto } from './entities/boleto.entity';
+import { Comprador } from 'src/comprador/entities/comprador.entity';
+import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
+import { Sorteo } from 'src/sorteo/entities/sorteo.entity';
+
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
-import { SorteoGateway } from 'src/sockets/boletos.gateway'; // asegúrate que esté bien importado
+
+import { SorteoGateway } from 'src/sockets/boletos.gateway';
 
 @Injectable()
 export class BoletoService {
-  constructor(private prisma: PrismaService,    private readonly sorteoGateway: SorteoGateway, // inyecta el gateway
-) {}
+  constructor(
+    @InjectRepository(Boleto)
+    private readonly boletoRepository: Repository<Boleto>,
 
- async findAll(sorteoId: number) {
-  return this.prisma.boleto.findMany({
-    where: {
-      sorteoId, // 👈 Filtra por sorteo
-    },
-    include: {
-      comprador: true,
-      vendedor: true,
-      sorteo: true,
-    },
+    @InjectRepository(Comprador)
+    private readonly compradorRepository: Repository<Comprador>,
+
+    @InjectRepository(Sorteo)
+    private readonly sorteoRepository: Repository<Sorteo>,
+
+    private readonly sorteoGateway: SorteoGateway,
+  ) {}
+
+  async findAll(sorteoId: number) {
+    return this.boletoRepository.find({
+      where: { sorteo: { id: sorteoId } },
+      relations: ['comprador', 'vendedor', 'sorteo'],
+    });
+  }
+
+  async findOne(id: number) {
+    const boleto = await this.boletoRepository.findOne({
+      where: { id },
+      relations: ['comprador', 'vendedor', 'sorteo'],
+    });
+    if (!boleto) throw new NotFoundException('Boleto not found');
+    return boleto;
+  }
+
+ async create(data: CreateBoletoDto) {
+  const sorteo = await this.sorteoRepository.findOneBy({ id: data.sorteoId });
+  if (!sorteo) throw new NotFoundException('Sorteo not found');
+
+  const boleto = this.boletoRepository.create({
+    numero: data.numero,
+    precio: data.precio,
+    estado: data.estado ?? 'disponible',
+    metodoPago: data.metodoPago ?? undefined,
+    fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
+    sorteo,
+    comprador: data.compradorId ? { id: data.compradorId } : undefined,
+    vendedor: data.vendedorId ? { id: data.vendedorId } : undefined,
   });
+
+  return this.boletoRepository.save(boleto);
 }
 
-  findOne(id: number) {
-    return this.prisma.boleto.findUnique({
-      where: { id },
-      include: {
-        comprador: true,
-        vendedor: true,
-        sorteo: true,
-      },
-    });
-  }
-
-  create(data: CreateBoletoDto) {
-    return this.prisma.boleto.create({
-      data: {
-        numero: data.numero,
-        precio: data.precio,
-        estado: data.estado ?? 'disponible',
-        metodoPago: data.metodoPago ?? null,
-        fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
-        sorteoId: data.sorteoId,
-        compradorId: data.compradorId ?? null,
-        vendedorId: data.vendedorId ?? null,
-      },
-    });
-  }
 async update(id: number, data: UpdateBoletoDto) {
-  const actual = await this.prisma.boleto.findUnique({
+  const boleto = await this.boletoRepository.findOne({
     where: { id },
-    include: {
-      comprador: true,
-      vendedor: true,
-      sorteo: true,
-    },
+    relations: ['comprador', 'vendedor', 'sorteo'],
   });
+  if (!boleto) throw new NotFoundException('Boleto not found');
 
-  if (!actual) throw new Error('❌ Boleto no encontrado');
-
-  // 🧠 Verifica si los datos son iguales (solo campos que cambian normalmente)
+  // Check if no real changes
   const noCambio =
-    actual.estado === data.estado &&
-    actual.metodoPago === data.metodoPago &&
-    actual.precio === data.precio &&
-    actual.compradorId === data.compradorId &&
-    actual.vendedorId === data.vendedorId;
+    boleto.estado === data.estado &&
+    boleto.metodoPago === data.metodoPago &&
+    boleto.precio === data.precio &&
+    boleto.comprador?.id === data.compradorId &&
+    boleto.vendedor?.id === data.vendedorId;
 
   if (noCambio) {
     console.log('🔁 Boleto sin cambios reales, no se actualiza ni emite socket');
-    return actual;
+    return boleto;
   }
 
-  // ✅ Si sí cambió, actualiza y emite
-  const updatedBoleto = await this.prisma.boleto.update({
-    where: { id },
-    data: {
-      ...data,
-      fechaCompra: data.fechaCompra ? new Date(data.fechaCompra) : undefined,
-    },
-    include: {
-      comprador: true,
-      vendedor: true,
-      sorteo: true,
-    },
-  });
+  // Update properties only if they exist in the DTO
+  if (data.fechaCompra !== undefined && data.fechaCompra !== null) {
+    boleto.fechaCompra = new Date(data.fechaCompra);
+  }
+
+  if (data.estado !== undefined) boleto.estado = data.estado;
+  if (data.metodoPago !== undefined) boleto.metodoPago = data.metodoPago;
+  if (data.precio !== undefined) boleto.precio = data.precio;
+
+  if (data.compradorId !== undefined) {
+boleto.comprador = data.compradorId ? { id: data.compradorId } as Comprador : undefined;
+  }
+
+  if (data.vendedorId !== undefined) {
+boleto.vendedor = data.vendedorId ? { id: data.vendedorId } as Vendedor : undefined;
+  }
+
+  const updatedBoleto = await this.boletoRepository.save(boleto);
 
   this.sorteoGateway.emitBoletoActualizado(updatedBoleto);
+
   return updatedBoleto;
 }
 
-
-
-  delete(id: number) {
-    return this.prisma.boleto.delete({
-      where: { id },
-    });
+  async delete(id: number) {
+    return this.boletoRepository.delete(id);
   }
 
   async generarBoletosParaSorteo(sorteoId: number, cantidad: number, precio = 100) {
-  const boletos = Array.from({ length: cantidad }, (_, i) => ({
-    numero: i, // 👈 empieza en 0, termina en cantidad - 1
-    precio,
-    estado: 'disponible',
-    sorteoId,
+    const sorteo = await this.sorteoRepository.findOneBy({ id: sorteoId });
+    if (!sorteo) throw new NotFoundException('Sorteo not found');
 
-  }));
+    const boletos: DeepPartial<Boleto>[] = Array.from({ length: cantidad }, (_, i) => ({
+      numero: i,
+      precio,
+      estado: 'disponible',
+      sorteo,
+    }));
 
-  return this.prisma.boleto.createMany({
-    data: boletos,
-  });
-}
-
-
- async apartarBoletosEnLote(
-  compradorId: number,
-  boletos: { id: number }[]
-) {
-  const boletosFallidos: number[] = [];
-
-  const ids = boletos.map(b => b.id);
-  const encontrados = await this.prisma.boleto.findMany({
-    where: { id: { in: ids } },
-  });
-
-  const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
-  boletosFallidos.push(...yaOcupados.map(b => b.numero));
-
-  const disponibles = encontrados.filter(b => b.estado === 'disponible');
-
-  let actualizados: any[] = [];
-
-  if (disponibles.length > 0) {
-    actualizados = await this.prisma.$transaction(
-      disponibles.map(b =>
-        this.prisma.boleto.update({
-          where: { id: b.id },
-          data: {
-            estado: 'ocupado',
-            compradorId: compradorId,
-          },
-          include: {
-            sorteo: true,
-            comprador: true,
-            vendedor: true,
-          },
-        })
-      )
-    );
-
-    // Emitir cada boleto actualizado por socket
-    for (const boleto of actualizados) {
-      this.sorteoGateway.emitBoletoActualizado(boleto);
-    }
+    return this.boletoRepository.save(boletos);
   }
 
-  return {
-    success: true,
-    boletosOcupados: boletosFallidos,
-  };
-}
+  async apartarBoletosEnLote(compradorId: number, boletos: { id: number }[]) {
+    const ids = boletos.map(b => b.id);
+    const encontrados = await this.boletoRepository.find({
+      where: { id: In(ids) },
+    });
 
+    const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
+    const boletosFallidos = yaOcupados.map(b => b.numero);
 
+    const disponibles = encontrados.filter(b => b.estado === 'disponible');
 
-async apartarLoteConComprador(
-  nombre: string,
-  telefono: string,
-  boletos: { id: number }[],
-  referidoId?: number
-) {
-  const comprador = await this.prisma.comprador.create({
-    data: {
+let actualizados: Boleto[] = [];
+    if (disponibles.length > 0) {
+      actualizados = await this.boletoRepository.save(
+        disponibles.map(boleto => ({
+          ...boleto,
+          estado: 'ocupado',
+          comprador: { id: compradorId } as Comprador,
+        })),
+      );
+
+      actualizados.forEach(boleto => this.sorteoGateway.emitBoletoActualizado(boleto));
+    }
+
+    return {
+      success: true,
+      boletosOcupados: boletosFallidos,
+    };
+  }
+
+  async apartarLoteConComprador(
+    nombre: string,
+    telefono: string,
+    boletos: { id: number }[],
+    referidoId?: number,
+  ) {
+    const comprador = this.compradorRepository.create({
       nombre,
       telefono,
       email: `${Date.now()}@fake.com`,
-      referidoId: 1,
-    },
-  });
-
-  const boletosFallidos: number[] = [];
-
-  const ids = boletos.map(b => b.id);
-  const encontrados = await this.prisma.boleto.findMany({
-    where: { id: { in: ids } },
-  });
-
-  const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
-  boletosFallidos.push(...yaOcupados.map(b => b.numero));
-
-  const disponibles = encontrados.filter(b => b.estado === 'disponible');
-
-  if (disponibles.length > 0) {
-    const actualizados = await this.prisma.$transaction(
-      disponibles.map(b =>
-        this.prisma.boleto.update({
-          where: { id: b.id },
-          data: {
-            estado: 'ocupado',
-            compradorId: comprador.id,
-          },
-          include: { sorteo: true, comprador: true, vendedor: true },
-        })
-      )
-    );
-
-    // 🔥 Emitimos cada boleto actualizado
-    actualizados.forEach(boleto => {
-      this.sorteoGateway.emitBoletoActualizado(boleto);
+referidoId: referidoId ?? undefined,
     });
-  }
+    await this.compradorRepository.save(comprador);
 
-  return {
-    success: true,
-    boletosOcupados: boletosFallidos,
-  };
-}
+    const ids = boletos.map(b => b.id);
+    const encontrados = await this.boletoRepository.find({
+      where: { id: In(ids) },
+    });
 
+    const yaOcupados = encontrados.filter(b => b.estado !== 'disponible');
+    const boletosFallidos = yaOcupados.map(b => b.numero);
 
-async findBoletosPorNombreTelefonoYSorteo(
-  nombre: string,
-  telefono: string,
-  sorteoId?: number
-) {
-  const whereBoletos = sorteoId ? { sorteoId } : {};
+    const disponibles = encontrados.filter(b => b.estado === 'disponible');
 
-  console.log('🟡 Buscar comprador con:');
-  console.log('Nombre:', nombre);
-  console.log('Teléfono:', telefono);
-  console.log('Filtro de boletos:', whereBoletos);
+    if (disponibles.length > 0) {
+      const actualizados = await this.boletoRepository.save(
+        disponibles.map(boleto => ({
+          ...boleto,
+          estado: 'ocupado',
+          comprador,
+        })),
+      );
 
-  // 👇 Esta es la parte clave: solo agregamos "boletos: some" si hay sorteoId
-  const whereComprador: any = {
-    nombre: {
-      mode: 'insensitive',
-      equals: nombre,
-    },
-    telefono: {
-      equals: telefono,
-    },
-  };
+      actualizados.forEach(boleto => this.sorteoGateway.emitBoletoActualizado(boleto));
+    }
 
-  if (sorteoId) {
-    whereComprador.boletos = {
-      some: { sorteoId },
-    };
-  }
-
-  const comprador = await this.prisma.comprador.findFirst({
-    where: whereComprador,
-    include: {
-      boletos: {
-        where: whereBoletos,
-        include: {
-          sorteo: true,
-          vendedor: true,
-        },
-      },
-    },
-  });
-
-  console.log('🟢 Resultado comprador:', comprador);
-
-  if (!comprador) {
-    console.warn('❌ Comprador no encontrado');
     return {
-      message: 'Comprador no encontrado',
-      boletos: [],
+      success: true,
+      boletosOcupados: boletosFallidos,
     };
   }
 
-  return {
-    comprador: {
-      id: comprador.id,
-      nombre: comprador.nombre,
-      telefono: comprador.telefono,
-    },
-    boletos: comprador.boletos,
-  };
-}
-
-
-async getBoletosPorClienteSinSorteo(nombre: string, telefono: string) {
-  console.log('🟡 Buscar TODOS los boletos (sin sorteoId) para:');
-  console.log('Nombre:', nombre);
-  console.log('Teléfono:', telefono);
-
-  const comprador = await this.prisma.comprador.findFirst({
-    where: {
-      nombre: {
-        equals: nombre,
-        mode: 'insensitive',
-      },
+  async findBoletosPorNombreTelefonoYSorteo(nombre: string, telefono: string, sorteoId?: number) {
+    const whereComprador: any = {
+      nombre: nombre.toLowerCase(),
       telefono,
-    },
-    include: {
-      boletos: {
-        include: {
-          sorteo: true,
-          vendedor: true,
-        },
-      },
-    },
-  });
+    };
 
-  console.log('🟢 Resultado comprador:', comprador);
+    const comprador = await this.compradorRepository.findOne({
+      where: whereComprador,
+      relations: ['boletos', 'boletos.sorteo', 'boletos.vendedor'],
+    });
 
-  if (!comprador) {
-    console.warn('❌ Comprador no encontrado');
+    if (!comprador) {
+      return { message: 'Comprador no encontrado', boletos: [] };
+    }
+
+    let boletos = comprador.boletos;
+
+    if (sorteoId) {
+      boletos = boletos.filter(b => b.sorteo.id === sorteoId);
+    }
+
     return {
-      message: 'Comprador no encontrado',
-      boletos: [],
+      comprador: {
+        id: comprador.id,
+        nombre: comprador.nombre,
+        telefono: comprador.telefono,
+      },
+      boletos,
     };
   }
 
-  return {
-    comprador: {
-      id: comprador.id,
-      nombre: comprador.nombre,
-      telefono: comprador.telefono,
-    },
-    boletos: comprador.boletos,
-  };
-}
+  async getBoletosPorClienteSinSorteo(nombre: string, telefono: string) {
+    const comprador = await this.compradorRepository.findOne({
+      where: { nombre: nombre.toLowerCase(), telefono },
+      relations: ['boletos', 'boletos.sorteo', 'boletos.vendedor'],
+    });
 
+    if (!comprador) {
+      return { message: 'Comprador no encontrado', boletos: [] };
+    }
+
+    return {
+      comprador: {
+        id: comprador.id,
+        nombre: comprador.nombre,
+        telefono: comprador.telefono,
+      },
+      boletos: comprador.boletos,
+    };
+  }
 }
