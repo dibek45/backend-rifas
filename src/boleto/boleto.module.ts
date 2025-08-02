@@ -2,9 +2,10 @@ import { Module } from '@nestjs/common';
 import { BoletoService } from './boleto.service';
 import { BoletoController } from './boleto.controller';
 import { SorteoGateway } from 'src/sockets/boletos.gateway';
+import { Boleto } from './entities/boleto.entity';
 
 @Module({
-    imports: [], // 👈 agrégalo aquí
+    imports: [Boleto], // 👈 agrégalo aquí
     exports: [BoletoService], // 👈 esto es CLAVE
 
   controllers: [BoletoController],
