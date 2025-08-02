@@ -9,11 +9,12 @@ import { SorteoGateway } from 'src/sockets/boletos.gateway';
 import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ aquí sí va bien
-  ],
+  
   controllers: [BoletoController],
-  providers: [BoletoService, SorteoGateway], // ❌ quitamos Vendedor de aquí
+imports: [
+  TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ ok
+],
+providers: [BoletoService, SorteoGateway], // ✅ quitaste Vendedor de aquí
   exports: [BoletoService],
 })
 
