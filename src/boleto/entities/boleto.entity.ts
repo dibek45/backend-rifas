@@ -19,9 +19,9 @@ export class Boleto {
 
   @Column({ name: 'metodopago', nullable: true })  // 👈 así le dices el nombre real de la columna
 metodoPago?: string;
+@Column({ name: 'fechacompra', nullable: true, type: 'timestamp' })
+fechaCompra?: Date;
 
-  @Column({ nullable: true, type: 'timestamp' })
-  fechaCompra?: Date;
 
   @ManyToOne(() => Sorteo, sorteo => sorteo.boletos)
   @JoinColumn({ name: 'sorteoId' }) // 👈 CLAVE
