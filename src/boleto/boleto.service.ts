@@ -19,7 +19,6 @@ export class BoletoService {
   @InjectRepository(Boleto) private boletoRepo: Repository<Boleto>,
   @InjectRepository(Comprador) private compradorRepo: Repository<Comprador>,
   @InjectRepository(Sorteo) private sorteoRepo: Repository<Sorteo>,
-  @InjectRepository(Vendedor) private vendedorRepo: Repository<Vendedor>,
   private readonly sorteoGateway: SorteoGateway,
 
 
