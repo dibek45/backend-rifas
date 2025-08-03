@@ -75,8 +75,7 @@ cierreVentas: Date | null;
   @JoinColumn({ name: 'cuentaBancariaId' })
 cuentaBancaria?: CuentaBancaria | null;
 
-  @OneToMany(() => Sorteo, sorteo => sorteo.cuentaBancaria)
-  sorteos: Sorteo[];
+ 
 
   @Column({ nullable: true })
   cuentaBancariaId?: number;
