@@ -4,7 +4,8 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci --legacy-peer-deps
 
-COPY . .
+COPY . .  
+RUN npm install
 RUN npm run build
 
 EXPOSE 3000
