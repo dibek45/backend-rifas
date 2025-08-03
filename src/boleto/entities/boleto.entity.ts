@@ -17,8 +17,8 @@ export class Boleto {
   @Column({ default: 'disponible' })
   estado: string;
 
-  @Column({ nullable: true })
-  metodoPago?: string;
+  @Column({ name: 'metodopago', nullable: true })  // 👈 así le dices el nombre real de la columna
+metodoPago?: string;
 
   @Column({ nullable: true, type: 'timestamp' })
   fechaCompra?: Date;
