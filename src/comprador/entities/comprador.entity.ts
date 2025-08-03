@@ -23,12 +23,12 @@ creadoEn: Date;
 
 
   @ManyToOne(() => Comprador, comprador => comprador.referidos, { nullable: true })
-  @JoinColumn({ name: 'referidoId' })
+@JoinColumn({ name: 'referidoid' }) // 👈 igual que arriba
   referido: Comprador;
 
   @OneToMany(() => Comprador, comprador => comprador.referido)
   referidos: Comprador[];
 
-  @Column({ nullable: true })
+@Column({ name: 'referidoid', nullable: true })  // 👈 forzar el nombre correcto
   referidoId: number;
 }
