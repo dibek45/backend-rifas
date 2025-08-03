@@ -21,7 +21,7 @@ export class Sorteo {
   fecha: Date;
 
 @Column({ name: 'cierreventas', type: 'timestamp', nullable: true })
-cierreVentas: Date;
+cierreVentas: Date | null; // 👈 esto permite null
 
 
   @Column('float', { nullable: true })
