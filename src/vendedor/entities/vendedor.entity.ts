@@ -1,7 +1,7 @@
   import { Boleto } from 'src/boleto/entities/boleto.entity';
   import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-@Entity('Vendedor') // 👈 ¡ojo, con mayúscula!
+@Entity('vendedor') // 👈 ✅ Esto es lo correcto, sigue el estándar
   export class Vendedor {
     @PrimaryGeneratedColumn()
     id: number;
@@ -17,7 +17,7 @@
 
     @OneToMany(() => Boleto, boleto => boleto.vendedor)
     boletos: Boleto[];
-    
+
 @Column({ name: 'createdat', default: () => 'CURRENT_TIMESTAMP' })
 createdAt: Date;
 
