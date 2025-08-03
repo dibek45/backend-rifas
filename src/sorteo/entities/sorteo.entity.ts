@@ -5,65 +5,64 @@ import { Usuario } from 'src/user/entities/user.entity';
 
 @Entity("Sorteo")  // 👈 exactamente igual que el nombre en tu DB
 export class Sorteo {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
-  @Column()
+  @Column({ name: 'nombre' })
   nombre: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'descripcion', nullable: true })
   descripcion?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'imagen', nullable: true })
   imagen?: string;
 
-  @Column({ type: 'timestamp' })
+  @Column({ name: 'fecha', type: 'timestamp' })
   fecha: Date;
 
-@Column({ name: 'cierreventas', type: 'timestamp', nullable: true })
-cierreVentas: Date | null; // 👈 esto permite null
+  @Column({ name: 'cierreventas', type: 'timestamp', nullable: true })
+  cierreVentas: Date | null;
 
-
-  @Column('float', {name: 'costoboleto' , nullable: true })
+  @Column('float', { name: 'costoboleto', nullable: true })
   costoBoleto?: number;
 
-  @Column({ name: 'totalboletos' , nullable: true })
+  @Column({ name: 'totalboletos', nullable: true })
   totalBoletos?: number;
 
-  @Column({ nullable: true })
+  @Column({ name: 'boletosvendidos', nullable: true })
   boletosVendidos?: number;
 
-  @Column({ nullable: true })
+  @Column({ name: 'estado', nullable: true })
   estado?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'numerowhatsapp', nullable: true })
   numeroWhatsApp?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'nombreempresa', nullable: true })
   nombreEmpresa?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'linkfacebook', nullable: true })
   linkfacebook?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'numerocuenta', nullable: true })
   numeroCuenta?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'tipobanco', nullable: true })
   tipoBanco?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'numerodesorteo', nullable: true })
   numeroDeSorteo?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'mensajewhatsappinfo', nullable: true })
   mensajeWhatsappInfo?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'mensajewhatsappapartado', nullable: true })
   mensajeWhatsappApartado?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'mensajewhatsappconfirmado', nullable: true })
   mensajeWhatsappConfirmado?: string;
 
-  @Column({ nullable: true })
+  @Column({ name: 'mensajewhatsappanuncio', nullable: true })
   mensajeWhatsappAnuncio?: string;
 
   // Relaciones
@@ -71,19 +70,17 @@ cierreVentas: Date | null; // 👈 esto permite null
   @OneToMany(() => Boleto, boleto => boleto.sorteo)
   boletos: Boleto[];
 
- @ManyToOne(() => CuentaBancaria, cuenta => cuenta.sorteos, { nullable: true })
-@JoinColumn({ name: 'cuentaBancariaId' }) // este asocia la FK manual
-cuentaBancaria?: CuentaBancaria | null;
+  @ManyToOne(() => CuentaBancaria, cuenta => cuenta.sorteos, { nullable: true })
+  @JoinColumn({ name: 'cuentabancariaid' })
+  cuentaBancaria?: CuentaBancaria | null;
 
-@Column({ nullable: true })
-cuentaBancariaId?: number;
-
-
+  @Column({ name: 'cuentabancariaid', nullable: true })
+  cuentaBancariaId?: number;
 
   @ManyToOne(() => Usuario, usuario => usuario.sorteosAdmin)
-  @JoinColumn({ name: 'adminId' })
+  @JoinColumn({ name: 'adminid' })
   admin: Usuario;
 
-  @Column()
+  @Column({ name: 'adminid' })
   adminId: number;
 }
