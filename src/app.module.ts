@@ -22,7 +22,7 @@ import { CuentaBancaria } from './vendedor/entities/cuenta-bancaria.entity';
     SorteoModule,
     CompradorModule,
     VendedorModule,
-   // AuthModule,
+   AuthModule,
     TypeOrmModule.forRoot({
       type: 'postgres',  // Asegúrate de usar PostgreSQL
       url: process.env.DATABASE_URL,  // Usamos la URL de conexión desde las variables de entorno
