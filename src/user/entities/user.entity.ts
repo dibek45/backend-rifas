@@ -25,8 +25,9 @@ export class Usuario {
 
   
   // Relación uno a muchos (un sorteo puede tener muchas cuentas bancarias)
-  @OneToMany(() => CuentaBancaria, cuentaBancaria => cuentaBancaria.sorteo)
-  cuentasBancarias: CuentaBancaria[];
+@OneToMany(() => CuentaBancaria, cuentaBancaria => cuentaBancaria.usuario)
+cuentasBancarias: CuentaBancaria[];
+
 
   
   @OneToMany(() => Sorteo, sorteo => sorteo.admin)
