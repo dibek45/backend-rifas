@@ -1,7 +1,7 @@
   import { Boleto } from 'src/boleto/entities/boleto.entity';
   import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 
-  @Entity()
+@Entity('Vendedor') // 👈 ¡ojo, con mayúscula!
   export class Vendedor {
     @PrimaryGeneratedColumn()
     id: number;
