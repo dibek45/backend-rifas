@@ -3,14 +3,13 @@ import { Sorteo } from 'src/sorteo/entities/sorteo.entity';
 import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-
-@Entity('boleto')  // 👈 nombre explícito en minúsculas
+@Entity('boleto')  // 👈 tabla en minúsculas
 export class Boleto {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  numero: number;   // Must be "numero", not "number" or anything else
+  numero: number;
 
   @Column('float')
   precio: number;
@@ -25,11 +24,14 @@ export class Boleto {
   fechaCompra?: Date;
 
   @ManyToOne(() => Sorteo, sorteo => sorteo.boletos)
+  @JoinColumn({ name: 'sorteoId' }) // 👈 CLAVE
   sorteo: Sorteo;
 
   @ManyToOne(() => Comprador, comprador => comprador.boletos, { nullable: true })
+  @JoinColumn({ name: 'compradorId' }) // 👈 CLAVE
   comprador?: Comprador;
 
   @ManyToOne(() => Vendedor, vendedor => vendedor.boletos, { nullable: true })
+  @JoinColumn({ name: 'vendedorId' }) // 👈 CLAVE
   vendedor?: Vendedor;
 }
