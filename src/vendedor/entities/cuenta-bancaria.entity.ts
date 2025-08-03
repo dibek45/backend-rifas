@@ -28,9 +28,5 @@ export class CuentaBancaria {
 sorteos: Sorteo[];
 
 
-  @Column()
-  sorteoId: number;  // Clave foránea que hace referencia a Sorteo
-
-
 
 }
