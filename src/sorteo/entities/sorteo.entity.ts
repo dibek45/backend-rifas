@@ -3,7 +3,7 @@ import { Boleto } from 'src/boleto/entities/boleto.entity';
 import { CuentaBancaria } from 'src/vendedor/entities/cuenta-bancaria.entity';
 import { Usuario } from 'src/user/entities/user.entity';
 
-@Entity()
+@Entity('"sorteo"') // 👈 ¡ojo, con mayúscula!
 export class Sorteo {
   @PrimaryGeneratedColumn()
   id: number;
