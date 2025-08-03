@@ -71,14 +71,14 @@ cierreVentas: Date | null;
   @OneToMany(() => Boleto, boleto => boleto.sorteo)
   boletos: Boleto[];
 
-  @ManyToOne(() => CuentaBancaria, cuenta => cuenta.sorteo, { nullable: true })
-  @JoinColumn({ name: 'cuentaBancariaId' })
+ @ManyToOne(() => CuentaBancaria, cuenta => cuenta.sorteos, { nullable: true })
+@JoinColumn({ name: 'cuentaBancariaId' }) // este asocia la FK manual
 cuentaBancaria?: CuentaBancaria | null;
 
- 
+@Column({ nullable: true })
+cuentaBancariaId?: number;
 
-  @Column({ nullable: true })
-  cuentaBancariaId?: number;
+
 
   @ManyToOne(() => Usuario, usuario => usuario.sorteosAdmin)
   @JoinColumn({ name: 'adminId' })
