@@ -17,7 +17,8 @@
 
     @OneToMany(() => Boleto, boleto => boleto.vendedor)
     boletos: Boleto[];
+    
+@Column({ name: 'createdat', default: () => 'CURRENT_TIMESTAMP' })
+createdAt: Date;
 
-    @Column({ default: () => 'CURRENT_TIMESTAMP' })
-    createdAt: Date;
   }
