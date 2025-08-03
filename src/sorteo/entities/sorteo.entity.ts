@@ -20,8 +20,8 @@ export class Sorteo {
   @Column({ type: 'timestamp' })
   fecha: Date;
 
-@Column({ type: 'timestamp', nullable: true })
-cierreVentas: Date | null;
+@Column({ name: 'cierreventas', type: 'timestamp', nullable: true })
+cierreVentas: Date;
 
 
   @Column('float', { nullable: true })
