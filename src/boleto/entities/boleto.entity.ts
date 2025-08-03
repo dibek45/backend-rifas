@@ -4,7 +4,7 @@ import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 
-@Entity()
+@Entity('boleto')  // 👈 nombre explícito en minúsculas
 export class Boleto {
   @PrimaryGeneratedColumn()
   id: number;
