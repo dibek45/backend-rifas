@@ -24,7 +24,7 @@ export class Sorteo {
 cierreVentas: Date | null; // 👈 esto permite null
 
 
-  @Column('float', { nullable: true })
+  @Column('float', {name: 'costoboleto' , nullable: true })
   costoBoleto?: number;
 
   @Column({ nullable: true })
