@@ -17,4 +17,11 @@ export class AuthController {
   async crearUsuario(@Body() dto: CreateUserDto) {
     return this.authService.crearUsuario(dto);
   }
+
+
+  @Post('test-nuevo')
+async testNuevo(@Body('nombre') nombre: string) {
+  return this.authService.testNuevo(nombre);
+}
+
 }

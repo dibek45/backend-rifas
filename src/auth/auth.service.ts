@@ -26,4 +26,11 @@ export class AuthService {
 async crearUsuario(dto: CreateUserDto) {
   return firstValueFrom(this.authClient.send('auth.create-dog', dto));
 }
+
+
+
+async testNuevo(nombre: string) {
+  return firstValueFrom(this.authClient.send('auth.test-nuevo', { nombre }));
+}
+
 }
