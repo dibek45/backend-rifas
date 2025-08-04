@@ -1,6 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { ClientProxy } from '@nestjs/microservices';
 import { firstValueFrom } from 'rxjs';
+import { CreateUserDto } from 'src/user/dto/create-user.dto';
 
 @Injectable()
 export class AuthService {
@@ -22,5 +23,7 @@ export class AuthService {
   }
 
 
- 
+async crearUsuario(dto: CreateUserDto) {
+  return firstValueFrom(this.authClient.send('auth.create-dog', dto));
+}
 }

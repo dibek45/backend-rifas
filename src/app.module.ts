@@ -1,6 +1,5 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { UserModule } from './user/user.module';
 import { BoletoModule } from './boleto/boleto.module';
 import { SorteoModule } from './sorteo/sorteo.module';
@@ -33,6 +32,6 @@ import { CuentaBancaria } from './vendedor/entities/cuenta-bancaria.entity';
     }),
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
