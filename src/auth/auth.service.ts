@@ -24,8 +24,10 @@ export class AuthService {
 
 
 async crearUsuario(dto: CreateUserDto) {
+  console.log('📡 Enviando al microservicio:', dto);
   return firstValueFrom(this.authClient.send('auth.create-dog', dto));
 }
+
 
 
 
