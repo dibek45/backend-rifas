@@ -3,47 +3,44 @@ import { Sorteo } from 'src/sorteo/entities/sorteo.entity';
 import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
-@Entity('boleto')  // 👈 tabla en minúsculas
+@Entity('boleto')  // 👈 nombre de tabla en minúsculas
 export class Boleto {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({ name: 'numero' })
   numero: number;
 
-  @Column('float')
+  @Column({ name: 'precio', type: 'float' })
   precio: number;
 
-  @Column({ default: 'disponible' })
+  @Column({ name: 'estado', default: 'disponible' })
   estado: string;
 
-  @Column({ name: 'metodopago', nullable: true })  // 👈 así le dices el nombre real de la columna
-metodoPago?: string;
-@Column({ name: 'fechacompra', nullable: true, type: 'timestamp' })
-fechaCompra?: Date;
+  @Column({ name: 'metodopago', nullable: true })
+  metodoPago?: string;
 
+  @Column({ name: 'fechacompra', nullable: true, type: 'timestamp' })
+  fechaCompra?: Date;
 
+  @Column({ name: 'sorteoid' })
+  sorteoId: number;
 
-// ⚠️ Agrega estas 3 columnas explícitas
-@Column()
-sorteoId: number;
+  @Column({ name: 'compradorid', nullable: true })
+  compradorId?: number;
 
-@Column({ nullable: true })
-compradorId?: number;
-
-@Column({ nullable: true })
-vendedorId?: number;
-
+  @Column({ name: 'vendedorid', nullable: true })
+  vendedorId?: number;
 
   @ManyToOne(() => Sorteo, sorteo => sorteo.boletos)
-  @JoinColumn({ name: 'sorteoId' }) // 👈 CLAVE
+  @JoinColumn({ name: 'sorteoid' })
   sorteo: Sorteo;
 
   @ManyToOne(() => Comprador, comprador => comprador.boletos, { nullable: true })
-  @JoinColumn({ name: 'compradorId' }) // 👈 CLAVE
+  @JoinColumn({ name: 'compradorid' })
   comprador?: Comprador;
 
   @ManyToOne(() => Vendedor, vendedor => vendedor.boletos, { nullable: true })
-  @JoinColumn({ name: 'vendedorId' }) // 👈 CLAVE
+  @JoinColumn({ name: 'vendedorid' })
   vendedor?: Vendedor;
 }
