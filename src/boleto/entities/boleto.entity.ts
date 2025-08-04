@@ -23,6 +23,18 @@ metodoPago?: string;
 fechaCompra?: Date;
 
 
+
+// ⚠️ Agrega estas 3 columnas explícitas
+@Column()
+sorteoId: number;
+
+@Column({ nullable: true })
+compradorId?: number;
+
+@Column({ nullable: true })
+vendedorId?: number;
+
+
   @ManyToOne(() => Sorteo, sorteo => sorteo.boletos)
   @JoinColumn({ name: 'sorteoId' }) // 👈 CLAVE
   sorteo: Sorteo;
