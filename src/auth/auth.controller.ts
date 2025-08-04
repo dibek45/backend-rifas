@@ -14,7 +14,7 @@ export class AuthController {
   }
 
 @Post('crear-usuario')
-async crearUsuario(@Body() dto: CreateUserDto) {
+async crearUsuario(@Body() dto: any) {
   console.log('📤 DTO ENVIADO DESDE EL MAESTRO:', dto);
   return this.authService.crearUsuario(dto);
 }
