@@ -13,10 +13,11 @@ export class AuthController {
     return await this.authService.login(email, password);
   }
 
- @Post('crear-usuario')
-  async crearUsuario(@Body() dto: CreateUserDto) {
-    return this.authService.crearUsuario(dto);
-  }
+@Post('crear-usuario')
+async crearUsuario(@Body() dto: CreateUserDto) {
+  console.log('📤 DTO ENVIADO DESDE EL MAESTRO:', dto);
+  return this.authService.crearUsuario(dto);
+}
 
 
   @Post('test-nuevo')
