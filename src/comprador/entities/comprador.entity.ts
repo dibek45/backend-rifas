@@ -18,8 +18,9 @@ export class Comprador {
   @OneToMany(() => Boleto, boleto => boleto.comprador)
   boletos: Boleto[];
 
- @Column({ name: 'creadoen' })
+@Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
 creadoEn: Date;
+
 
 
   @ManyToOne(() => Comprador, comprador => comprador.referidos, { nullable: true })
