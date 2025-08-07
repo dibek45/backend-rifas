@@ -162,6 +162,8 @@ let actualizados: Boleto[] = [];
       email: `${Date.now()}@fake.com`,
 referidoId: referidoId ?? undefined,
     });
+    comprador.creadoEn = new Date();
+
     await this.compradorRepo.save(comprador);
 
     const ids = boletos.map(b => b.id);
