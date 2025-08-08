@@ -137,6 +137,7 @@ let actualizados: Boleto[] = [];
         disponibles.map(boleto => ({
           ...boleto,
           estado: 'ocupado',
+          fechaCompra: new Date(), // 👈 aquí se guarda
           comprador: { id: compradorId } as Comprador,
         })),
       );
