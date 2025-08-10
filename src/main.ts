@@ -29,6 +29,8 @@ async function bootstrap() {
     'http://localhost:4202',
     'http://127.0.0.1:4200',
     'capacitor://localhost',
+    'https://localhost',           // 👈 agregar
+
     'https://sorteos.sa.dibeksolutions.com',
     'https://sorteos.sa.admin.dibeksolutions.com',
     'https://sorteos.sa.admin.dibeksolutions.com/login',
