@@ -5,39 +5,37 @@ import { IoAdapter } from '@nestjs/platform-socket.io';
 import * as bodyParser from 'body-parser';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
-import * as express from 'express';
 import * as dotenv from 'dotenv';
-import { Request, Response } from 'express';
-
 dotenv.config();
-
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // 📂 Ruta correcta al build de Angular
-  const clientPath = join(__dirname, '..', '..', 'dist', 'nombre-de-tu-app'); // <-- cambia 'nombre-de-tu-app' por el real
-  app.use(express.static(clientPath));
-
-  // 📂 Archivos estáticos (ej. imágenes)
+  // Archivos estáticos (por ejemplo, imágenes)
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
 
-  // WebSocket Adapter
+  // WebSocket Adapter (si usas sockets)
   app.useWebSocketAdapter(new IoAdapter(app));
 
-  // Límite de body grande
+  // Límite de body grande (por si subes imágenes o base64)
   app.use(bodyParser.json({ limit: '50mb' }));
 
-  // 🌍 Lista de dominios permitidos
+  // Lista de dominios permitidos (CORS)
   const whitelist = [
     'http://localhost:3000',
     'http://localhost:4200',
+    'http://localhost:4201',
+    'http://localhost:4202',
+    'http://127.0.0.1:4200',
     'capacitor://localhost',
-    'http://192.168.1.75:3000',
-    'http://192.168.1.75:8080',
     'https://sorteos.sa.dibeksolutions.com',
     'https://sorteos.sa.admin.dibeksolutions.com',
+    'https://sorteos.sa.admin.dibeksolutions.com/login',
+    'https://studio.apollographql.com',
+    'https://sandbox.embed.apollographql.com',
+        'http://192.168.1.75:3000',
+    'http://192.168.1.75:8080',
   ];
 
   app.enableCors({
@@ -60,12 +58,6 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
-
-  // 📌 Catch-all para SPA Angular
-  const expressApp = app.getHttpAdapter().getInstance();
-  expressApp.get(/^\/(?!api|uploads).*/, (req: Request, res: Response) => {
-    res.sendFile(join(clientPath, 'index.html'));
-  });
 
   await app.listen(3000, '0.0.0.0');
   console.log(`🚀 Sorteos backend running at http://localhost:3000`);
