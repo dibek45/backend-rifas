@@ -63,12 +63,10 @@ async function bootstrap() {
 
  const expressApp = app.getHttpAdapter().getInstance();
 
-expressApp.get('*', (req: Request, res: Response) => {
-  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
-    return res.status(404).send('Not found');
-  }
+expressApp.get(/^\/(?!api|uploads).*/, (req: Request, res: Response) => {
   res.sendFile(join(clientPath, 'index.html'));
 });
+
 
   await app.listen(3000, '0.0.0.0');
   console.log(`🚀 Sorteos backend running at http://localhost:3000`);
