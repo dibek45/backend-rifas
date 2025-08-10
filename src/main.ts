@@ -5,35 +5,39 @@ import { IoAdapter } from '@nestjs/platform-socket.io';
 import * as bodyParser from 'body-parser';
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { join } from 'path';
+import * as express from 'express';
 import * as dotenv from 'dotenv';
+import { Request, Response } from 'express';
+
 dotenv.config();
+
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+
+  // Carpeta del build de Angular
+  const clientPath = join(__dirname, '..', 'client'); // Ajusta a tu carpeta real
+  app.use(express.static(clientPath));
 
   // Archivos estáticos (por ejemplo, imágenes)
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
 
-  // WebSocket Adapter (si usas sockets)
+  // WebSocket Adapter
   app.useWebSocketAdapter(new IoAdapter(app));
 
-  // Límite de body grande (por si subes imágenes o base64)
+  // Límite de body grande
   app.use(bodyParser.json({ limit: '50mb' }));
 
-  // Lista de dominios permitidos (CORS)
+  // Lista de dominios permitidos
   const whitelist = [
     'http://localhost:3000',
     'http://localhost:4200',
-    'http://localhost:4201',
-    'http://localhost:4202',
-    'http://127.0.0.1:4200',
     'capacitor://localhost',
+    'http://192.168.1.75:3000',
+    'http://192.168.1.75:8080',
     'https://sorteos.sa.dibeksolutions.com',
     'https://sorteos.sa.admin.dibeksolutions.com',
-    'https://sorteos.sa.admin.dibeksolutions.com/login',
-    'https://studio.apollographql.com',
-    'https://sandbox.embed.apollographql.com',
   ];
 
   app.enableCors({
@@ -56,6 +60,15 @@ async function bootstrap() {
       whitelist: true,
     }),
   );
+
+ const expressApp = app.getHttpAdapter().getInstance();
+
+expressApp.get('*', (req: Request, res: Response) => {
+  if (req.path.startsWith('/api') || req.path.startsWith('/uploads')) {
+    return res.status(404).send('Not found');
+  }
+  res.sendFile(join(clientPath, 'index.html'));
+});
 
   await app.listen(3000, '0.0.0.0');
   console.log(`🚀 Sorteos backend running at http://localhost:3000`);
