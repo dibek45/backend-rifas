@@ -14,11 +14,11 @@ dotenv.config();
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // Carpeta del build de Angular
-  const clientPath = join(__dirname, '..', 'client'); // Ajusta a tu carpeta real
+  // 📂 Ruta correcta al build de Angular
+  const clientPath = join(__dirname, '..', '..', 'dist', 'nombre-de-tu-app'); // <-- cambia 'nombre-de-tu-app' por el real
   app.use(express.static(clientPath));
 
-  // Archivos estáticos (por ejemplo, imágenes)
+  // 📂 Archivos estáticos (ej. imágenes)
   app.useStaticAssets(join(__dirname, '..', 'uploads'), {
     prefix: '/uploads/',
   });
@@ -29,7 +29,7 @@ async function bootstrap() {
   // Límite de body grande
   app.use(bodyParser.json({ limit: '50mb' }));
 
-  // Lista de dominios permitidos
+  // 🌍 Lista de dominios permitidos
   const whitelist = [
     'http://localhost:3000',
     'http://localhost:4200',
@@ -61,12 +61,11 @@ async function bootstrap() {
     }),
   );
 
- const expressApp = app.getHttpAdapter().getInstance();
-
-expressApp.get(/^\/(?!api|uploads).*/, (req: Request, res: Response) => {
-  res.sendFile(join(clientPath, 'index.html'));
-});
-
+  // 📌 Catch-all para SPA Angular
+  const expressApp = app.getHttpAdapter().getInstance();
+  expressApp.get(/^\/(?!api|uploads).*/, (req: Request, res: Response) => {
+    res.sendFile(join(clientPath, 'index.html'));
+  });
 
   await app.listen(3000, '0.0.0.0');
   console.log(`🚀 Sorteos backend running at http://localhost:3000`);
