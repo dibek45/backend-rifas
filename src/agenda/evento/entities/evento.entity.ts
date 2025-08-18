@@ -26,6 +26,6 @@ export class Evento {
   adminId: number;
 
   @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
-  @JoinColumn({ name: 'adminId' })
+@JoinColumn({ name: 'admin_id' }) // 👈 usa snake_case para coincidir con la tabla
   admin: Admin;
 }
