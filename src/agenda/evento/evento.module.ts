@@ -2,7 +2,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Evento } from './entities/evento.entity';
-import { EventoService } from './cita.service';
+import { EventoService } from './evento.service';
 import { EventoController } from './evento.controller';
 import { Cita } from '../cita/cita.entity';
 
