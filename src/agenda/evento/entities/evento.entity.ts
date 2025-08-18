@@ -22,10 +22,8 @@ export class Evento {
   @OneToMany(() => Cita, (cita) => cita.evento, { cascade: true })
   citas: Cita[];
 
-  @Column()
-  adminId: number;
-
   @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
-@JoinColumn({ name: 'admin_id' }) // 👈 usa snake_case para coincidir con la tabla
+  @JoinColumn({ name: 'admin_id' }) // 👈 crea automáticamente la columna admin_id
   admin: Admin;
+
 }
