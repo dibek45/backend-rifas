@@ -22,7 +22,9 @@ export class Cita {
   @Column({ default: 'pendiente' })
   estado: string;
 
-
+  @Column()
+  eventoId: number;
+  
     @ManyToOne(() => Evento, (evento) => evento.citas, { eager: true })
   @JoinColumn({ name: 'eventoId' })
   evento: Evento;

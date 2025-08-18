@@ -24,4 +24,6 @@ export class Evento {
 
   @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
   admin: Admin;
+
+  
 }
