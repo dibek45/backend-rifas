@@ -2,7 +2,7 @@ import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, JoinColum
 import { Admin } from 'src/agenda/admin-agenda/entities/admin.entity';
 import { Cita } from 'src/agenda/cita/cita.entity';
 
-@Entity('evento')
+@Entity('eventos')
 export class Evento {
   @PrimaryGeneratedColumn()
   id: number;

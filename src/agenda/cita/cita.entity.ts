@@ -2,7 +2,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Evento } from '../evento/entities/evento.entity';
 
-@Entity('cita')
+@Entity('citas')
 export class Cita {
   @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
