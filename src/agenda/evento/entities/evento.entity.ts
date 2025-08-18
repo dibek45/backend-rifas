@@ -23,7 +23,6 @@ export class Evento {
   citas: Cita[];
 
   @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
-  @JoinColumn({ name: 'admin_id' }) // 👈 crea automáticamente la columna admin_id
+  @JoinColumn({ name: 'admin_id' }) // 👈 solo esto crea la FK
   admin: Admin;
-
 }
