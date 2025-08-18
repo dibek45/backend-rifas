@@ -12,9 +12,10 @@ export class EventoController {
     return this.eventoService.create(dto);
   }
 
-  @Get()
-  findAll() {
-    return this.eventoService.findAll();
+  // 🔹 Obtener todos los eventos de un admin
+  @Get('admin/:adminId')
+  findAllByAdmin(@Param('adminId') adminId: string) {
+    return this.eventoService.findAllByAdmin(Number(adminId));
   }
 
   @Get(':id')

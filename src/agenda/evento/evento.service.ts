@@ -14,8 +14,9 @@ export class EventoService {
     private readonly eventoRepository: Repository<Evento>,
   ) {}
 
-  findAll() {
+  findAllByAdmin(adminId: number) {
     return this.eventoRepository.find({
+      where: { admin: { id: adminId } },
       relations: ['citas', 'admin'],
     });
   }
