@@ -2,30 +2,30 @@
 import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 import { Evento } from '../evento/entities/evento.entity';
 
-@Entity('citas')
+@Entity('cita')
 export class Cita {
-  @PrimaryGeneratedColumn()
+  @PrimaryGeneratedColumn({ name: 'id' })
   id: number;
 
-  @Column()
+  @Column({ name: 'nombre_cliente' })
   nombreCliente: string;
 
-  @Column()
+  @Column({ name: 'telefono_cliente' })
   telefonoCliente: string;
 
-  @Column()
+  @Column({ name: 'fecha', type: 'date' })
   fecha: Date;
 
-  @Column()
+  @Column({ name: 'hora', type: 'time' })
   hora: string;
 
-  @Column({ default: 'pendiente' })
+  @Column({ name: 'estado', default: 'pendiente' })
   estado: string;
 
-  @Column()
+  @Column({ name: 'evento_id' })
   eventoId: number;
-  
-    @ManyToOne(() => Evento, (evento) => evento.citas, { eager: true })
-  @JoinColumn({ name: 'eventoId' })
+
+  @ManyToOne(() => Evento, (evento) => evento.citas, { eager: true })
+  @JoinColumn({ name: 'evento_id' })
   evento: Evento;
 }

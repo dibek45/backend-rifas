@@ -1,8 +1,8 @@
-import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn, JoinColumn } from 'typeorm';
 import { Admin } from 'src/agenda/admin-agenda/entities/admin.entity';
 import { Cita } from 'src/agenda/cita/cita.entity';
 
-@Entity()
+@Entity('evento')
 export class Evento {
   @PrimaryGeneratedColumn()
   id: number;
@@ -22,8 +22,10 @@ export class Evento {
   @OneToMany(() => Cita, (cita) => cita.evento, { cascade: true })
   citas: Cita[];
 
-  @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
-  admin: Admin;
+  @Column()
+  adminId: number;
 
-  
+  @ManyToOne(() => Admin, (admin) => admin.eventos, { eager: true })
+  @JoinColumn({ name: 'adminId' })
+  admin: Admin;
 }
