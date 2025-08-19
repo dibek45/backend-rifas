@@ -19,6 +19,7 @@ import { CitaModule } from './agenda/cita/cita.module';
 import { Cita } from './agenda/cita/cita.entity';
 import { Evento } from './agenda/evento/entities/evento.entity';
 import { Admin } from './agenda/admin-agenda/entities/admin.entity';
+import { Disponibilidad } from './agenda/evento/entities/disponibilidad.entity';
 
 
 @Module({
@@ -35,7 +36,7 @@ import { Admin } from './agenda/admin-agenda/entities/admin.entity';
     TypeOrmModule.forRoot({
       type: 'postgres',  // Asegúrate de usar PostgreSQL
       url: process.env.DATABASE_URL,  // Usamos la URL de conexión desde las variables de entorno
-      entities: [Usuario, Sorteo, Comprador, Vendedor, Boleto, CuentaBancaria,
+      entities: [Usuario, Sorteo, Comprador, Vendedor, Boleto, CuentaBancaria,Disponibilidad,
          Admin,
       Evento,
       Cita],  // Agregamos todas las entidades

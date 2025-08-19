@@ -1,3 +1,4 @@
+import { Disponibilidad } from 'src/agenda/evento/entities/disponibilidad.entity';
 import { Evento } from 'src/agenda/evento/entities/evento.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
@@ -14,4 +15,9 @@ export class Admin {
 
   @OneToMany(() => Evento, (evento) => evento.admin)
   eventos: Evento[];
+
+
+    // 👇 relación inversa
+  @OneToMany(() => Disponibilidad, (disp) => disp.admin)
+  disponibilidades: Disponibilidad[];
 }
