@@ -1,5 +1,5 @@
 import { Admin } from 'src/agenda/admin-agenda/entities/admin.entity';
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
 
 @Entity('disponibilidades')   // nombre de la tabla en la BD
 export class Disponibilidad {
@@ -15,6 +15,7 @@ export class Disponibilidad {
   @Column({ type: 'time' })
   hora_fin: string;
 
-  @ManyToOne(() => Admin, (admin) => admin.disponibilidades, { onDelete: 'CASCADE' })
-  admin: Admin;
+@ManyToOne(() => Admin, (admin) => admin.disponibilidades, { onDelete: 'CASCADE' })
+@JoinColumn({ name: 'admin_id' })   // 👈 aquí obligamos a usar admin_id
+admin: Admin;
 }
