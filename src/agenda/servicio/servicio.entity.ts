@@ -18,9 +18,7 @@ export class Servicio {
   @Column({ name: 'admin_id' })
   adminId: number;
 
-  @ManyToOne(() => Admin, { onDelete: 'CASCADE' })
-  @JoinColumn({ name: 'admin_id' })
-  admin: Admin;
+
 
   @Column()
   nombre: string;
@@ -44,7 +42,12 @@ export class Servicio {
   updatedAt: Date;
 
 
-  @ManyToOne(() => Evento, (evento) => evento.servicios, { nullable: true })
-@JoinColumn({ name: 'evento_id' })
-evento: Evento;
+ @ManyToOne(() => Evento, evento => evento.servicios, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'evento_id' })
+  evento: Evento;
+
+  // servicio pertenece a un admin
+  @ManyToOne(() => Admin, admin => admin.servicios, { onDelete: 'CASCADE' })
+  @JoinColumn({ name: 'admin_id' })
+  admin: Admin;
 }

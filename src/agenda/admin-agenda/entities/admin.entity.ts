@@ -23,6 +23,6 @@ export class Admin {
   disponibilidades: Disponibilidad[];
 
 
-  @OneToMany(() => Servicio, (servicio) => servicio.admin)
-servicios: Servicio[];
+  @OneToMany(() => Servicio, servicio => servicio.admin)
+  servicios: Servicio[];
 }
