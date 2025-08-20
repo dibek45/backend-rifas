@@ -8,6 +8,7 @@ import {
   UpdateDateColumn,
 } from 'typeorm';
 import { Admin } from '../admin-agenda/entities/admin.entity';
+import { Evento } from '../evento/entities/evento.entity';
 
 @Entity('servicio')
 export class Servicio {
@@ -41,4 +42,9 @@ export class Servicio {
 
   @UpdateDateColumn({ name: 'updated_at' })
   updatedAt: Date;
+
+
+  @ManyToOne(() => Evento, (evento) => evento.servicios, { nullable: true })
+@JoinColumn({ name: 'evento_id' })
+evento: Evento;
 }
