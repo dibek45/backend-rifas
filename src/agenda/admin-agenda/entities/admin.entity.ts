@@ -1,5 +1,6 @@
 import { Disponibilidad } from 'src/agenda/evento/entities/disponibilidad.entity';
 import { Evento } from 'src/agenda/evento/entities/evento.entity';
+import { Servicio } from 'src/agenda/servicio/servicio.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('admins') // 👈 opcional, pero recomendado para nombrar la tabla
@@ -20,4 +21,8 @@ export class Admin {
     // 👇 relación inversa
   @OneToMany(() => Disponibilidad, (disp) => disp.admin)
   disponibilidades: Disponibilidad[];
+
+
+  @OneToMany(() => Servicio, (servicio) => servicio.admin)
+servicios: Servicio[];
 }

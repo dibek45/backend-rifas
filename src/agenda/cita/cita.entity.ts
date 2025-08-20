@@ -7,6 +7,7 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { Evento } from '../evento/entities/evento.entity';
+import { Servicio } from '../servicio/servicio.entity';
 
 @Entity('citas') // 👈 nombre de la tabla en plural
 export class Cita {
@@ -34,4 +35,13 @@ export class Cita {
   @ManyToOne(() => Evento, (evento) => evento.citas, { eager: true })
   @JoinColumn({ name: 'evento_id' })
   evento: Evento;
+
+
+    // 👇 nueva relación con servicio
+  @Column({ name: 'servicio_id', nullable: true })
+  servicioId?: number;
+
+  @ManyToOne(() => Servicio, { eager: true, nullable: true })
+  @JoinColumn({ name: 'servicio_id' })
+  servicio?: Servicio;
 }
