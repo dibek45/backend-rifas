@@ -10,7 +10,7 @@ import {
 import { Admin } from '../admin-agenda/entities/admin.entity';
 import { Evento } from '../evento/entities/evento.entity';
 
-@Entity('servicio')
+@Entity('servicios')
 export class Servicio {
   @PrimaryGeneratedColumn()
   id: number;
