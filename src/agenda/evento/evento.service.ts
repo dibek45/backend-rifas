@@ -17,14 +17,14 @@ export class EventoService {
   findAllByAdmin(adminId: number) {
     return this.eventoRepository.find({
       where: { admin: { id: adminId } },
-relations: ['citas', 'admin', 'admin.disponibilidades'],
+    relations: ['citas', 'admin', 'admin.disponibilidades', 'servicios'],
     });
   }
 
   findOne(id: number) {
     return this.eventoRepository.findOne({
       where: { id },
-relations: ['citas', 'admin', 'admin.disponibilidades'],
+    relations: ['citas', 'admin', 'admin.disponibilidades', 'servicios'],
     });
   }
 
