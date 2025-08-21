@@ -13,6 +13,9 @@ export class Admin {
 
   @Column()
   email: string;
+  
+  @Column({ nullable: true }) // 👈 lo hacemos opcional por si no todos los admins tienen teléfono al inicio
+  telefono?: string;
 
   @OneToMany(() => Evento, (evento) => evento.admin)
   eventos: Evento[];
