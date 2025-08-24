@@ -13,6 +13,7 @@ import { SorteoGateway } from 'src/sockets/boletos.gateway';
   ],
   controllers: [SorteoController],
   providers: [SorteoService, SorteoGateway],
-  exports: [SorteoGateway],
+  exports: [SorteoGateway,SorteoService],
+
 })
 export class SorteoModule {}

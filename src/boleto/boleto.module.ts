@@ -7,12 +7,14 @@ import { BoletoService } from './boleto.service';
 import { BoletoController } from './boleto.controller';
 import { SorteoGateway } from 'src/sockets/boletos.gateway';
 import { Vendedor } from 'src/vendedor/entities/vendedor.entity';
+import { SorteoModule } from 'src/sorteo/sorteo.module';
 
 @Module({
   
   controllers: [BoletoController],
 imports: [
   TypeOrmModule.forFeature([Boleto, Comprador, Sorteo, Vendedor]), // ✅ ok
+  SorteoModule
 ],
 providers: [BoletoService, SorteoGateway], // ✅ quitaste Vendedor de aquí
   exports: [BoletoService],
