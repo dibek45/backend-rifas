@@ -65,7 +65,8 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   if (!sorteo) {
     throw new BadRequestException(`No existe sorteo con id ${id}`);
   }
-
+console.log('🗄️ Dominio en BD:', sorteo.dominio);
+console.log('🌍 Dominio en request:', dominioRequest);
   // comparar dominio del request vs dominio en la BD
   if (sorteo.dominio !== dominioRequest) {
     throw new ForbiddenException(
