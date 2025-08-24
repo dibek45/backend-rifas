@@ -23,18 +23,19 @@ export class BoletoService {
 
 
   ) {}
-
 async findAll(sorteoId: number, dominio: string) {
-  return this.boletoRepo.find({
-    where: { 
-      sorteo: { 
-        id: sorteoId,
-        dominio: dominio   // 👈 validamos que coincida con el dominio del sorteo
-      }
-    },
-    relations: ['comprador', 'vendedor', 'sorteo'],
-  });
+  console.log(`🎯 Buscando boletos de sorteo=${sorteoId}, dominio=${dominio}`);
+
+  return this.boletoRepo
+    .createQueryBuilder('boleto')
+    .leftJoinAndSelect('boleto.comprador', 'comprador')
+    .leftJoinAndSelect('boleto.vendedor', 'vendedor')
+    .leftJoinAndSelect('boleto.sorteo', 'sorteo')
+    .where('sorteo.id = :sorteoId', { sorteoId })
+    .andWhere('sorteo.dominio = :dominio', { dominio })
+    .getMany();
 }
+
 
   async findOne(id: number) {
     const boleto = await this.boletoRepo.findOne({
