@@ -1,16 +1,20 @@
 import { 
   Controller, Get, Post, Body, Patch, Param, Delete, Query, 
-  BadRequestException, Req 
+  BadRequestException, Req, 
+  ForbiddenException
 } from '@nestjs/common';
 import { BoletoService } from './boleto.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
 import { Request } from 'express';
+import { SorteoService } from 'src/sorteo/sorteo.service';
 
 @Controller('boleto')
 export class BoletoController {
   constructor(
     private readonly boletoService: BoletoService,
+        private readonly sorteoService: SorteoService // 👈 inyecta el sorteoService
+
   ) {}
 
   @Get('por-cliente')
@@ -48,14 +52,31 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
     throw new BadRequestException('sorteoId must be a valid number');
   }
 
-const dominio = req.headers.host?.replace(/^api\./, '');
-  console.log('🌍 Host recibido en request:', dominio);
+  // dominio del request (ej: api.sorteos.sa.dibeksolutions.com → sorteos.sa.dibeksolutions.com)
+  const dominioRequest = req.headers.host?.replace(/^api\./, '');
+  console.log('🌍 Host recibido en request:', dominioRequest);
 
-  if (!dominio) {
+  if (!dominioRequest) {
     throw new BadRequestException('Dominio no detectado en el header');
   }
 
-  return this.boletoService.findAll(id, dominio);
+  // obtener sorteo de la BD
+  const sorteo = await this.sorteoService.findOne(id); // 👈 asumiendo que ya tienes este método
+  if (!sorteo) {
+    throw new BadRequestException(`No existe sorteo con id ${id}`);
+  }
+
+  // comparar dominio del request vs dominio en la BD
+  if (sorteo.dominio !== dominioRequest) {
+    throw new ForbiddenException(
+      `El dominio ${dominioRequest} no corresponde al sorteo ${id}`
+    );
+  }
+
+  // si todo bien → pasa al service de boletos
+  return this.boletoService.findAll(id, dominioRequest);
+}
+
 }
 
 
