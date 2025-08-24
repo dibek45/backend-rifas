@@ -44,7 +44,7 @@ export class BoletoController {
     return this.boletoService.create(createBoletoDto);
   }
 
-  // 👇 Aquí solo añadimos el dominio
+// 👇 Aquí solo añadimos el dominio
 @Get(':sorteoId')
 async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   const id = parseInt(sorteoId, 10);
@@ -61,12 +61,15 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   }
 
   // obtener sorteo de la BD
-  const sorteo = await this.sorteoService.findOne(id); // 👈 asumiendo que ya tienes este método
+  const sorteo = await this.sorteoService.findOne(id);
   if (!sorteo) {
     throw new BadRequestException(`No existe sorteo con id ${id}`);
   }
-console.log('🗄️ Dominio en BD:', sorteo.dominio);
-console.log('🌍 Dominio en request:', dominioRequest);
+
+  // 🔍 Debug para ver ambos valores
+  console.log('🗄️ Dominio en BD:', sorteo.dominio);
+  console.log('🌍 Dominio en request:', dominioRequest);
+
   // comparar dominio del request vs dominio en la BD
   if (sorteo.dominio !== dominioRequest) {
     throw new ForbiddenException(
@@ -77,6 +80,7 @@ console.log('🌍 Dominio en request:', dominioRequest);
   // si todo bien → pasa al service de boletos
   return this.boletoService.findAll(id, dominioRequest);
 }
+
 
 
 
