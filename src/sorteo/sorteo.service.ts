@@ -50,7 +50,7 @@ export class SorteoService {
   sorteo.mensajeWhatsappApartado = dto.mensajeWhatsappApartado;
   sorteo.mensajeWhatsappConfirmado = dto.mensajeWhatsappConfirmado;
   sorteo.mensajeWhatsappAnuncio = dto.mensajeWhatsappAnuncio;
-  sorteo.dominio = dto.dominio;
+//  sorteo.dominio = dto.dominio;
 
 
   sorteo.admin = { id: dto.adminId } as Usuario;

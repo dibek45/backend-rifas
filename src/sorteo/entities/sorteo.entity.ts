@@ -83,7 +83,7 @@ export class Sorteo {
 
   @Column({ name: 'adminid' })
   adminId: number;
-
-@Column({ name: 'dominio', nullable: false })
-  dominio: string; // ej: "sorteos.sa.dibeksolutions.com"
+//
+//@Column({ name: 'dominio', nullable: false })
+ // dominio: string; // ej: "sorteos.sa.dibeksolutions.com"
 }

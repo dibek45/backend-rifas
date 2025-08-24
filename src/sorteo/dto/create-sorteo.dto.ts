@@ -101,7 +101,7 @@ adminId: number;
 @IsInt()
 cuentaBancariaId?: number;
 
-@IsString()
-dominio: string;
+//@IsString()
+//dominio: string;
 
 }
