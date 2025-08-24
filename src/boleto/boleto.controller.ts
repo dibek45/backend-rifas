@@ -48,7 +48,7 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
     throw new BadRequestException('sorteoId must be a valid number');
   }
 
-  const dominio = req.headers.host;
+const dominio = req.headers.host?.replace(/^api\./, '');
   console.log('🌍 Host recibido en request:', dominio);
 
   if (!dominio) {
