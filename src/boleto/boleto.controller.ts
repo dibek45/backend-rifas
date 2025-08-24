@@ -41,7 +41,7 @@ export class BoletoController {
   }
 
   // 👇 Aquí solo añadimos el dominio
- @Get(':sorteoId')
+@Get(':sorteoId')
 async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   const id = parseInt(sorteoId, 10);
   if (isNaN(id)) {
@@ -49,6 +49,8 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   }
 
   const dominio = req.headers.host;
+  console.log('🌍 Host recibido en request:', dominio);
+
   if (!dominio) {
     throw new BadRequestException('Dominio no detectado en el header');
   }
