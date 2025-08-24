@@ -54,7 +54,7 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
 
   // dominio del request (ej: api.sorteos.sa.dibeksolutions.com → sorteos.sa.dibeksolutions.com)
   const dominioRequest = req.headers.host?.replace(/^api\./, '');
-  console.log('🌍 Host recibido en request:', dominioRequest);
+  console.log('🌍 Host recibido en requestupdate :', dominioRequest);
 
   if (!dominioRequest) {
     throw new BadRequestException('Dominio no detectado en el header');
