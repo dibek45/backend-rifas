@@ -32,6 +32,8 @@ async function bootstrap() {
     'https://localhost',           // 👈 agregar
     'https://agenda.dibeksolutions.com', // 👈 agrégalo aquí
     'https://sorteos.sa.dibeksolutions.com',
+    'https://rifas.dibeksolutions.com',
+
     'https://sorteos.sa.admin.dibeksolutions.com',
     'https://sorteos.sa.admin.dibeksolutions.com/login',
     'https://studio.apollographql.com',
