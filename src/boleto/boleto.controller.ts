@@ -1,7 +1,11 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query, BadRequestException } from '@nestjs/common';
+import { 
+  Controller, Get, Post, Body, Patch, Param, Delete, Query, 
+  BadRequestException, Req 
+} from '@nestjs/common';
 import { BoletoService } from './boleto.service';
 import { CreateBoletoDto } from './dto/create-boleto.dto';
 import { UpdateBoletoDto } from './dto/update-boleto.dto';
+import { Request } from 'express';
 
 @Controller('boleto')
 export class BoletoController {
@@ -9,43 +13,48 @@ export class BoletoController {
     private readonly boletoService: BoletoService,
   ) {}
 
-@Get('por-cliente')
-async buscarPorNombreTelefonoYSorteo(
-  @Query('nombre') nombre: string,
-  @Query('telefono') telefono: string,
-  @Query('sorteoId') sorteoIdStr?: string // <- opcional
-) {
-  const sorteoId = sorteoIdStr ? parseInt(sorteoIdStr, 10) : undefined;
-  return this.boletoService.findBoletosPorNombreTelefonoYSorteo(
-    nombre,
-    telefono,
-    sorteoId
-  );
-}
-@Get('por-cliente-sin-sorteo')
-async getBoletosPorClienteSinSorteo(
-  @Query('nombre') nombre: string,
-  @Query('telefono') telefono: string
-) {
-  return this.boletoService.getBoletosPorClienteSinSorteo(nombre, telefono);
-}
+  @Get('por-cliente')
+  async buscarPorNombreTelefonoYSorteo(
+    @Query('nombre') nombre: string,
+    @Query('telefono') telefono: string,
+    @Query('sorteoId') sorteoIdStr?: string // <- opcional
+  ) {
+    const sorteoId = sorteoIdStr ? parseInt(sorteoIdStr, 10) : undefined;
+    return this.boletoService.findBoletosPorNombreTelefonoYSorteo(
+      nombre,
+      telefono,
+      sorteoId
+    );
+  }
 
+  @Get('por-cliente-sin-sorteo')
+  async getBoletosPorClienteSinSorteo(
+    @Query('nombre') nombre: string,
+    @Query('telefono') telefono: string
+  ) {
+    return this.boletoService.getBoletosPorClienteSinSorteo(nombre, telefono);
+  }
 
   @Post()
   create(@Body() createBoletoDto: CreateBoletoDto) {
     return this.boletoService.create(createBoletoDto);
   }
 
- // GET /boletos?sorteoId=123
-@Get(':sorteoId')
-findAll(@Param('sorteoId') sorteoId: string) {
+  // 👇 Aquí solo añadimos el dominio
+ @Get(':sorteoId')
+async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
   const id = parseInt(sorteoId, 10);
   if (isNaN(id)) {
     throw new BadRequestException('sorteoId must be a valid number');
   }
-  return this.boletoService.findAll(id);
-}
 
+  const dominio = req.headers.host;
+  if (!dominio) {
+    throw new BadRequestException('Dominio no detectado en el header');
+  }
+
+  return this.boletoService.findAll(id, dominio);
+}
 
 
   @Patch(':id')
@@ -58,13 +67,11 @@ findAll(@Param('sorteoId') sorteoId: string) {
     return this.boletoService.delete(+id);
   }
 
-
   @Post('/apartar-lote')
-async apartarLote(
-  @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
-) {
-  const { nombre, telefono, boletos } = body;
-  return this.boletoService.apartarLoteConComprador(nombre, telefono, boletos);
-}
-
+  async apartarLote(
+    @Body() body: { nombre: string; telefono: string; boletos: { id: number }[] }
+  ) {
+    const { nombre, telefono, boletos } = body;
+    return this.boletoService.apartarLoteConComprador(nombre, telefono, boletos);
+  }
 }

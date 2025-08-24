@@ -24,12 +24,17 @@ export class BoletoService {
 
   ) {}
 
-  async findAll(sorteoId: number) {
-    return this.boletoRepo.find({
-      where: { sorteo: { id: sorteoId } },
-      relations: ['comprador', 'vendedor', 'sorteo'],
-    });
-  }
+async findAll(sorteoId: number, dominio: string) {
+  return this.boletoRepo.find({
+    where: { 
+      sorteo: { 
+        id: sorteoId,
+        dominio: dominio   // 👈 validamos que coincida con el dominio del sorteo
+      }
+    },
+    relations: ['comprador', 'vendedor', 'sorteo'],
+  });
+}
 
   async findOne(id: number) {
     const boleto = await this.boletoRepo.findOne({
