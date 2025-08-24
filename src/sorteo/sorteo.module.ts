@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Sorteo } from './entities/sorteo.entity'; // ✅ entidad
 import { SorteoService } from './sorteo.service';
@@ -9,7 +9,7 @@ import { SorteoGateway } from 'src/sockets/boletos.gateway';
 @Module({
   imports: [
     TypeOrmModule.forFeature([Sorteo]), // ✅ esto es lo que faltaba
-    BoletoModule,
+    forwardRef(() => BoletoModule),  // 👈 también aquí
   ],
   controllers: [SorteoController],
   providers: [SorteoService, SorteoGateway],
