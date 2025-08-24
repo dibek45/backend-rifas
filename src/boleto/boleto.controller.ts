@@ -65,7 +65,7 @@ async findAll(@Param('sorteoId') sorteoId: string, @Req() req: Request) {
     );
   }
 
-  return this.boletoService.findAll(id, dominioRequest);
+  return this.boletoService.findAll(id);
 }
 
 
