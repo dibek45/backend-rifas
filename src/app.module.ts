@@ -27,6 +27,7 @@ import { WhatsAppModule } from './whatsapp/whatsapp.module';
 
 @Module({
   imports: [
+    WhatsAppModule,
     UserModule,
     BoletoModule,
     SorteoModule,
@@ -50,6 +51,6 @@ import { WhatsAppModule } from './whatsapp/whatsapp.module';
     }),
   ],
   controllers: [AppController],
-  providers: [WhatsAppModule],
+  providers: [],
 })
 export class AppModule {}
