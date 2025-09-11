@@ -22,6 +22,7 @@ import { Admin } from './agenda/admin-agenda/entities/admin.entity';
 import { Disponibilidad } from './agenda/evento/entities/disponibilidad.entity';
 import { ServicioModule } from './agenda/servicio/servicio.module';
 import { Servicio } from './agenda/servicio/servicio.entity';
+import { WhatsAppModule } from './whatsapp/whatsapp.module';
 
 
 @Module({
@@ -49,6 +50,6 @@ import { Servicio } from './agenda/servicio/servicio.entity';
     }),
   ],
   controllers: [AppController],
-  providers: [],
+  providers: [WhatsAppModule],
 })
 export class AppModule {}
