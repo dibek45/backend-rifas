@@ -1,5 +1,4 @@
 import { Injectable } from '@nestjs/common';
-import { HttpModule } from '@nestjs/axios';
 import { HttpService } from '@nestjs/axios';
 import { firstValueFrom } from 'rxjs';
 
