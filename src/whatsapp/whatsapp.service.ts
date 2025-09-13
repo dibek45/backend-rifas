@@ -16,8 +16,8 @@ export class WhatsAppService {
 
 
 async sendTemplateMessage(to: string) {
-  if (!to.startsWith('+')) {
-    to = `+${to}`;
+   if (this.sandboxMode) {
+    to = to.replace(/^\+/, ''); // elimina "+"
   }
 
   const payload = {
