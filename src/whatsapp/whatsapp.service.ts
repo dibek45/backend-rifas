@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class WhatsAppService {
   private apiUrl = 'https://graph.facebook.com/v20.0';
   private token =
-    'EAASTcEqZBJ7UBPV1B3tenuHVXZAzZCCMkcUZA6STZBAWKUmGVyq5zWvtyTqeYCgZCZBwLbdpZChYvQiKvafZBjHigc5SM8IWZCU4fRck3gbIuD0LDdfrMJbLNHVYpslHlzxovYP17noz0Sv8REZBJSxts16l0EVQgUxmcs6OeOH8g2RqQPK6rppGhdc65L7ZBjswjB988pWbLvbTeIqjPZAkzfgGnjxbCaHZAGWuMDizSgZCU7r';
+    'EAASTcEqZBJ7UBPScB2hSDKVdASpHbFe4TTkEPsRVo7ROWdVp7EJh6LZBKl08MxE7DAV89fDJ3O72gtXIzUeOS2FYt7XR6ReTQd2jk2c4mhn4UylxkCux89jpZCaAga3kbcTAkqsZCmZCM5ZC4PCFJPwG75Eg4qcDih3FJLBcIrRnlaZAMryZCbWVNtFbqCy6cXmPXYwEDGiSa8UZA03m0bZAejwYAlWX6Bldr98LPLYLNtkyo4';
   private phoneId = '832110753311917';
 
   // ⚡ Cambia a false cuando pases a producción
@@ -14,30 +14,6 @@ export class WhatsAppService {
 
   constructor(private http: HttpService) {}
 
- async sendTextMessage(to: string, text: string) {
-  if (!to.startsWith('+')) {
-    to = `+${to}`;
-  }
-
-  const payload = {
-    messaging_product: 'whatsapp',
-    to,
-    type: 'text',
-    text: { body: text },
-  };
-
-  const headers = {
-    Authorization: `Bearer ${this.token}`,
-    'Content-Type': 'application/json',
-  };
-
-  console.log('📤 Enviando mensaje de texto...');
-  console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
-
-  return firstValueFrom(
-    this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
-  );
-}
 
 async sendTemplateMessage(to: string) {
   if (!to.startsWith('+')) {
