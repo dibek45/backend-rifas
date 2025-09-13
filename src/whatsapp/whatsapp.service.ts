@@ -14,47 +14,56 @@ export class WhatsAppService {
 
   constructor(private http: HttpService) {}
 
+  private formatNumber(to: string): string {
+    // En sandbox, Meta no acepta "+" → usa formato tal cual lo manda el webhook (ej: "5216144674123")
+    if (this.sandboxMode) {
+      return to.replace(/^\+/, ''); // si viene con + lo quita
+    }
 
-async sendTemplateMessage(to: string) {
-  // 🔹 En sandbox, Meta espera el número sin "+"
-  if (this.sandboxMode) {
-    to = to.replace(/^\+/, '');
+    // En producción → formato E.164 con +
+    if (!to.startsWith('+')) {
+      return `+${to}`;
+    }
+    return to;
   }
 
-  const payload = {
-    messaging_product: 'whatsapp',
-    to,
-    type: 'template',
-    template: {
-      name: 'hello_world',
-      language: { code: 'en_US' },
-    },
-  };
+  async sendTemplateMessage(to: string) {
+    const formattedTo = this.formatNumber(to);
 
-  const headers = {
-    Authorization: `Bearer ${this.token}`,
-    'Content-Type': 'application/json',
-  };
+    const payload = {
+      messaging_product: 'whatsapp',
+      to: formattedTo,
+      type: 'template',
+      template: {
+        name: 'hello_world',
+        language: { code: 'en_US' },
+      },
+    };
 
-  // 🟢 Logs detallados
-  console.log('📤 Enviando mensaje a WhatsApp...');
-  console.log('➡️ URL:', `${this.apiUrl}/${this.phoneId}/messages`);
-  console.log('➡️ Headers:', headers);
-  console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
+    const headers = {
+      Authorization: `Bearer ${this.token}`,
+      'Content-Type': 'application/json',
+    };
 
-  try {
-    const response = await firstValueFrom(
-      this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
-    );
-    console.log('✅ Respuesta de WhatsApp API:', response.data);
-    return response.data;
-  } catch (error) {
-    console.error(
-      '❌ Error al enviar mensaje:',
-      error.response?.data || error.message || error,
-    );
-    throw error;
+    console.log('📤 Enviando plantilla hello_world...');
+    console.log('➡️ URL:', `${this.apiUrl}/${this.phoneId}/messages`);
+    console.log('➡️ To:', formattedTo);
+    console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
+
+    try {
+      const response = await firstValueFrom(
+        this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, {
+          headers,
+        }),
+      );
+      console.log('✅ Respuesta de WhatsApp API:', response.data);
+      return response.data;
+    } catch (error) {
+      console.error(
+        '❌ Error al enviar mensaje:',
+        error.response?.data || error.message || error,
+      );
+      throw error;
+    }
   }
-}
-
 }
