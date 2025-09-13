@@ -5,7 +5,7 @@ import { firstValueFrom } from 'rxjs';
 @Injectable()
 export class WhatsAppService {
   private apiUrl = 'https://graph.facebook.com/v20.0';
-  private token = 'EAASTcEqZBJ7UBPcVZApRsd8PMU1eSKZA4ZCqxjKpSajLo3zUwaeaiGvYMuulotiAlJ4UwWyjhO1F0bBZAUZBIQg5UwhRlu96dMPP7rS7KgdxpDMy4rHh9RCKF45nRRhqZCbz5jJ95ZAviZAXWpJa7IvnbFym6A8m32tk7boXTThMxJtKgQeSlOV5sZCs3HZAacHVKaobgjjLf0fTDc2ELMXtsX7oQmiEgEib2oNwZCuQAvyQ65H5LgZDZD';
+  private token = 'EAASTcEqZBJ7UBPV1B3tenuHVXZAzZCCMkcUZA6STZBAWKUmGVyq5zWvtyTqeYCgZCZBwLbdpZChYvQiKvafZBjHigc5SM8IWZCU4fRck3gbIuD0LDdfrMJbLNHVYpslHlzxovYP17noz0Sv8REZBJSxts16l0EVQgUxmcs6OeOH8g2RqQPK6rppGhdc65L7ZBjswjB988pWbLvbTeIqjPZAkzfgGnjxbCaHZAGWuMDizSgZCU7r';
   private phoneId = '832110753311917';
 
   constructor(private http: HttpService) {}
