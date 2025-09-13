@@ -31,47 +31,41 @@ export class AppController {
   }
 
   // ✅ Aquí llegan los mensajes de WhatsApp
-  @Post('webhook')
-  async handleMessage(@Req() req) {
-    console.log('📩 Webhook recibido:', JSON.stringify(req.body, null, 2));
+ @Post('webhook')
+async handleMessage(@Req() req) {
+  console.log('📩 Webhook recibido:', JSON.stringify(req.body, null, 2));
 
-    const entry = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
-    if (!entry) {
-      console.warn('⚠️ No se encontró mensaje en el body');
-      return { status: 'no message' };
-    }
-
-    // 🟢 Aseguramos que el número tenga el formato correcto
-    let from = entry.from;
-    if (!from.startsWith('+')) {
-      from = `+${from}`;
-    }
-
-    const text = entry.text?.body?.toLowerCase() || '';
-
-    console.log(`👤 Mensaje de: ${from}`);
-    console.log(`💬 Texto recibido: "${text}"`);
-
-    try {
-      if (text.includes('hola') || text.includes('buenas')) {
-        console.log('🤖 Enviando respuesta automática...');
-        await this.whatsappService.sendMessage(
-          from,
-          '👋 Buenas tardes, ¿qué servicio necesitas?\n\n' +
-            '1️⃣ Uñas 💅\n' +
-            '2️⃣ Pestañas 👁️\n' +
-            '3️⃣ Corte de pelo 💇\n\n' +
-            'Responde con el número de la opción.'
-        );
-        console.log('✅ Mensaje enviado correctamente');
-      } else {
-        console.log('ℹ️ Mensaje no coincide con saludo, no se responde');
-      }
-    } catch (err) {
-      console.error('❌ Error al enviar mensaje:', err.response?.data || err.message || err);
-      return { status: 'error', error: err.message };
-    }
-
-    return { status: 'ok' };
+  const entry = req.body.entry?.[0]?.changes?.[0]?.value?.messages?.[0];
+  if (!entry) {
+    console.warn('⚠️ No se encontró mensaje en el body');
+    return { status: 'no message' };
   }
+
+  // 🟢 Aseguramos formato correcto
+  let from = entry.from;
+  if (!from.startsWith('+')) {
+    from = `+${from}`;
+  }
+
+  const text = entry.text?.body?.toLowerCase() || '';
+  console.log(`👤 Mensaje de: ${from}`);
+  console.log(`💬 Texto recibido: "${text}"`);
+
+  try {
+    if (text.includes('hola') || text.includes('buenas')) {
+      console.log('🤖 Enviando respuesta automática (sandbox hello_world)...');
+      await this.whatsappService.sendTemplateMessage(from);
+      console.log('✅ Mensaje enviado correctamente');
+    } else {
+      console.log('ℹ️ Mensaje no coincide con saludo, no se responde');
+    }
+  } catch (err) {
+    console.error('❌ Error al enviar mensaje:', err.response?.data || err.message || err);
+    return { status: 'error', error: err.message };
+  }
+
+  return { status: 'ok' };
+}
+
+
 }

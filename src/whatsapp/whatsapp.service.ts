@@ -14,58 +14,57 @@ export class WhatsAppService {
 
   constructor(private http: HttpService) {}
 
-  async sendMessage(to: string, text: string) {
-    if (!to.startsWith('+')) {
-      to = `+${to}`;
-    }
-
-    let payload: any;
-
-    if (this.sandboxMode) {
-      // 🟢 En sandbox: usar plantilla hello_world
-      payload = {
-        messaging_product: 'whatsapp',
-        to,
-        type: 'template',
-        template: {
-          name: 'hello_world',
-          language: { code: 'en_US' },
-        },
-      };
-      console.log('📤 Enviando mensaje sandbox (hello_world)...');
-    } else {
-      // 🟢 En producción: enviar texto normal
-      payload = {
-        messaging_product: 'whatsapp',
-        to,
-        type: 'text',
-        text: { body: text },
-      };
-      console.log('📤 Enviando mensaje producción (texto libre)...');
-    }
-
-    const headers = {
-      Authorization: `Bearer ${this.token}`,
-      'Content-Type': 'application/json',
-    };
-
-    console.log('➡️ URL:', `${this.apiUrl}/${this.phoneId}/messages`);
-    console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
-
-    try {
-      const response = await firstValueFrom(
-        this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, {
-          headers,
-        }),
-      );
-      console.log('✅ Respuesta WhatsApp API:', response.data);
-      return response.data;
-    } catch (error) {
-      console.error(
-        '❌ Error al enviar mensaje:',
-        error.response?.data || error.message || error,
-      );
-      throw error;
-    }
+ async sendTextMessage(to: string, text: string) {
+  if (!to.startsWith('+')) {
+    to = `+${to}`;
   }
+
+  const payload = {
+    messaging_product: 'whatsapp',
+    to,
+    type: 'text',
+    text: { body: text },
+  };
+
+  const headers = {
+    Authorization: `Bearer ${this.token}`,
+    'Content-Type': 'application/json',
+  };
+
+  console.log('📤 Enviando mensaje de texto...');
+  console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
+
+  return firstValueFrom(
+    this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
+  );
+}
+
+async sendTemplateMessage(to: string) {
+  if (!to.startsWith('+')) {
+    to = `+${to}`;
+  }
+
+  const payload = {
+    messaging_product: 'whatsapp',
+    to,
+    type: 'template',
+    template: {
+      name: 'hello_world',
+      language: { code: 'en_US' },
+    },
+  };
+
+  const headers = {
+    Authorization: `Bearer ${this.token}`,
+    'Content-Type': 'application/json',
+  };
+
+  console.log('📤 Enviando plantilla hello_world...');
+  console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
+
+  return firstValueFrom(
+    this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
+  );
+}
+
 }
