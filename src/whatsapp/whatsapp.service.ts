@@ -16,8 +16,9 @@ export class WhatsAppService {
 
 
 async sendTemplateMessage(to: string) {
-   if (this.sandboxMode) {
-    to = to.replace(/^\+/, ''); // elimina "+"
+  // 🔹 En sandbox, Meta espera el número sin "+"
+  if (this.sandboxMode) {
+    to = to.replace(/^\+/, '');
   }
 
   const payload = {
@@ -35,12 +36,25 @@ async sendTemplateMessage(to: string) {
     'Content-Type': 'application/json',
   };
 
-  console.log('📤 Enviando plantilla hello_world...');
+  // 🟢 Logs detallados
+  console.log('📤 Enviando mensaje a WhatsApp...');
+  console.log('➡️ URL:', `${this.apiUrl}/${this.phoneId}/messages`);
+  console.log('➡️ Headers:', headers);
   console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
 
-  return firstValueFrom(
-    this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
-  );
+  try {
+    const response = await firstValueFrom(
+      this.http.post(`${this.apiUrl}/${this.phoneId}/messages`, payload, { headers }),
+    );
+    console.log('✅ Respuesta de WhatsApp API:', response.data);
+    return response.data;
+  } catch (error) {
+    console.error(
+      '❌ Error al enviar mensaje:',
+      error.response?.data || error.message || error,
+    );
+    throw error;
+  }
 }
 
 }
