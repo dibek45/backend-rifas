@@ -14,18 +14,18 @@ export class WhatsAppService {
 
   constructor(private http: HttpService) {}
 
-  private formatNumber(to: string): string {
-    // En sandbox, Meta no acepta "+" → usa formato tal cual lo manda el webhook (ej: "5216144674123")
-    if (this.sandboxMode) {
-      return to.replace(/^\+/, ''); // si viene con + lo quita
-    }
-
-    // En producción → formato E.164 con +
-    if (!to.startsWith('+')) {
-      return `+${to}`;
-    }
-    return to;
+private formatNumber(to: string): string {
+  if (this.sandboxMode) {
+    // Meta espera formato sin +
+    // y en muchos casos sin el "1" intermedio
+    return to.replace(/^\+?521/, '52'); 
   }
+  if (!to.startsWith('+')) {
+    return `+${to}`;
+  }
+  return to;
+}
+
 
   async sendTemplateMessage(to: string) {
     const formattedTo = this.formatNumber(to);
