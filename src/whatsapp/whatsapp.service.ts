@@ -6,7 +6,7 @@ import { firstValueFrom } from 'rxjs';
 export class WhatsAppService {
   private apiUrl = 'https://graph.facebook.com/v20.0';
   private token =
-    'EAASTcEqZBJ7UBPV3rFvNihGwTQNCddAXbKk93kZAOw1CJJR424sYiAR60NvVXDqCfPA5c39iQDVKNG2ykhov75vyn64FQ4rWNimD4zszFZCqr5nZCUYIvYvP5SUJBIZBm4kzjg37AEcLZAnpaFgXvuvAWpHft2ak1ueNQiuiR46yAv1xlEyIj7qimABI4SKwQLfeokQUQVgJbBmR5eEdxOANmAp0KLmsCNtQtB0aZC0ZAPcZD';
+    'EAASTcEqZBJ7UBPdMCUIzE2f4ieeiWZCyaj212cJSZCNK0R9FIWRfoGTwAXpu6l1zliusRENuTH7gMlGlFDQXGKV9intNlB5wcTNsfE74OkjhZBLrjBfDvYywbugtVRVSzEli5yEJjLd7gipiC5xbqwkvbNxzZAgZBr13JNPAzllHgLzr7KVw3ZAO741VNKnpsdh8HuZBRBLZCQrbZBVEz2lEcuOgMlx2svjfIO0I97jshpYJIZD';
   private phoneId = '832110753311917';
 
   // ⚡ Cambia a false cuando pases a producción
