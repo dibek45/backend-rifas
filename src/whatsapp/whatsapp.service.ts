@@ -9,29 +9,47 @@ export class WhatsAppService {
     'EAASTcEqZBJ7UBPV1B3tenuHVXZAzZCCMkcUZA6STZBAWKUmGVyq5zWvtyTqeYCgZCZBwLbdpZChYvQiKvafZBjHigc5SM8IWZCU4fRck3gbIuD0LDdfrMJbLNHVYpslHlzxovYP17noz0Sv8REZBJSxts16l0EVQgUxmcs6OeOH8g2RqQPK6rppGhdc65L7ZBjswjB988pWbLvbTeIqjPZAkzfgGnjxbCaHZAGWuMDizSgZCU7r';
   private phoneId = '832110753311917';
 
+  // ⚡ Cambia a false cuando pases a producción
+  private sandboxMode = true;
+
   constructor(private http: HttpService) {}
 
   async sendMessage(to: string, text: string) {
-    // 🟢 Asegurar formato correcto del número
     if (!to.startsWith('+')) {
       to = `+${to}`;
     }
 
-    const payload = {
-      messaging_product: 'whatsapp',
-      to,
-      type: 'text',
-      text: { body: text },
-    };
+    let payload: any;
+
+    if (this.sandboxMode) {
+      // 🟢 En sandbox: usar plantilla hello_world
+      payload = {
+        messaging_product: 'whatsapp',
+        to,
+        type: 'template',
+        template: {
+          name: 'hello_world',
+          language: { code: 'en_US' },
+        },
+      };
+      console.log('📤 Enviando mensaje sandbox (hello_world)...');
+    } else {
+      // 🟢 En producción: enviar texto normal
+      payload = {
+        messaging_product: 'whatsapp',
+        to,
+        type: 'text',
+        text: { body: text },
+      };
+      console.log('📤 Enviando mensaje producción (texto libre)...');
+    }
 
     const headers = {
       Authorization: `Bearer ${this.token}`,
       'Content-Type': 'application/json',
     };
 
-    console.log('📤 Enviando mensaje a WhatsApp API...');
     console.log('➡️ URL:', `${this.apiUrl}/${this.phoneId}/messages`);
-    console.log('➡️ Headers:', headers);
     console.log('➡️ Payload:', JSON.stringify(payload, null, 2));
 
     try {
@@ -40,8 +58,7 @@ export class WhatsAppService {
           headers,
         }),
       );
-
-      console.log('✅ Respuesta de WhatsApp API:', response.data);
+      console.log('✅ Respuesta WhatsApp API:', response.data);
       return response.data;
     } catch (error) {
       console.error(
